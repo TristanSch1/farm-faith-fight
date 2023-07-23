@@ -38,20 +38,6 @@ const App = observer(() => {
         <a href="https://developers.rune.ai" target="_blank">
           <img src={reactLogo} className="logo rune" alt="Rune logo" />
         </a>
-
-        <input
-          type={"text"}
-          onChange={(e) => {
-            nameInput.current = e.target.value;
-          }}
-        />
-        <button
-          onClick={() => {
-            Rune.actions.setPlayerName(nameInput.current);
-          }}
-        >
-          Set Name
-        </button>
       </div>
       {Object.entries(gameStore.players ?? []).map(([id, player]) => {
         return <div key={id}>{player.displayName}</div>;

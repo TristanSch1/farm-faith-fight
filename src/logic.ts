@@ -1,15 +1,13 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer";
+import { Empire } from "./lib/Empire";
 
 export interface GameState {
-  playerState: {
-    [playerId: string]: {
-      score: number;
-    };
-  };
+  empires: {
+    [playerId: string]: Empire;
+  }
 }
 
 type GameActions = {
-  setScore: (score: number) => void;
 };
 
 declare global {
@@ -21,29 +19,23 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds): GameState => {
     return {
-      playerState: allPlayerIds.reduce<GameState["playerState"]>((acc, playerId) => {
+      empires: allPlayerIds.reduce<GameState["empires"]>((acc, playerId) => {
         return {
           ...acc,
-          [playerId]: {
-            score: 0,
-          },
+          [playerId]: new Empire(),
         };
       }, {}),
     };
   },
   actions: {
-    setScore: (score, { playerId, game }) => {
-      game.playerState[playerId].score = score;
-    },
+
   },
   events: {
     playerJoined: (playerId, { game }) => {
-      game.playerState[playerId] = {
-        score: 0,
-      };
+      game.empires[playerId] = new Empire()
     },
     playerLeft(playerId, { game }) {
-      delete game.playerState[playerId];
+      delete game.empires[playerId];
     },
   },
 });
