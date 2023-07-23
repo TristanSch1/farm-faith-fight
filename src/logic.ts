@@ -3,14 +3,13 @@ import type { RuneClient } from "rune-games-sdk/multiplayer";
 export interface GameState {
   playerState: {
     [playerId: string]: {
-      name: string;
       score: number;
     };
   };
 }
 
 type GameActions = {
-  setPlayerName: (params: { name: string }) => void;
+  setScore: (score: number) => void;
 };
 
 declare global {
@@ -22,11 +21,10 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds): GameState => {
     return {
-      playerState: allPlayerIds.reduce<GameState["playerState"]>((acc, playerId, index) => {
+      playerState: allPlayerIds.reduce<GameState["playerState"]>((acc, playerId) => {
         return {
           ...acc,
           [playerId]: {
-            name: `Player ${index + 1}`,
             score: 0,
           },
         };
@@ -34,14 +32,13 @@ Rune.initLogic({
     };
   },
   actions: {
-    setPlayerName: ({ name }, { game, playerId }) => {
-      game.playerState[playerId].name = name;
+    setScore: (score, { playerId, game }) => {
+      game.playerState[playerId].score = score;
     },
   },
   events: {
     playerJoined: (playerId, { game }) => {
       game.playerState[playerId] = {
-        name: `Player ${Object.keys(game.playerState).length + 1}`,
         score: 0,
       };
     },

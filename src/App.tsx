@@ -1,20 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import reactLogo from "./assets/rune.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { GameState } from "./logic.ts";
+import GameStore from "./stores/GameStore.ts";
+import { observer } from "mobx-react";
 
-function App() {
-  const [game, setGame] = useState<GameState>();
+const gameStore = new GameStore();
+
+const App = observer(() => {
+  const nameInput = useRef("");
   useEffect(() => {
     Rune.initClient({
-      onChange: ({ newGame }) => {
-        setGame(newGame);
+      onChange: ({ newGame, players, yourPlayerId, rollbacks, action, event }) => {
+        gameStore.update(newGame, players, yourPlayerId);
+        console.log("onChange", {
+          newGame,
+          players,
+          yourPlayerId,
+          rollbacks,
+          action,
+          event,
+        });
       },
     });
   }, []);
 
-  if (!game) {
+  if (!gameStore.game) {
     return <div>Loading...</div>;
   }
 
@@ -27,10 +38,27 @@ function App() {
         <a href="https://developers.rune.ai" target="_blank">
           <img src={reactLogo} className="logo rune" alt="Rune logo" />
         </a>
+
+        <input
+          type={"text"}
+          onChange={(e) => {
+            nameInput.current = e.target.value;
+          }}
+        />
+        <button
+          onClick={() => {
+            Rune.actions.setPlayerName(nameInput.current);
+          }}
+        >
+          Set Name
+        </button>
       </div>
+      {Object.entries(gameStore.players ?? []).map(([id, player]) => {
+        return <div key={id}>{player.displayName}</div>;
+      })}
       <h1>Vite + Rune</h1>
     </>
   );
-}
+});
 
 export default App;
