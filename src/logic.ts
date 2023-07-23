@@ -1,38 +1,52 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer";
 
 export interface GameState {
-  count: number;
+  playerState: {
+    [playerId: string]: {
+      name: string;
+      score: number;
+    };
+  };
 }
 
 type GameActions = {
-  increment: (params: { amount: number }) => void;
+  setPlayerName: (params: { name: string }) => void;
 };
 
 declare global {
   const Rune: RuneClient<GameState, GameActions>;
 }
 
-export function getCount(game: GameState) {
-  return game.count;
-}
-
 Rune.initLogic({
   minPlayers: 2,
   maxPlayers: 4,
-  setup: (): GameState => {
-    return { count: 0 };
+  setup: (allPlayerIds): GameState => {
+    return {
+      playerState: allPlayerIds.reduce<GameState["playerState"]>((acc, playerId, index) => {
+        return {
+          ...acc,
+          [playerId]: {
+            name: `Player ${index + 1}`,
+            score: 0,
+          },
+        };
+      }, {}),
+    };
   },
   actions: {
-    increment: ({ amount }, { game }) => {
-      game.count += amount;
+    setPlayerName: ({ name }, { game, playerId }) => {
+      game.playerState[playerId].name = name;
     },
   },
   events: {
-    playerJoined: () => {
-      console.log("Player joined");
+    playerJoined: (playerId, { game }) => {
+      game.playerState[playerId] = {
+        name: `Player ${Object.keys(game.playerState).length + 1}`,
+        score: 0,
+      };
     },
-    playerLeft() {
-      // Handle player left
+    playerLeft(playerId, { game }) {
+      delete game.playerState[playerId];
     },
   },
 });
