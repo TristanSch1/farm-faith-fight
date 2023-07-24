@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=MedievalSharp|Oswald&display=swap');
+
+html {
+    font-size: 62.5%;
+}
+
+:root {
+  --font-primary: 'Oswald';
+  --font-accent: 'MedievalSharp';
+  --color-primary: #ffffff;
+}
+
+
+body {
+    background: #1C111C;
+}
+
+#root {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    margin: 0 auto;
+    width: 58vh;
+    height: 100vh;
+}

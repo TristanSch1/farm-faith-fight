@@ -1,0 +1,13 @@
+.empires_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.empire_status {
+}
+
+.empire_avatar {
+    height: 10vh;
+    width: 10vh;
+    background: red;
+}

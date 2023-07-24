@@ -1,0 +1,6 @@
+.scene_container {
+    background: #4C382C;
+    height: 100%;
+    padding: 24px;
+    height: calc(100% - 48px);
+}
