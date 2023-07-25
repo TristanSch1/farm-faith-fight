@@ -5,16 +5,16 @@ import React from 'react'
 import styles from './style.module.css';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
-export type EmpireStatusProps = {
+type Props = {
     children: React.ReactElement,
-    health: number,
+    fill: number,
 }
 
-const EmpireStatus: React.FC<EmpireStatusProps> = ({ children, health }) => (
+const EmpireStatus: React.FC<Props> = ({ children, fill }) => (
     <div className={styles.empire_status}>
-        <ProgressBar value={health} />
+        <ProgressBar value={fill} />
         {children}
-    </div >
+    </div>
 )
 
 export default EmpireStatus;

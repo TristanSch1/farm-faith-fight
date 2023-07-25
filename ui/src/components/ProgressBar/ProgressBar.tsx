@@ -27,7 +27,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value } = { value: 0 }) => {
     const style: React.CSSProperties = {
         width: `${value}%`,
         backgroundColor: barColor,
-        boxShadow: `${barColor} 0px 2px 29px 0px`,
+        boxShadow: `${barColor} 0px 2px 19px 2px`,
     };
 
     return (

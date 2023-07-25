@@ -4,12 +4,13 @@ import React from 'react'
 // @ts-ignore
 import styles from './style.module.css';
 
-export type EmpireAvatarProps = {
+type Props = {
+    imageUrl: string,
 }
 
-const EmpireAvatar: React.FC<EmpireAvatarProps> = () => (
+const EmpireAvatar: React.FC<Props> = ({ imageUrl }) => (
     <div className={styles.empire_avatar}>
-        Avatar
+        <img src={imageUrl} />
     </div>
 )
 

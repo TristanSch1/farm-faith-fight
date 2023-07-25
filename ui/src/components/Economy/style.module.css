@@ -1,0 +1,46 @@
+.economy_header {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+    padding: 8px 0;
+}
+
+.economy_header > * {
+    margin: 0 16px;
+}
+
+.economy_item {
+    width: 8vh;
+    height: 8vh;
+    position: relative;
+}
+
+.foreground, .background {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+}
+
+.foreground > *, .background > * {
+    width: 8vh;
+    height: 8vh;
+}
+
+.background {
+    filter: invert(60%) sepia(100%) saturate(10000%) hue-rotate(62deg) brightness(30%) contrast(84%);
+    z-index: 1;
+}
+
+.foreground {
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    filter: drop-shadow(0px 8px 18px rgb(0 0 0 / .4));
+    border-radius: 0 46px / 10% 14px 0;
+}
+
+.foreground > * {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
