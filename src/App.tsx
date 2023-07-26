@@ -35,7 +35,7 @@ const App = observer(() => {
           </div>
         );
       })}
-      <button onClick={Rune.actions.ready}>READY</button>
+      <button onClick={() => Rune.actions.ready()}>READY</button>
       <h1>Vite + Rune</h1>
     </>
   );
