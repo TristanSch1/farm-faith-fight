@@ -4,11 +4,14 @@ import { SceneContainer } from './layouts'
 import './assets/styles/normalize.css';
 import './assets/styles/app.css';
 import {
+  CardDrawable,
+  CardDrawPile,
+  Card,
   EmpireAvatar,
   EmpireStatus,
   EmpiresHeader,
   EconomyHeader,
-  EconomyItem
+  EconomyItem,
 } from './components';
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
@@ -48,6 +51,12 @@ function App() {
         <EconomyItem fill={35} type='FOOD' />
         <EconomyItem fill={50} type='WOOD' />
       </EconomyHeader>
+
+      <CardDrawPile>
+        <CardDrawable>
+          <Card />
+        </CardDrawable>
+      </CardDrawPile>
 
     </SceneContainer>
   )
