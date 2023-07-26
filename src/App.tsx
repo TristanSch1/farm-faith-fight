@@ -1,6 +1,4 @@
-import { useEffect, useRef } from "react";
-import reactLogo from "./assets/rune.svg";
-import viteLogo from "/vite.svg";
+import { useEffect } from "react";
 import "./App.css";
 import GameStore from "./stores/GameStore.ts";
 import { observer } from "mobx-react";
@@ -8,7 +6,6 @@ import { observer } from "mobx-react";
 const gameStore = new GameStore();
 
 const App = observer(() => {
-  const nameInput = useRef("");
   useEffect(() => {
     Rune.initClient({
       onChange: ({ newGame, players, yourPlayerId, rollbacks, action, event }) => {
@@ -31,17 +28,14 @@ const App = observer(() => {
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://developers.rune.ai" target="_blank">
-          <img src={reactLogo} className="logo rune" alt="Rune logo" />
-        </a>
-      </div>
-      {Object.entries(gameStore.players ?? []).map(([id, player]) => {
-        return <div key={id}>{player.displayName}</div>;
+      {Object.entries(gameStore.game.players ?? []).map(([id, player]) => {
+        return (
+          <div key={id}>
+            {player.empire.name} <span>{gameStore.isPlayerReady(id) ? "READY" : "WAITING"}</span>
+          </div>
+        );
       })}
+      <button onClick={Rune.actions.ready}>READY</button>
       <h1>Vite + Rune</h1>
     </>
   );

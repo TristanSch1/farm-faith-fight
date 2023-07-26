@@ -1,41 +1,60 @@
-import type { RuneClient } from "rune-games-sdk/multiplayer";
 import { Empire } from "./lib/Empire";
+import { GameState } from "./lib/types/GameState.ts";
 
-export interface GameState {
-  empires: {
-    [playerId: string]: Empire;
-  }
-}
+// TODO - Mettre les vrais empires
+const EMPIRE_NAMES = ["Orcs", "Elves", "Dwarves", "Humans"];
+const getRandomEmpireName = (players: GameState["players"]) => {
+  const empireNames = Object.values(players).map((player) => player.empire.name);
 
-type GameActions = {
+  const availableEmpires = EMPIRE_NAMES.filter((empire) => !empireNames.includes(empire));
+
+  const randomIndex = Math.floor(Math.random() * availableEmpires.length);
+  return availableEmpires[randomIndex];
 };
-
-declare global {
-  const Rune: RuneClient<GameState, GameActions>;
-}
 
 Rune.initLogic({
   minPlayers: 2,
   maxPlayers: 4,
   setup: (allPlayerIds): GameState => {
     return {
-      empires: allPlayerIds.reduce<GameState["empires"]>((acc, playerId) => {
+      players: allPlayerIds.reduce<GameState["players"]>((acc, playerId) => {
         return {
           ...acc,
-          [playerId]: new Empire(),
+          [playerId]: {
+            empire: new Empire(getRandomEmpireName(acc)),
+            state: "waiting",
+          },
         };
       }, {}),
+      gameStarted: false,
     };
   },
   actions: {
+    startGame: (_, { game }) => {
+      if (game.gameStarted) throw Rune.invalidAction();
 
+      game.gameStarted = true;
+    },
+    ready: (_, { game, playerId }) => {
+      if (game.gameStarted) throw Rune.invalidAction();
+      console.log("ready", playerId);
+      game.players[playerId].state = "ready";
+    },
+    notReady: (_, { game, playerId }) => {
+      if (!game.gameStarted) throw Rune.invalidAction();
+
+      game.players[playerId].state = "waiting";
+    },
   },
   events: {
     playerJoined: (playerId, { game }) => {
-      game.empires[playerId] = new Empire()
+      game.players[playerId] = {
+        empire: new Empire(getRandomEmpireName(game.players)),
+        state: "waiting",
+      };
     },
     playerLeft(playerId, { game }) {
-      delete game.empires[playerId];
+      delete game.players[playerId];
     },
   },
 });
