@@ -1,3 +1,6 @@
+import gameConfig from "./game.config.ts";
+import { TCardType } from "./lib/CardDictionnary.ts";
+import { CardFactory } from "./lib/CardFactory.ts";
 import { Empire } from "./lib/Empire";
 import { GameState } from "./lib/types/GameState.ts";
 
@@ -11,6 +14,14 @@ const getRandomEmpireName = (players: GameState["players"]) => {
   const randomIndex = Math.floor(Math.random() * availableEmpires.length);
   return availableEmpires[randomIndex];
 };
+//TODO: create type
+const deck = [];
+
+const test = Object.entries(gameConfig.deck).map(([cardType, nbCard]) => {
+  deck.push(...CardFactory.bulkBuildCard(cardType as TCardType, nbCard));
+});
+
+console.log(deck);
 
 Rune.initLogic({
   minPlayers: 2,

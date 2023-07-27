@@ -4,6 +4,6 @@ export type TCost = {
 };
 
 export type TIncome = {
-  wood: number;
-  food: number;
+  wood?: number;
+  food?: number;
 };
