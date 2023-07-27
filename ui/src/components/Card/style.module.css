@@ -1,10 +1,12 @@
 .card_draw_pile {
-    background-color: blue;
     /* TODO: Responsabilty of the Scene */
     flex-grow: 1;
+    cursor: grab;
+    background-color: red;
 }
 
 .card {
     height: 100%;
     position: relative;
+    background-color: blue;
 }
