@@ -38,12 +38,7 @@ Rune.initLogic({
     ready: (_, { game, playerId }) => {
       if (game.gameStarted || !game.players?.[playerId]) throw Rune.invalidAction();
       console.log("ready", playerId);
-      game.players[playerId].state = "ready";
-    },
-    notReady: (_, { game, playerId }) => {
-      if (!game.gameStarted) throw Rune.invalidAction();
-
-      game.players[playerId].state = "waiting";
+      game.players[playerId].state = game.players[playerId].state === "waiting" ? "ready" : "waiting";
     },
   },
   events: {

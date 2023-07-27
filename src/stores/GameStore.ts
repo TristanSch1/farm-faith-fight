@@ -5,7 +5,7 @@ import { GameState } from "../lib/types/GameState.ts";
 class GameStore {
   game: GameState | null = null;
   players: Players | null = null;
-  lastActivityPlayerId = "";
+  playerId = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -15,14 +15,19 @@ class GameStore {
     return this.game?.gameStarted;
   }
 
-  isPlayerReady(id: string) {
-    return this.game?.players[id]?.state === "ready";
+  get allPlayersReady() {
+    if (!this.game?.players) return false;
+    return Object.values(this.game.players).every(({ state }) => state === "ready");
+  }
+
+  isPlayerReady(id?: string) {
+    return this.game?.players[id ?? this.playerId]?.state === "ready";
   }
 
   update(game: GameState, players: Players, playerId = "") {
     this.game = game;
     this.players = players;
-    this.lastActivityPlayerId = playerId;
+    this.playerId = playerId;
   }
 }
 

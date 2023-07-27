@@ -3,6 +3,7 @@ import "./App.css";
 import GameStore from "./stores/GameStore.ts";
 import StartGame from "./components/StartGame/StartGame.tsx";
 import { observer } from "mobx-react";
+import Game from "./components/Game/Game.tsx";
 
 export const gameStore = new GameStore();
 
@@ -11,6 +12,7 @@ const App = observer(() => {
     Rune.initClient({
       onChange: ({ newGame, players, yourPlayerId, rollbacks, action, event }) => {
         gameStore.update(newGame, players, yourPlayerId);
+
         console.log("onChange", {
           newGame,
           players,
@@ -23,14 +25,15 @@ const App = observer(() => {
     });
   }, []);
 
+  useEffect(() => {
+    if (gameStore.allPlayersReady) {
+      Rune.actions.startGame();
+    }
+  }, [gameStore.allPlayersReady]);
   if (!gameStore.game) {
     return <div>Loading...</div>;
   }
 
-  return (
-    <>
-      <StartGame />
-    </>
-  );
+  return <>{gameStore.game.gameStarted ? <Game /> : <StartGame />}</>;
 });
 export default App;

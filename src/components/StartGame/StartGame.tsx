@@ -11,7 +11,7 @@ const StartGame = observer(() => {
           </div>
         );
       })}
-      <button onClick={Rune.actions.ready}>READY</button>
+      <button onClick={() => Rune.actions.ready()}>{gameStore.isPlayerReady() ? "NOT READY" : "READY"}</button>
     </div>
   );
 });
