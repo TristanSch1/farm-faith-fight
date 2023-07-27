@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import "./App.css";
 import GameStore from "./stores/GameStore.ts";
+import StartGame from "./components/StartGame/StartGame.tsx";
 import { observer } from "mobx-react";
 
-const gameStore = new GameStore();
+export const gameStore = new GameStore();
 
 const App = observer(() => {
   useEffect(() => {
@@ -28,17 +29,8 @@ const App = observer(() => {
 
   return (
     <>
-      {Object.entries(gameStore.game.players ?? []).map(([id, player]) => {
-        return (
-          <div key={id}>
-            {player.empire.name} <span>{gameStore.isPlayerReady(id) ? "READY" : "WAITING"}</span>
-          </div>
-        );
-      })}
-      <button onClick={() => Rune.actions.ready()}>READY</button>
-      <h1>Vite + Rune</h1>
+      <StartGame />
     </>
   );
 });
-
 export default App;

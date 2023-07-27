@@ -17,11 +17,11 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds): GameState => {
     return {
-      players: allPlayerIds.reduce<GameState["players"]>((acc, playerId) => {
+      players: allPlayerIds.reduce<GameState["players"]>((acc, playerId, index) => {
         return {
           ...acc,
           [playerId]: {
-            empire: new Empire(getRandomEmpireName(acc)),
+            empire: new Empire(EMPIRE_NAMES[index]),
             state: "waiting",
           },
         };
@@ -36,7 +36,7 @@ Rune.initLogic({
       game.gameStarted = true;
     },
     ready: (_, { game, playerId }) => {
-      if (game.gameStarted) throw Rune.invalidAction();
+      if (game.gameStarted || !game.players?.[playerId]) throw Rune.invalidAction();
       console.log("ready", playerId);
       game.players[playerId].state = "ready";
     },
