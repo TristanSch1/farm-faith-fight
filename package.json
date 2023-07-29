@@ -17,6 +17,7 @@
     "mobx-react": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remeda": "^1.24.0",
     "rune-games-sdk": "^4.9.6"
   },
   "devDependencies": {

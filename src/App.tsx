@@ -12,7 +12,6 @@ const App = observer(() => {
     Rune.initClient({
       onChange: ({ newGame, players, yourPlayerId, rollbacks, action, event }) => {
         gameStore.update(newGame, players, yourPlayerId);
-
         console.log("onChange", {
           newGame,
           players,

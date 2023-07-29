@@ -1,14 +1,17 @@
 import { CardTemplate } from "./CardTemplate";
-import { ActionEffect } from "./ActionEffect";
+import { ActionEffectProps } from "./ActionEffect";
+import { BuildingEffectProps } from "./BuildingEffect.ts";
+
 export type TCard = {
   template: CardTemplate;
-  effect: ActionEffect;
+  effects: ActionEffectProps[] | BuildingEffectProps[];
 };
+
 export class Card {
   template: CardTemplate;
-  effect: ActionEffect;
+  effects: ActionEffectProps[] | BuildingEffectProps[];
   constructor(props: TCard) {
     this.template = props.template;
-    this.effect = props.effect;
+    this.effects = props.effects;
   }
 }

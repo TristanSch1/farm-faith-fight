@@ -1,4 +1,4 @@
-import { TCost, TIncome } from "./types/genericTypes";
+import { TIncome } from "./types/genericTypes";
 
 export type BuildingEffectProps = {
   income: TIncome;
@@ -6,5 +6,10 @@ export type BuildingEffectProps = {
 };
 
 export class BuildingEffect {
-  constructor(props: BuildingEffectProps) {}
+  income;
+  turnsToBuild;
+  constructor(props: BuildingEffectProps) {
+    this.income = props.income;
+    this.turnsToBuild = props.turnsToBuild;
+  }
 }

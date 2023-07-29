@@ -8,9 +8,19 @@ export type ActionEffectProps = {
 };
 
 export class ActionEffect {
+  actionType;
+  category;
+  impact;
+  impactType;
+
   constructor(
     props: ActionEffectProps = {
       actionType: "singleTarget",
     },
-  ) {}
+  ) {
+    this.actionType = props.actionType;
+    this.category = props.category;
+    this.impact = props.impact;
+    this.impactType = props.impactType;
+  }
 }

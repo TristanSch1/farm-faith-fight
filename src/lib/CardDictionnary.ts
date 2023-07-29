@@ -2,7 +2,25 @@ import { BuildingEffectProps } from "./BuildingEffect";
 import { ActionEffectProps } from "./ActionEffect";
 import { CardTemplateProps } from "./CardTemplate";
 
-export type TCardType =
+export type TCardBuildingType =
+  | "farm"
+  | "woodFactory"
+  | "garrison"
+  | "spiritualPlace"
+  | "market"
+  | "temple"
+  | "moonwell"
+  | "shamanAltar"
+  | "damnedChasm"
+  | "spiceTrade"
+  | "silkTrade"
+  | "woolTrade"
+  | "castle"
+  | "crypt"
+  | "ancientOfWar"
+  | "barracks";
+
+export type TCardActionType =
   | "attack"
   | "spy"
   | "spyAll"
@@ -10,15 +28,19 @@ export type TCardType =
   | "burningEarth"
   | "poisoning"
   | "spiritualCelebration"
-  | "spiritualAttack"
-  | "farm"
-  | "woodFactory";
+  | "spiritualAttack";
+
+export type TCardType = TCardActionType | TCardBuildingType;
 
 export const cardDictionnary: {
-  [cardName in TCardType]: { template: CardTemplateProps; effects: ActionEffectProps[] | BuildingEffectProps[] };
+  [cardName in TCardType]: {
+    template: CardTemplateProps;
+    effects: ActionEffectProps[] | BuildingEffectProps[];
+  };
 } = {
   attack: {
     template: {
+      id: "attack",
       description: "j'attaque",
       cost: { food: 2, wood: 2 },
       name: "Attaque",
@@ -35,6 +57,7 @@ export const cardDictionnary: {
   },
   spy: {
     template: {
+      id: "spy",
       description: "spy",
       cost: { food: 2, wood: 2 },
       name: "spy",
@@ -48,6 +71,7 @@ export const cardDictionnary: {
   },
   spyAll: {
     template: {
+      id: "spyAll",
       description: "spyAll",
       cost: { food: 2, wood: 2 },
       name: "spyAll",
@@ -61,6 +85,7 @@ export const cardDictionnary: {
   },
   steal: {
     template: {
+      id: "steal",
       description: "steal",
       cost: { food: 2, wood: 2 },
       name: "steal",
@@ -83,6 +108,7 @@ export const cardDictionnary: {
   },
   burningEarth: {
     template: {
+      id: "burningEarth",
       description: "burningEarth",
       cost: { food: 2, wood: 2 },
       name: "burningEarth",
@@ -99,6 +125,7 @@ export const cardDictionnary: {
   },
   poisoning: {
     template: {
+      id: "poisoning",
       description: "poisoning",
       cost: { food: 2, wood: 2 },
       name: "poisoning",
@@ -121,6 +148,7 @@ export const cardDictionnary: {
   },
   spiritualCelebration: {
     template: {
+      id: "spiritualCelebration",
       description: "spiritualCelebration",
       cost: { food: 2, wood: 2 },
       name: "spiritualCelebration",
@@ -143,6 +171,7 @@ export const cardDictionnary: {
   },
   spiritualAttack: {
     template: {
+      id: "spiritualAttack",
       description: "spiritualAttack",
       cost: { food: 2, wood: 2 },
       name: "spiritualAttack",
@@ -159,6 +188,7 @@ export const cardDictionnary: {
   },
   farm: {
     template: {
+      id: "farm",
       cost: {
         wood: 50,
         food: 50,
@@ -178,6 +208,7 @@ export const cardDictionnary: {
   },
   woodFactory: {
     template: {
+      id: "woodFactory",
       cost: {
         wood: 50,
         food: 50,
@@ -191,6 +222,258 @@ export const cardDictionnary: {
         income: {
           wood: 2,
         },
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  garrison: {
+    template: {
+      id: "garrison",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "garrison",
+      name: "garrison",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  spiritualPlace: {
+    template: {
+      id: "spiritualPlace",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "spiritualPlace",
+      name: "spiritualPlace",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  market: {
+    template: {
+      id: "market",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "market",
+      name: "market",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  temple: {
+    template: {
+      id: "temple",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "temple",
+      name: "temple",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  moonwell: {
+    template: {
+      id: "moonwell",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "moonwell",
+      name: "moonwell",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  shamanAltar: {
+    template: {
+      id: "shamanAltar",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "shamanAltar",
+      name: "shamanAltar",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  damnedChasm: {
+    template: {
+      id: "damnedChasm",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "shamanAltar",
+      name: "shamanAltar",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  spiceTrade: {
+    template: {
+      id: "spiceTrade",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "spiceTrade",
+      name: "spiceTrade",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  silkTrade: {
+    template: {
+      id: "silkTrade",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "silkTrade",
+      name: "silkTrade",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  woolTrade: {
+    template: {
+      id: "woolTrade",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "woolTrade",
+      name: "woolTrade",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  castle: {
+    template: {
+      id: "castle",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "castle",
+      name: "castle",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  crypt: {
+    template: {
+      id: "crypt",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "crypt",
+      name: "crypt",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  ancientOfWar: {
+    template: {
+      id: "ancientOfWar",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "ancientOfWar",
+      name: "ancientOfWar",
+    },
+    effects: [
+      {
+        income: {},
+        turnsToBuild: 2,
+      },
+    ],
+  },
+  barracks: {
+    template: {
+      id: "barracks",
+      cost: {
+        wood: 50,
+        food: 50,
+      },
+      category: "BUILDING",
+      description: "barracks",
+      name: "barracks",
+    },
+    effects: [
+      {
+        income: {},
         turnsToBuild: 2,
       },
     ],

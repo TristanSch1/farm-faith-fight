@@ -1,11 +1,9 @@
-import gameConfig from "./game.config.ts";
-import { TCardType } from "./lib/CardDictionnary.ts";
-import { CardFactory } from "./lib/CardFactory.ts";
 import { Empire } from "./lib/Empire";
 import { GameState } from "./lib/types/GameState.ts";
+import { makeDeck, shuffleCardTemplates } from "./lib/helpers/CardHelper.ts";
 
 // TODO - Mettre les vrais empires
-const EMPIRE_NAMES = ["Orcs", "Elves", "Dwarves", "Humans"];
+const EMPIRE_NAMES = ["Orcs", "Elves", "Undead", "Humans"];
 const getRandomEmpireName = (players: GameState["players"]) => {
   const empireNames = Object.values(players).map((player) => player.empire.name);
 
@@ -14,14 +12,6 @@ const getRandomEmpireName = (players: GameState["players"]) => {
   const randomIndex = Math.floor(Math.random() * availableEmpires.length);
   return availableEmpires[randomIndex];
 };
-//TODO: create type
-const deck = [];
-
-const test = Object.entries(gameConfig.deck).map(([cardType, nbCard]) => {
-  deck.push(...CardFactory.bulkBuildCard(cardType as TCardType, nbCard));
-});
-
-console.log(deck);
 
 Rune.initLogic({
   minPlayers: 2,
@@ -34,6 +24,9 @@ Rune.initLogic({
           [playerId]: {
             empire: new Empire(EMPIRE_NAMES[index]),
             state: "waiting",
+            deck: shuffleCardTemplates(),
+            actualDeck: [],
+            cursor: 0,
           },
         };
       }, {}),
@@ -43,13 +36,20 @@ Rune.initLogic({
   actions: {
     startGame: (_, { game }) => {
       if (game.gameStarted) throw Rune.invalidAction();
-
       game.gameStarted = true;
     },
     ready: (_, { game, playerId }) => {
       if (game.gameStarted || !game.players?.[playerId]) throw Rune.invalidAction();
-      console.log("ready", playerId);
       game.players[playerId].state = game.players[playerId].state === "waiting" ? "ready" : "waiting";
+    },
+    prepareDeck: (_, { game, playerId }) => {
+      game.players[playerId].actualDeck = makeDeck();
+    },
+    drawCard: (_, { game, playerId }) => {
+      // const randomIndex = Math.floor(Math.random() * availableEmpires.length);
+      const cardType = game.players[playerId].deck[game.players[playerId].cursor];
+      const cardToPlay = game.players[playerId].actualDeck.find((card) => card.template.id === cardType);
+      game.players[playerId].cursor++;
     },
   },
   events: {
@@ -57,6 +57,9 @@ Rune.initLogic({
       game.players[playerId] = {
         empire: new Empire(getRandomEmpireName(game.players)),
         state: "waiting",
+        deck: shuffleCardTemplates(),
+        actualDeck: [],
+        cursor: 0,
       };
     },
     playerLeft(playerId, { game }) {
