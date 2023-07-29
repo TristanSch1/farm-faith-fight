@@ -51,11 +51,13 @@ const App = () => (
     </EconomyHeader>
 
     <CardDrawPile>
-      <Card color='blue' />
-      <Card color='green' />
-      <Card color='yellow' />
-      <Card color='pink' />
-      <Card color='orange' />
+      <Card image_path='building/spiritual_t1' />
+      <Card image_path='building/spiritual_t1' />
+      <Card image_path='building/spiritual_t1' />
+      <Card image_path='building/spiritual_t1' />
+      <Card image_path='building/spiritual_t1' />
+      <Card image_path='building/spiritual_t1' />
+      <Card image_path='building/spiritual_t1' />
     </CardDrawPile>
   </SceneContainer>
 )

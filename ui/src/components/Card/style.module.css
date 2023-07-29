@@ -3,14 +3,19 @@
     flex-grow: 1;
     cursor: grab;
     position: relative;
+    border-radius: 30px;
+    background-color: #473127;
+    box-shadow: inset 0px 0px 32px 4px rgba(0,0,0,0.35);
+    border: 3px solid #2d2313;
+    padding: 15px;
 }
 
 .card_drawable {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    left: 5px;
+    right: 5px;
+    top: 7px;
+    bottom: 15px;
     perspective: 1500px;
 }
 
@@ -27,9 +32,10 @@
 .card {
     height: 100%;
     position: relative;
-    background-color: #000;
     backface-visibility: hidden;
     transform-style: preserve-3d;
+    background-size: cover;
+    background-position: center center;
 }
 
 .card::after {
@@ -40,8 +46,33 @@
     top: 0;
     bottom: 0;
     z-index: -1;
+    background: url('/src/assets/images/card/backcard_bg.png');
     backface-visibility: hidden;
     transform-style: preserve-3d;
     transform: rotateY(180deg);
-    background: black;
+}
+
+.card, .card::after {
+    border-radius: 30px;
+    border: 4px solid #000;
+}
+
+.card__inner {
+    border-radius: 30px;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+}
+
+.card__content {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px 16px 32px 32px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

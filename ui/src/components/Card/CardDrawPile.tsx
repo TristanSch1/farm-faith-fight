@@ -6,6 +6,8 @@ import CardDrawable, { CardDrawableAPI } from './CardDrawable';
 // @ts-ignore
 import styles from './style.module.css';
 
+const numberOfCardToDistribute = 5;
+
 type Props = {
     children: React.ReactElement | React.ReactElement[],
 }
@@ -15,9 +17,26 @@ const CardDrawPile: React.FC<Props> = ({ children }) => {
     const drawableRef = useRef<CardDrawableAPI[]>([]);
     let currentCardIndex = -1;
 
+    const cardDistribution = () => {
+        let i = 0;
+
+        for (i; i < Math.min(numberOfCardToDistribute, drawableRef.current.length); i++) {
+            drawableRef.current[i].throw((i + 1) * .2);
+        }
+
+        setTimeout(() => {
+            for (i; i < drawableRef.current.length; i++) {
+                drawableRef.current[i].display();
+            }
+        }, 3000);
+
+        turnNextCard();
+    }
+
     const turnNextCard = () => {
         const nextCard = drawableRef.current[currentCardIndex++];
-        if (nextCard) setTimeout(nextCard.turn, 250);
+        const delay = currentCardIndex === 1 ? 600 : 250;
+        if (nextCard) setTimeout(nextCard.turn, delay);
     }
 
     const setDrawableRef = (element: CardDrawableAPI | null, index: number) => {
@@ -25,7 +44,7 @@ const CardDrawPile: React.FC<Props> = ({ children }) => {
         drawableRef.current[index] = element;
     }
 
-    useEffect(() => turnNextCard());
+    useEffect(() => cardDistribution());
 
     return (
         <div className={styles.card_draw_pile}>

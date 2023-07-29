@@ -3,6 +3,8 @@
   background-color: rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
+  border: 3px solid #2d2313;
+  border-bottom: none;
 }
 
 .bar {
