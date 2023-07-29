@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react'
-import { motion, useMotionValue, useTransform, animate, PanInfo, delay } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, PanInfo, delay, useSpring } from 'framer-motion';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -24,7 +24,7 @@ const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPi
     const duration = (duration: number) => duration * debugDurationFactor;
     const drawTreshold = 150;
     const [drag, setDrag] = useState<boolean | 'x' | 'y'>(false);
-    const x = useMotionValue(-400);
+    const x = useSpring(-400, {});
     const y = useMotionValue(-150);
     const opacity = useMotionValue(0);
     const rotateY = useMotionValue(180);
@@ -46,7 +46,7 @@ const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPi
         opacity.set(1);
     };
 
-    const resetCardPosition = () => animate(x, 0, { duration: duration(.5) });
+    const resetCardPosition = () => animate(x, 0, { duration: duration(.5), ease: 'anticipate' });
     const throwCardAway = (info: PanInfo) => {
         animate([
             [x, x.get() + (info.offset.x > 0 ? -200 : 200), { duration: duration(1) }],

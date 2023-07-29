@@ -14,10 +14,16 @@ type Props = {
 }
 
 const Card: React.FC<Props> = ({ image_path }) => (
-    <div style={{ backgroundImage: `url(/src/assets/images/card/${image_path}.png)` }} className={styles.card}>
+    <div className={styles.card}>
         <div className={styles.card__inner}>
+            <img draggable={false} src={`/src/assets/images/card/${image_path}.png`} />
             <div className={styles.card__content}>
-                blabla
+                <span className={styles.card__content__title}>
+                    Lieu spirituel (Tier 2)
+                </span>
+                <p>
+                    Lieu de spiritualité bla bla bla va attaquer <span style={{ color: '#ff902f', fontWeight: 'bold' }}>KEVIN</span>
+                </p>
             </div>
         </div>
     </div>
