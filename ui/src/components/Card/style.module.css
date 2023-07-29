@@ -2,11 +2,46 @@
     /* TODO: Responsabilty of the Scene */
     flex-grow: 1;
     cursor: grab;
-    background-color: red;
+    position: relative;
+}
+
+.card_drawable {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    perspective: 1500px;
+}
+
+.card_drawable__swipe {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    transform-style: preserve-3d;
+    perspective: 500px;
 }
 
 .card {
     height: 100%;
     position: relative;
-    background-color: blue;
+    background-color: #000;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    background: black;
 }

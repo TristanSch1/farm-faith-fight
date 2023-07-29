@@ -5,10 +5,11 @@ import React from 'react'
 import styles from './style.module.css';
 
 type Props = {
+    color: string,
 }
 
-const Card: React.FC<Props> = () => (
-    <div className={styles.card}>
+const Card: React.FC<Props> = ({ color }) => (
+    <div style={{ backgroundColor: color }} className={styles.card}>
         Card
     </div>
 )
