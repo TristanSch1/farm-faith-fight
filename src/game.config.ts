@@ -1,15 +1,15 @@
 import { TCardType } from "./lib/CardDictionnary";
 
 export default {
-  // 86 cartes
+  // 96 cartes
   deck: {
     // actions
-    attack: 10,
+    attack: 12,
     spy: 5,
-    burningEarth: 10,
-    poisoning: 10,
-    spiritualAttack: 10,
-    spiritualCelebration: 10,
+    burningEarth: 12,
+    poisoning: 12,
+    spiritualAttack: 12,
+    spiritualCelebration: 12,
     spyAll: 2,
     steal: 5,
     // buildings
