@@ -1,6 +1,6 @@
 import gameConfig from "../../game.config.ts";
 import { TCardType } from "../CardDictionnary.ts";
-import { TCard } from "../Card.ts";
+import { Card } from "../Card.ts";
 import { CardFactory } from "../CardFactory.ts";
 import { shuffle } from "remeda";
 
@@ -15,9 +15,9 @@ export function shuffleCardTemplates() {
 }
 
 export function makeDeck() {
-  const deck: TCard[] = [];
+  const deck: Card[] = [];
   Object.entries(gameConfig.deck).map(([cardType, nbCard]) => {
     deck.push(...CardFactory.bulkBuildCard(cardType as TCardType, nbCard));
   });
-  return deck;
+  return shuffle(deck);
 }

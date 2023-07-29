@@ -1,6 +1,7 @@
 import { Empire } from "./lib/Empire";
 import { GameState } from "./lib/types/GameState.ts";
-import { makeDeck, shuffleCardTemplates } from "./lib/helpers/CardHelper.ts";
+import { gameStore } from "./stores/GameStore.ts";
+import { toJS } from "mobx";
 
 // TODO - Mettre les vrais empires
 const EMPIRE_NAMES = ["Orcs", "Elves", "Undead", "Humans"];
@@ -24,9 +25,7 @@ Rune.initLogic({
           [playerId]: {
             empire: new Empire(EMPIRE_NAMES[index]),
             state: "waiting",
-            deck: shuffleCardTemplates(),
-            actualDeck: [],
-            cursor: 0,
+            turns: 0,
           },
         };
       }, {}),
@@ -42,14 +41,14 @@ Rune.initLogic({
       if (game.gameStarted || !game.players?.[playerId]) throw Rune.invalidAction();
       game.players[playerId].state = game.players[playerId].state === "waiting" ? "ready" : "waiting";
     },
-    prepareDeck: (_, { game, playerId }) => {
-      game.players[playerId].actualDeck = makeDeck();
+    playCard(_, { game }) {
+      gameStore.playCard();
+      //   mettre le store a jour ?
+      game.players = toJS(gameStore.game!.players);
     },
-    drawCard: (_, { game, playerId }) => {
-      // const randomIndex = Math.floor(Math.random() * availableEmpires.length);
-      const cardType = game.players[playerId].deck[game.players[playerId].cursor];
-      const cardToPlay = game.players[playerId].actualDeck.find((card) => card.template.id === cardType);
-      game.players[playerId].cursor++;
+    throwCard(_, { game }) {
+      gameStore.throwCard();
+      game.players = toJS(gameStore.game!.players);
     },
   },
   events: {
@@ -57,9 +56,7 @@ Rune.initLogic({
       game.players[playerId] = {
         empire: new Empire(getRandomEmpireName(game.players)),
         state: "waiting",
-        deck: shuffleCardTemplates(),
-        actualDeck: [],
-        cursor: 0,
+        turns: 0,
       };
     },
     playerLeft(playerId, { game }) {

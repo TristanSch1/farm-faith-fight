@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import "./App.css";
-import GameStore from "./stores/GameStore.ts";
+import { gameStore } from "./stores/GameStore.ts";
 import StartGame from "./components/StartGame/StartGame.tsx";
 import { observer } from "mobx-react";
 import Game from "./components/Game/Game.tsx";
-
-export const gameStore = new GameStore();
 
 const App = observer(() => {
   useEffect(() => {
     Rune.initClient({
       onChange: ({ newGame, players, yourPlayerId, rollbacks, action, event }) => {
         gameStore.update(newGame, players, yourPlayerId);
+        // core : states
         console.log("onChange", {
           newGame,
           players,

@@ -1,10 +1,16 @@
-import { useEffect } from "react";
+import { gameStore } from "../../stores/GameStore.ts";
 
 const Game = () => {
-  useEffect(() => {
-    Rune.actions.prepareDeck();
-  }, []);
-  return <div>GAME</div>;
+  return (
+    <div>
+      {gameStore.isGameStarted && (
+        <div>
+          <div onClick={() => Rune.actions.playCard()}>Joue la carte</div>
+          <div onClick={() => Rune.actions.throwCard()}>Joue pas la carte</div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Game;
