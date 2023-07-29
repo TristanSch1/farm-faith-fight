@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { SceneContainer } from './layouts'
 
 import './assets/styles/normalize.css';
@@ -25,6 +25,7 @@ import humanAvatarUrl from './assets/images/avatar/human.png';
 import undeadAvatarUrl from './assets/images/avatar/undead.png';
 
 function App() {
+  const cardRef = useRef();
   return (
     <SceneContainer>
       <EmpiresHeader>
@@ -53,10 +54,16 @@ function App() {
       </EconomyHeader>
 
       <CardDrawPile>
-        <CardDrawable>
+        <CardDrawable ref={cardRef}>
           <Card />
         </CardDrawable>
       </CardDrawPile>
+
+      {/* <div style={{}}>
+        <button onClick={() => cardRef.current!.turnCard()}>
+          Turn card
+        </button>
+      </div> */}
 
     </SceneContainer>
   )
