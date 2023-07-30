@@ -32,7 +32,7 @@ const App = () => {
       ...waitingList,
       {
         progress: 0,
-        domain: ["army", "religion", "trade"][Math.floor(Math.random() * 3)],
+        domain: ["ARMY", "RELIGION", "TRADE"][Math.floor(Math.random() * 3)],
       },
     ]);
   };
