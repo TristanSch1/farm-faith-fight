@@ -31,7 +31,7 @@ body {
   text-align: unset;
 }
 
-@media (max-width: 57vh) {
+@media (max-width: 768px) {
   #root {
     width: 100vw;
   }

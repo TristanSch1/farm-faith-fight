@@ -1,6 +1,7 @@
 .scene_container {
   padding: 24px;
-  height: calc(100% - 48px);
+  padding-top: 0;
+  height: calc(100vh - 24px);
   display: flex;
   flex-flow: column;
   position: relative;
