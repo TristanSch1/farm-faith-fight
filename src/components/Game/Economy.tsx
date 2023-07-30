@@ -3,7 +3,6 @@ import { BuildWaitingList, ConstructionIcon, EconomyHeader, EconomyItem } from "
 import { gameStore } from "../../stores/GameStore.ts";
 
 export const Economy = observer(() => {
-  console.log(gameStore.buildingsIncoming);
   return (
     <EconomyHeader>
       <EconomyItem fill={gameStore.player!.empire.food / 2} type="FOOD" />
