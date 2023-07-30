@@ -20,7 +20,6 @@ type Props = {
 let currentCardIndex = -1;
 
 const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ debug_key, children, onDrawPileEmpty }, ref) => {
-  console.log('RENDER DRAW PILE');
   children = Array.isArray(children) ? children : [children];
   const drawableRef = useRef<CardDrawableAPI[]>([]);
 
@@ -43,9 +42,13 @@ const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ debug_key, children, onDr
   };
 
   const turnNextCard = () => {
-    const nextCard = drawableRef.current[currentCardIndex++];
-    const delay = currentCardIndex === 1 ? 600 : 250;
-    console.log(debug_key, currentCardIndex, drawableRef.current.length);
+    currentCardIndex++
+
+    const nextCard = drawableRef.current[currentCardIndex];
+    const delay = currentCardIndex === 0 ? 600 : 250;
+
+    console.log(debug_key, currentCardIndex, drawableRef.current, drawableRef.current[currentCardIndex]);
+
     if (nextCard) setTimeout(nextCard.turn, delay);
     else onDrawPileEmpty && onDrawPileEmpty();
   };

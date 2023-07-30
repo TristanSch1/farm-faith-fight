@@ -1,22 +1,19 @@
+import { useEffect, useRef } from "react";
+
 import "../../../ui/src/assets/styles/normalize.css";
 import "../../../ui/src/assets/styles/app.css";
+
 import { Players } from "./Players.tsx";
 import { SceneContainer } from "../../../ui/src/layouts";
 import { Economy } from "./Economy.tsx";
 import CardDrawPile, { DrawPileAPI } from "../../../ui/src/components/Card/CardDrawPile.tsx";
 import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
-import { useEffect, useRef, useState } from "react";
 
 const GameUi = (() => {
   const ref = useRef<DrawPileAPI>(null);
-  const [isMounted, setIsMounded] = useState(false);
 
-  useEffect(() => {
-    ref.current?.distribute();
-    setIsMounded(true);
-  }, []);
-  // useEffect(() => setState(true), []);
+  useEffect(() => ref.current?.distribute());
 
   return (
     <SceneContainer>
