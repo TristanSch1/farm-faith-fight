@@ -18,7 +18,7 @@ export type CardDrawableAPI = {
     distribute: (delay: number) => void,
     display: () => void,
     reset: () => void,
-    throw: (fromSide: 'left' | 'right') => void,
+    throw: () => void,
 }
 
 const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPick, onPickLeft, onPickRight, }: Props, ref) => {
