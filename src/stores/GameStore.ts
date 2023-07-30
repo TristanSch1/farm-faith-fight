@@ -41,14 +41,10 @@ export class GameStore {
 
   get buildingsIncoming() {
     return this.player!.empire.buildingsQueue.map((building) => {
-      console.log(building.buildingType);
+      const turnsToBuild = (cardDictionnary[building.buildingType].effects as BuildingEffect).turnsToBuild;
       return {
         domain: cardDictionnary[building.buildingType].template!.domain,
-        progress: Math.floor(
-          ((cardDictionnary[building.buildingType].effects as BuildingEffect).turnsToBuild -
-            building.turnsLeft / (cardDictionnary[building.buildingType].effects as BuildingEffect).turnsToBuild) *
-            100,
-        ),
+        progress: Math.floor(((turnsToBuild - building.turnsLeft) / turnsToBuild) * 100),
       };
     });
   }
