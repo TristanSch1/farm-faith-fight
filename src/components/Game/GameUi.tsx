@@ -10,7 +10,7 @@ import CardDrawPile, { DrawPileAPI } from "../../../ui/src/components/Card/CardD
 import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
 import eventsStore from "../../stores/EventsStore.ts";
-import { TCardBuildingType, cardDictionnary } from "../../lib/CardDictionnary.ts";
+import { cardDictionnary } from "../../lib/CardDictionnary.ts";
 import { BuildingEffectProps } from "../../lib/BuildingEffect.ts";
 
 const GameUi = () => {

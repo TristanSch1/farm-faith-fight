@@ -209,6 +209,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "farm",
       name: "Ferme",
+      domain: "FOOD",
     },
     effects: {
       income: {
@@ -229,6 +230,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "wood factory",
       name: "Scierie",
+      domain: "WOOD",
     },
     effects: {
       income: {

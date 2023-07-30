@@ -3,6 +3,7 @@ import { BuildWaitingList, ConstructionIcon, EconomyHeader, EconomyItem } from "
 import { gameStore } from "../../stores/GameStore.ts";
 
 export const Economy = observer(() => {
+  console.log(gameStore.buildingsIncoming);
   return (
     <EconomyHeader>
       <EconomyItem fill={gameStore.player!.empire.food / 2} type="FOOD" />
@@ -11,7 +12,7 @@ export const Economy = observer(() => {
       <div className="divider"></div>
       <BuildWaitingList values={gameStore.buildingsIncoming}>
         {gameStore.buildingsIncoming.map(({ domain }) => {
-          if (!domain) return null;
+          if (!domain) return <div></div>;
           return <ConstructionIcon domain={domain} key={domain} />;
         })}
       </BuildWaitingList>

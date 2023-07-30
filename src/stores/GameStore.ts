@@ -41,6 +41,7 @@ export class GameStore {
 
   get buildingsIncoming() {
     return this.player!.empire.buildingsQueue.map((building) => {
+      console.log(building.buildingType);
       return {
         domain: cardDictionnary[building.buildingType].template!.domain,
         progress: Math.floor(
