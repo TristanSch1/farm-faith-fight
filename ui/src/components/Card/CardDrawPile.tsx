@@ -16,6 +16,7 @@ type Props = {
 };
 
 const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ children }, ref) => {
+  console.log('RENDER DRAW PILE');
   children = Array.isArray(children) ? children : [children];
   const drawableRef = useRef<CardDrawableAPI[]>([]);
   let currentCardIndex = -1;

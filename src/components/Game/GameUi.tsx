@@ -7,18 +7,11 @@ import CardDrawPile, { DrawPileAPI } from "../../../ui/src/components/Card/CardD
 import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
 import { useEffect, useRef } from "react";
-import { observer } from "mobx-react";
 
-const GameUi = observer(() => {
+const GameUi = (() => {
   const ref = useRef<DrawPileAPI>(null);
 
-  useEffect(() => {
-    ref.current?.distribute();
-  }, []);
-
-  useEffect(() => {
-    gameStore.randomizeSingleTarget();
-  }, [gameStore.game?.players[gameStore.playerId].empire.turn]);
+  useEffect(() => ref.current?.distribute());
 
   return (
     <SceneContainer>

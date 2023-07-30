@@ -61,6 +61,7 @@ const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPi
 
     const onDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         if (isCardPicked(info)) {
+
             throwCardAway(info)
             info.offset.x > 0 ? onPickRight && onPickRight() : onPickLeft && onPickLeft();
             onPick && onPick();
