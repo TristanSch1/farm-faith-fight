@@ -18,6 +18,11 @@ const Game = observer(() => {
         <div>Is playable: {gameStore.isThisPlayableCard ? "Yes" : "No"}</div>
       </div>
       <hr />
+      {
+        gameStore.player?.empire.buildings.map(building => 
+          <div>building :{building}</div>
+        )
+      }
       {gameStore.player?.empire.name && <div>{gameStore.player?.empire.name}</div>}
       {gameStore.player?.empire.food && <div>Food: {gameStore.player?.empire.food}</div>}
       {gameStore.player?.empire.wood && <div>Wood: {gameStore.player?.empire.wood}</div>}

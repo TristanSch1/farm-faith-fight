@@ -34,6 +34,7 @@ export class GameActionsStore {
 
   static playCard(game: GameState, playerId: string, playedCard: TCard, randomPlayerIdTarget: string) {
     console.log(playedCard);
+    GameActionsStore.readBuildingsQueue(game, playerId);
     GameActionsStore.applyEffects(game, playerId, playedCard, randomPlayerIdTarget);
     game.players[playerId].empire.food -= playedCard.template.cost.food;
     game.players[playerId].empire.wood -= playedCard.template.cost.wood;
@@ -41,12 +42,13 @@ export class GameActionsStore {
   }
 
   static throwCard(game: GameState, playerId: string) {
+    GameActionsStore.readBuildingsQueue(game, playerId);
     let wood = gameConfig.income;
     let food = gameConfig.income;
-    wood +=
+    food +=
       game.players[playerId].empire.buildings.filter((building) => building === "farm").length *
       cardDictionnary.farm.effects.income.food;
-    food +=
+    wood +=
       game.players[playerId].empire.buildings.filter((building) => building === "woodFactory").length *
       cardDictionnary.woodFactory.effects.income.wood;
 
@@ -62,8 +64,9 @@ export class GameActionsStore {
   }
 
   static applyEffects(game: GameState, playerId: string, playedCard: TCard, targetPlayerId?: string) {
-    console.log(playedCard);
-    if (playedCard.effects instanceof BuildingEffect) {
+    console.log(playedCard.effects);
+
+    if ((playedCard.effects as BuildingEffect).turnsToBuild) {
       GameActionsStore.applyBuildingEffect(game, playerId, playedCard);
     } else {
       GameActionsStore.applyActionEffects(game, playerId, playedCard, targetPlayerId);
@@ -75,6 +78,22 @@ export class GameActionsStore {
       building: playedCard.template.id as TCardBuildingType,
       turnsLeft: (playedCard.effects as BuildingEffect).turnsToBuild,
     });
+  }
+
+  static readBuildingsQueue(game: GameState, playerId: string) {
+    if (game.players[playerId].empire.buildingsQueue.length) {
+      game.players[playerId].empire.buildingsQueue.map((building, index) => {
+        if (!building.turnsLeft) {
+          GameActionsStore.addBuildingsEffect(game, playerId, building.building);
+          game.players[playerId].empire.buildingsQueue.splice(index, 1);
+        }
+        building.turnsLeft -= 1;
+      });
+    }
+  }
+
+  static addBuildingsEffect(game: GameState, playerId: string, building: TCardBuildingType) {
+    game.players[playerId].empire.buildings.push(building);
   }
 
   static applyActionEffects(game: GameState, playerId: string, playedCard: TCard, targetPlayerId?: string) {
