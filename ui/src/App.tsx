@@ -75,7 +75,10 @@ const App = () => {
 
   const drawPileRef = useRef<DrawPileAPI>(null)
 
-  useEffect(() => drawPileRef.current?.distribute());
+  useEffect(() => {
+    console.log('DISTRIBUTE CARDS');
+    drawPileRef.current?.distribute()
+  });
 
   return (
     <SceneContainer>
@@ -135,6 +138,66 @@ const App = () => {
       </EconomyHeader>
 
       <CardDrawPile ref={drawPileRef}>
+        <Card
+          domain="RELIGION"
+          race="orc"
+          type="building/spiritualPlace"
+          tier={0}
+          title="Ferme"
+          description="Voici la Ferme, un havre de simplicité où le blé danse au gré du vent. Lieu de labeur et de moisson, il n'appartient à aucune race mais nourrit toutes bouches affamées. </br></br> Augmente votre production de blé."
+          target="Kevin"
+          turnsToBuild={3}
+          buildLinks={[
+            {
+              name: "Caserne",
+              built: false,
+            },
+            {
+              name: "Puit de Lune",
+              built: true,
+            },
+          ]}
+        />
+        <Card
+          domain="RELIGION"
+          race="orc"
+          type="building/spiritualPlace"
+          tier={0}
+          title="Ferme"
+          description="Voici la Ferme, un havre de simplicité où le blé danse au gré du vent. Lieu de labeur et de moisson, il n'appartient à aucune race mais nourrit toutes bouches affamées. </br></br> Augmente votre production de blé."
+          target="Kevin"
+          turnsToBuild={3}
+          buildLinks={[
+            {
+              name: "Caserne",
+              built: false,
+            },
+            {
+              name: "Puit de Lune",
+              built: true,
+            },
+          ]}
+        />
+        <Card
+          domain="RELIGION"
+          race="orc"
+          type="building/spiritualPlace"
+          tier={0}
+          title="Ferme"
+          description="Voici la Ferme, un havre de simplicité où le blé danse au gré du vent. Lieu de labeur et de moisson, il n'appartient à aucune race mais nourrit toutes bouches affamées. </br></br> Augmente votre production de blé."
+          target="Kevin"
+          turnsToBuild={3}
+          buildLinks={[
+            {
+              name: "Caserne",
+              built: false,
+            },
+            {
+              name: "Puit de Lune",
+              built: true,
+            },
+          ]}
+        />
         <Card
           domain="RELIGION"
           race="orc"
