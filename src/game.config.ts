@@ -27,13 +27,13 @@ export default {
   // 96 cartes
   deck: {
     // actions
-    attack: 100,
-    spy: 5,
+    attack: 12,
+    spy: 2,
     burningEarth: 12,
     poisoning: 12,
     spiritualAttack: 12,
-    spiritualCelebration: 100,
-    spyAll: 100,
+    spiritualCelebration: 12,
+    spyAll: 2,
     steal: 5,
     // buildings
     farm: 5,
@@ -48,7 +48,7 @@ export default {
     spiceTrade: 1,
     silkTrade: 1,
     woolTrade: 1,
-    castle: 50,
+    castle: 1,
     crypt: 1,
     ancientOfWar: 1,
     barracks: 1,
