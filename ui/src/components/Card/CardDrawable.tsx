@@ -24,7 +24,11 @@ const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPi
     const duration = (duration: number) => duration * debugDurationFactor;
     const drawTreshold = 150;
     const [drag, setDrag] = useState<boolean | 'x' | 'y'>(false);
-    const x = useSpring(-400, {});
+    const x = useSpring(-400, {
+        mass: .6,
+        damping: 8,
+        stiffness: 65,
+    });
     const y = useMotionValue(-150);
     const opacity = useMotionValue(0);
     const rotateY = useMotionValue(180);
@@ -46,7 +50,7 @@ const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPi
         opacity.set(1);
     };
 
-    const resetCardPosition = () => animate(x, 0, { duration: duration(.5), ease: 'anticipate' });
+    const resetCardPosition = () => animate(x, 0, { duration: duration(.1), ease: 'anticipate' });
     const throwCardAway = (info: PanInfo) => {
         animate([
             [x, x.get() + (info.offset.x > 0 ? -200 : 200), { duration: duration(1) }],

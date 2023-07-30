@@ -13,34 +13,24 @@ import {
   EconomyItem,
 } from './components';
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-ignore
-import elfAvatarUrl from './assets/images/avatar/elf.png';
-// @ts-ignore
-import orcAvatarUrl from './assets/images/avatar/orc.png';
-// @ts-ignore
-import humanAvatarUrl from './assets/images/avatar/human.png';
-// @ts-ignore
-import undeadAvatarUrl from './assets/images/avatar/undead.png';
-
 const App = () => (
   <SceneContainer>
     <EmpiresHeader>
 
       <EmpireStatus fill={80}>
-        <EmpireAvatar imageUrl={elfAvatarUrl} />
+        <EmpireAvatar race_name='elf' />
       </EmpireStatus>
 
       <EmpireStatus fill={20}>
-        <EmpireAvatar imageUrl={orcAvatarUrl} />
+        <EmpireAvatar race_name='orc' />
       </EmpireStatus>
 
       <EmpireStatus fill={60}>
-        <EmpireAvatar imageUrl={humanAvatarUrl} />
+        <EmpireAvatar race_name='human' />
       </EmpireStatus>
 
       <EmpireStatus fill={66}>
-        <EmpireAvatar imageUrl={undeadAvatarUrl} />
+        <EmpireAvatar race_name='undead' />
       </EmpireStatus>
 
     </EmpiresHeader>
@@ -51,13 +41,14 @@ const App = () => (
     </EconomyHeader>
 
     <CardDrawPile>
-      <Card image_path='building/spiritual_t1' />
-      <Card image_path='building/spiritual_t1' />
-      <Card image_path='building/spiritual_t1' />
-      <Card image_path='building/spiritual_t1' />
-      <Card image_path='building/spiritual_t1' />
-      <Card image_path='building/spiritual_t1' />
-      <Card image_path='building/spiritual_t1' />
+      <Card
+        domain='religion'
+        image_path='building/spiritualPlace'
+        tier={1}
+        title='Lieu spirituel'
+        description='Découvrez le Cercle Spirituel, un humble lieu de sanctuaire en pleine plaine, entouré de la sérénité de la forêt environnante. Les piliers de terre et de pierre dressés ici accueillent les païens démunis mais ardents, qui viennent y accomplir leurs rituels avec ferveur. Ce lieu sacré transcende les races, accueillant tous ceux qui cherchent la paix intérieure.'
+        target="Kevin"
+      />
     </CardDrawPile>
   </SceneContainer>
 )

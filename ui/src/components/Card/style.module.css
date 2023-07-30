@@ -1,99 +1,111 @@
 .card_draw_pile {
-    /* TODO: Responsabilty of the Scene */
-    flex-grow: 1;
-    cursor: grab;
-    position: relative;
-    border-radius: 30px;
-    background-color: #473127;
-    box-shadow: inset 0px 0px 32px 4px rgba(0,0,0,0.35);
-    border: 3px solid #2d2313;
-    padding: 15px;
+  /* TODO: Responsabilty of the Scene */
+  flex-grow: 1;
+  cursor: grab;
+  position: relative;
+  border-radius: 30px;
+  background-color: #473127;
+  box-shadow: inset 0px 0px 32px 4px rgba(0, 0, 0, 0.35);
+  border: 3px solid #2d2313;
+  padding: 15px;
 }
 
 .card_drawable {
-    position: absolute;
-    left: 5px;
-    right: 5px;
-    top: 7px;
-    bottom: 15px;
-    perspective: 1500px;
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 7px;
+  bottom: 15px;
+  perspective: 1500px;
 }
 
 .card_drawable__swipe {
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    transform-style: preserve-3d;
-    perspective: 500px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  transform-style: preserve-3d;
+  perspective: 500px;
 }
 
 .card {
-    height: 100%;
-    position: relative;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    background-size: cover;
-    background-position: center center;
+  height: 100%;
+  position: relative;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  background-size: cover;
+  background-position: center center;
 }
 
 .card::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    background: url('/src/assets/images/card/backcard_bg.png');
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    transform: rotateY(180deg);
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  background: url("/src/assets/images/card/backcard_bg.png");
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
 }
 
-.card, .card::after {
-    border-radius: 30px;
-    border: 4px solid #000;
+.card,
+.card::after {
+  border-radius: 30px;
+  border: 4px solid #000;
 }
 
 .card__inner {
-    border-radius: 30px;
-    overflow: hidden;
-    height: 100%;
-    position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
 }
 
 .card__inner > img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card__header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 16px;
 }
 
 .card__content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30%;
-    background: rgba(58, 58, 58, 0.3);
-    border-radius: 16px 16px 32px 32px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-bottom: none;
-    padding: 16px;
-    text-shadow: 0px 0px 8px rgba(0,0,0,0.74);
+  overflow: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: rgba(58, 58, 58, 0.3);
+  border-radius: 16px 16px 32px 32px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: none;
+  padding: 16px;
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.74);
 }
 
 @supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
-    .card__content {
-        backdrop-filter: blur(5px);
-    }
+  .card__content {
+    backdrop-filter: blur(5px);
+  }
 }
 
 .card__content__title {
-    font-family: var(--font-accent);
-    font-size: 2.4rem;
-    font-weight: bold;
-    text-shadow: 0px 0px 8px rgba(0,0,0,0.74), 0px 0px 8px rgba(0,0,0,0.74), 0px 0px 8px rgba(0,0,0,0.74);
+  font-family: var(--font-accent);
+  font-size: 2.4rem;
+  font-weight: bold;
+  text-shadow:
+    0px 0px 8px rgba(0, 0, 0, 0.74),
+    0px 0px 8px rgba(0, 0, 0, 0.74),
+    0px 0px 8px rgba(0, 0, 0, 0.74);
 }
