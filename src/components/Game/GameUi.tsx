@@ -27,7 +27,7 @@ const GameUi = observer(() => {
       <CardDrawPile ref={ref}>
         {gameStore.deck.map((card, index) => {
           const { template } = card;
-          return <Card key={index} {...{ ...template, title: template.name, type: template.id }} />;
+          return <Card key={index} {...{ ...template, title: template.name, type: 'building/spiritualPlace', race: template.race?.toLowerCase() }} />;
         })}
       </CardDrawPile>
     </SceneContainer>

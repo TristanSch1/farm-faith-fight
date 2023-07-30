@@ -7,7 +7,7 @@ export const Players = observer(() => {
     <EmpiresHeader>
       {Object.entries(gameStore.game!.players).map(([playerId, player]) => (
         <EmpireStatus fill={gameStore.player!.empire.health} key={playerId}>
-          <EmpireAvatar race_name={player.empire.name} />
+          <EmpireAvatar race_name={player.empire.name} pseudo={player.empire.name} />
         </EmpireStatus>
       ))}
     </EmpiresHeader>

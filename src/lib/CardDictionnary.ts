@@ -318,7 +318,7 @@ export const cardDictionnary: {
     template: {
       id: "moonwell",
       tier: 2,
-      race: "ELVE",
+      race: "ELF",
       cost: {
         wood: 100,
         food: 100,
@@ -398,7 +398,7 @@ export const cardDictionnary: {
     template: {
       id: "silkTrade",
       tier: 2,
-      race: "ELVE",
+      race: "ELF",
       cost: {
         wood: 100,
         food: 100,
@@ -498,7 +498,7 @@ export const cardDictionnary: {
     template: {
       id: "ancientOfWar",
       tier: 2,
-      race: "ELVE",
+      race: "ELF",
       cost: {
         wood: 100,
         food: 100,

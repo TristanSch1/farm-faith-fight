@@ -1,7 +1,7 @@
 import { TCost } from "./types/genericTypes";
 import { TCardType } from "./CardDictionnary.ts";
 
-export type TRACE = "HUMAN" | "ELVE" | "ORC" | "UNDEAD" | "NEUTRAL" | "NONE";
+export type TRACE = "HUMAN" | "ELF" | "ORC" | "UNDEAD" | "NEUTRAL" | "NONE";
 export type TDOMAIN = "ARMY" | "RELIGION" | "TRADE";
 export type TCARDCATEGORY = "BUILDING" | "ACTION";
 
