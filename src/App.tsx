@@ -4,6 +4,9 @@ import { gameStore } from "./stores/GameStore.ts";
 import StartGame from "./components/StartGame/StartGame.tsx";
 import { observer } from "mobx-react";
 import Game from "./components/Game/Game.tsx";
+import { fxStore } from "./stores/FxStore.ts";
+
+fxStore.init();
 
 const App = observer(() => {
   useEffect(() => {

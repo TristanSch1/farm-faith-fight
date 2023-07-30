@@ -28,6 +28,11 @@ class GameStore {
     );
   }
 
+  get player() {
+    if (!this.playerId) return;
+    return this.game?.players[this.playerId];
+  }
+
   get isGameStarted() {
     if (!this.game) return false;
     return this.game.gameStarted;
@@ -55,6 +60,7 @@ class GameStore {
   playCard() {
     console.log(this.currentTurnCard);
     this.applyEffects(this.currentTurnCard.effects);
+    eventsStore.send({ type: "playCard" });
     this.setNextTurn();
     //   mettre le store a jour
   }
@@ -62,6 +68,7 @@ class GameStore {
   throwCard() {
     console.log(this.currentTurnCard);
     this.applyEffects(this.currentTurnCard.effects);
+    eventsStore.send({ type: "throwCard" });
     this.setNextTurn();
   }
 

@@ -2,6 +2,7 @@ import { Empire } from "./lib/Empire";
 import { GameState } from "./lib/types/GameState.ts";
 import { gameStore } from "./stores/GameStore.ts";
 import { toJS } from "mobx";
+import eventsStore from "./stores/EventsStore.ts";
 
 // TODO - Mettre les vrais empires
 const EMPIRE_NAMES = ["Orcs", "Elves", "Undead", "Humans"];
@@ -58,6 +59,7 @@ Rune.initLogic({
         state: "waiting",
         turns: 0,
       };
+      eventsStore.send({ type: "playerJoin" });
     },
     playerLeft(playerId, { game }) {
       delete game.players[playerId];
