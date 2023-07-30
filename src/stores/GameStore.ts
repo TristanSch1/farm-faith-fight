@@ -7,6 +7,7 @@ import gameConfig from "../game.config.ts";
 import { intersection } from "remeda";
 import { BuildingEffect } from "../lib/BuildingEffect.ts";
 import { GameActionsStore } from "./GameActionsStore.ts";
+import { cardDictionnary } from "../lib/CardDictionnary.ts";
 
 export class GameStore {
   game: GameState | null = null;
@@ -36,6 +37,19 @@ export class GameStore {
 
   get currentTurnCard() {
     return this.deck[this.player!.empire.turn % this.deck.length];
+  }
+
+  get buildingsIncoming() {
+    return this.player!.empire.buildingsQueue.map((building) => {
+      return {
+        domain: cardDictionnary[building.buildingType].template!.domain,
+        progress: Math.floor(
+          ((cardDictionnary[building.buildingType].effects as BuildingEffect).turnsToBuild -
+            building.turnsLeft / (cardDictionnary[building.buildingType].effects as BuildingEffect).turnsToBuild) *
+            100,
+        ),
+      };
+    });
   }
 
   get isThisPlayableCard() {

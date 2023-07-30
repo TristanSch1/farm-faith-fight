@@ -3,9 +3,9 @@ import "./App.css";
 import { gameStore } from "./stores/GameStore.ts";
 import StartGame from "./components/StartGame/StartGame.tsx";
 import { observer } from "mobx-react";
-import Game from "./components/Game/Game.tsx";
 import { fxStore } from "./stores/FxStore.ts";
 import { GameActionsStore } from "./stores/GameActionsStore.ts";
+import GameUi from "./components/Game/GameUi.tsx";
 
 fxStore.init();
 GameActionsStore.initEvents();
@@ -37,6 +37,6 @@ const App = observer(() => {
     return <div>Loading...</div>;
   }
 
-  return <>{gameStore.game.gameStarted ? <Game /> : <StartGame />}</>;
+  return <>{gameStore.game.gameStarted ? <GameUi /> : <StartGame />}</>;
 });
 export default App;
