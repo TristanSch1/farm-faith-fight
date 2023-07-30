@@ -28,6 +28,7 @@ export class CardTemplate {
   constructor(props: CardTemplateProps) {
     this.id = props.id;
     this.description = props.description;
+    this.tier = props.tier;
     this.name = props.name;
     this.cost = props.cost;
     this.category = props.category;

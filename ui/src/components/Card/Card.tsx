@@ -47,7 +47,7 @@ const Card: React.FC<Props> = ({ type, target, title, description, tier, domain,
         return <span className={styles.card__badge}>⏲ {turnsToBuild} Tours</span>;
     }
 
-    const badgeStyle = (done: boolean) => (done ? {} : { textDecoration: 'line-through', filter: 'grayscale(1)', opacity: .8 })
+    const badgeStyle = (done: boolean) => (done ? { textDecoration: 'line-through', filter: 'grayscale(1)', opacity: .8 } : {})
 
     return (
         <div className={styles.card}>
