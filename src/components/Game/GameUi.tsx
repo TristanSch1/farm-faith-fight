@@ -14,15 +14,33 @@ import eventsStore from "../../stores/EventsStore.ts";
 const GameUi = () => {
   const ref = useRef<DrawPileAPI>(null);
   useEffect(() => ref.current?.distribute(), []);
-  useEffect(() => {
-    eventsStore.send({ type: "gameOver" });
-  });
 
   return (
     <SceneContainer>
       <Players />
       <Economy />
-      <CardDrawPile ref={ref} debug_key={gameStore.playerId}>
+      <CardDrawPile
+        onPlayCard={(cardDrawable) => {
+          if (!gameStore.isThisPlayableCard) {
+            cardDrawable.reset();
+            return;
+          }
+          eventsStore.send({
+            type: "playCard",
+            payload: {
+              card: gameStore.currentTurnCard,
+              empire: gameStore.player!.empire,
+              randomPlayerIdTarget: gameStore.randomPlayerIdTarget,
+            },
+          });
+        }}
+        onThrowCard={(cardDrawable) => {
+          cardDrawable.throw();
+          eventsStore.send({ type: "throwCard" });
+        }}
+        ref={ref}
+        debug_key={gameStore.playerId}
+      >
         {gameStore.deck.map((card, index) => {
           const { template } = card;
           return (

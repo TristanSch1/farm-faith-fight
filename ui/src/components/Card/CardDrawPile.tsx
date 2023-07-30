@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
 import CardDrawable, { CardDrawableAPI } from "./CardDrawable";
 
@@ -15,74 +15,85 @@ type Props = {
   children: React.ReactElement | React.ReactElement[];
   debug_key?: string;
   onDrawPileEmpty?: () => void;
+  onPlayCard?: (card: CardDrawableAPI) => void;
+  onThrowCard?: (card: CardDrawableAPI) => void;
 };
 
 let currentCardIndex = -1;
 let wasDistributed = false;
 
-const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ debug_key, children, onDrawPileEmpty }, ref) => {
-  children = Array.isArray(children) ? children : [children];
-  const drawableRef = useRef<CardDrawableAPI[]>([]);
+const CardDrawPile = forwardRef<DrawPileAPI, Props>(
+  ({ debug_key, children, onDrawPileEmpty, onPlayCard, onThrowCard }, ref) => {
+    children = Array.isArray(children) ? children : [children];
+    const drawableRef = useRef<CardDrawableAPI[]>([]);
 
-  const cardDistribution = () => {
-    if (wasDistributed) return;
+    const cardDistribution = () => {
+      if (wasDistributed) return;
 
-    let i = 0;
+      let i = 0;
 
-    for (i; i < Math.min(numberOfCardToDistribute, drawableRef.current.length); i++) {
-      drawableRef.current[i].distribute((i + 1) * 0.2);
-    }
-
-    setTimeout(() => {
-      for (i; i < drawableRef.current.length; i++) {
-        drawableRef.current[i].display();
+      for (i; i < Math.min(numberOfCardToDistribute, drawableRef.current.length); i++) {
+        drawableRef.current[i].distribute((i + 1) * 0.2);
       }
-    }, 3000);
 
-    turnNextCard();
+      setTimeout(() => {
+        for (i; i < drawableRef.current.length; i++) {
+          drawableRef.current[i].display();
+        }
+      }, 3000);
 
-    if (!wasDistributed) wasDistributed = true;
-  };
+      turnNextCard();
 
-  const turnNextCard = () => {
-    currentCardIndex++
+      if (!wasDistributed) wasDistributed = true;
+    };
 
-    console.log(currentCardIndex);
-    const nextCard = drawableRef.current[currentCardIndex];
-    const delay = currentCardIndex === 0 ? 600 : 250;
+    const turnNextCard = () => {
+      currentCardIndex++;
 
-    if (nextCard) setTimeout(nextCard.turn, delay);
-    else {
-      onDrawPileEmpty && onDrawPileEmpty();
+      console.log(currentCardIndex);
+      const nextCard = drawableRef.current[currentCardIndex];
+      const delay = currentCardIndex === 0 ? 600 : 250;
 
-      // setTimeout(nextCard.turn, delay)
-      wasDistributed = false;
-      currentCardIndex = -1;
-      cardDistribution();
-    }
-  };
+      if (nextCard) setTimeout(nextCard.turn, delay);
+      else {
+        onDrawPileEmpty && onDrawPileEmpty();
 
-  const setDrawableRef = (element: CardDrawableAPI | null, index: number) => {
-    if (!element) return;
-    drawableRef.current[index] = element;
-  };
+        // setTimeout(nextCard.turn, delay)
+        wasDistributed = false;
+        currentCardIndex = -1;
+        cardDistribution();
+      }
+    };
 
-  useImperativeHandle(
-    ref,
-    (): DrawPileAPI => ({
-      distribute: cardDistribution,
-    }),
-  );
+    const setDrawableRef = (element: CardDrawableAPI | null, index: number) => {
+      if (!element) return;
+      drawableRef.current[index] = element;
+    };
 
-  return (
-    <div className={styles.card_draw_pile}>
-      {React.Children.map(children, (child, index) => (
-        <CardDrawable onPick={turnNextCard} ref={(el) => setDrawableRef(el, index)} key={index} order={index + 1}>
-          {child}
-        </CardDrawable>
-      ))}
-    </div>
-  );
-});
+    useImperativeHandle(
+      ref,
+      (): DrawPileAPI => ({
+        distribute: cardDistribution,
+      }),
+    );
+
+    return (
+      <div className={styles.card_draw_pile}>
+        {React.Children.map(children, (child, index) => (
+          <CardDrawable
+            onPickRight={() => onPlayCard && onPlayCard(drawableRef.current[currentCardIndex])}
+            onPickLeft={() => onThrowCard && onThrowCard(drawableRef.current[currentCardIndex])}
+            onThrown={turnNextCard}
+            ref={(el) => setDrawableRef(el, index)}
+            key={index}
+            order={index + 1}
+          >
+            {child}
+          </CardDrawable>
+        ))}
+      </div>
+    );
+  },
+);
 
 export default CardDrawPile;
