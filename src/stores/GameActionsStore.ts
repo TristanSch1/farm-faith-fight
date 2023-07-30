@@ -146,15 +146,20 @@ export class GameActionsStore {
               playerId: targetPlayerId,
               turnsLeft: (playedCard.effects as ActionEffectProps[]).map((effect) => effect.turnsToSpy)[0]!,
             });
+            break;
           }
-
           if (actionEffect.impactType === "negative") {
             game.players[targetPlayerId].empire.health -=
               gameConfig.baseDamage +
               GameActionsStore.getBonusOrMalusDamageByEffect(actionEffect, game, playerId, targetPlayerId);
+            break;
           }
           if (actionEffect.impactType === "positive") {
-            game.players[targetPlayerId].empire.health += actionEffect.impact!;
+            game.players[playerId].empire.health =
+              game.players[playerId].empire.health + actionEffect.impact! >= gameConfig.health
+                ? gameConfig.health
+                : game.players[playerId].empire.health + actionEffect.impact!;
+            break;
           }
           break;
         case "everyTarget":
@@ -168,6 +173,7 @@ export class GameActionsStore {
                 });
               }
             });
+            break;
           }
 
           Object.keys(game.players).map((targetPlayerId) => {
