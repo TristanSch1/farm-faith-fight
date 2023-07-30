@@ -25,6 +25,9 @@ const GameUi = () => {
             cardDrawable.reset();
             return;
           }
+
+          cardDrawable.throw();
+
           eventsStore.send({
             type: "playCard",
             payload: {

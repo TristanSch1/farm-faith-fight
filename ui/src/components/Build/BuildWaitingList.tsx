@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import styles from "./style.module.css";
 import ConstructionBuildProgress from "./ConstructionBuildProgress";
 
-type Props = PropsWithChildren & {
+type Props = {
+  children: React.ReactElement | React.ReactElement[],
   values: Array<{
     progress: number;
   }>;
@@ -23,7 +24,9 @@ const BuildWaitingList: React.FC<Props> = ({ children, values }) => (
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
           >
-            <ConstructionBuildProgress progress={values[index].progress}>{child}</ConstructionBuildProgress>
+            <ConstructionBuildProgress progress={values[index].progress}>
+              {child}
+            </ConstructionBuildProgress>
           </motion.div>
         );
       })}

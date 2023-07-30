@@ -48,6 +48,7 @@ const CardDrawPile = forwardRef<DrawPileAPI, Props>(
     };
 
     const turnNextCard = () => {
+      console.log('turnnextcard');
       currentCardIndex++;
 
       console.log(currentCardIndex);
