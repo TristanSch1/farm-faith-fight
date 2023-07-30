@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import { SceneContainer } from './layouts'
 
 import './assets/styles/normalize.css';
@@ -6,18 +7,24 @@ import './assets/styles/app.css';
 import {
   CardDrawPile,
   Card,
-  EmpireAvatar,
+  EmpirePlayer,
   EmpireStatus,
   EmpiresHeader,
   EconomyHeader,
   EconomyItem,
   BuildWaitingList,
   ConstructionIcon,
+  SpyReport,
 } from './components';
 
 const App = () => {
 
   const [waitingList, setWaitingList] = useState<{ progress: number, domain: string }[]>([]);
+  const [spyReport, setSpyReport] = useState<{
+    domain: string,
+    tier: number,
+    race?: string,
+  }[]>([]);
 
   const addWaitingList = () => {
     setWaitingList([...waitingList, {
@@ -39,6 +46,25 @@ const App = () => {
     setWaitingList(array);
   }
 
+  const showSpy = () => {
+    setSpyReport([{
+      domain: 'army',
+      tier: 1,
+      race: 'elf',
+    }, {
+      domain: 'religion',
+      tier: 2,
+    }, {
+      domain: 'trade',
+      tier: 1,
+      race: 'orc',
+    }])
+  }
+
+  const stopSpy = () => {
+    setSpyReport([]);
+  }
+
   return (
     <SceneContainer>
       <div style={{
@@ -53,24 +79,31 @@ const App = () => {
         <div style={{ margin: '5px 0' }}></div>
         <button onClick={changeWaitingValues}>Change waiting list progress</button>
         <div style={{ margin: '20px 0' }}></div>
+        <button onClick={showSpy}>Show spy report</button>
+        <div style={{ margin: '5px 0' }}></div>
+        <button onClick={stopSpy}>Hide spy report</button>
+        <div style={{ margin: '5px 0' }}></div>
       </div>
 
       <EmpiresHeader>
 
         <EmpireStatus fill={80}>
-          <EmpireAvatar race_name='elf' />
+          <>
+            <EmpirePlayer race_name='elf' pseudo='Aradehel' />
+            <SpyReport data={spyReport} />
+          </>
         </EmpireStatus>
 
         <EmpireStatus fill={20}>
-          <EmpireAvatar race_name='orc' />
+          <EmpirePlayer race_name='orc' pseudo='Ulgborz' />
         </EmpireStatus>
 
         <EmpireStatus fill={60}>
-          <EmpireAvatar race_name='human' />
+          <EmpirePlayer race_name='human' pseudo='Leoric' />
         </EmpireStatus>
 
         <EmpireStatus fill={66}>
-          <EmpireAvatar race_name='undead' />
+          <EmpirePlayer race_name='undead' pseudo='Phelishma' />
         </EmpireStatus>
 
       </EmpiresHeader>

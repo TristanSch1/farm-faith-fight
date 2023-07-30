@@ -1,0 +1,20 @@
+.spy_report {
+  display: flex;
+  position: absolute;
+  top: 0;
+}
+
+.spy_report__tier {
+  position: absolute;
+  top: -3.55vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #2d2313;
+  line-height: 2.6rem;
+}
+
+.spy_report__construction > * {
+  width: 3.55vh !important;
+  height: 3.55vh !important;
+}
