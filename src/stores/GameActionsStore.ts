@@ -4,7 +4,7 @@ import { GameState } from "../lib/types/GameState.ts";
 import gameConfig from "../game.config.ts";
 import { cardDictionnary, TCardBuildingType } from "../lib/CardDictionnary.ts";
 import { BuildingEffect, BuildingEffectProps } from "../lib/BuildingEffect.ts";
-import { ActionEffect } from "../lib/ActionEffect.ts";
+import { ActionEffect, ActionEffectProps } from "../lib/ActionEffect.ts";
 import eventsStore from "./EventsStore.ts";
 import { IEventPlayCard, IEventThrowCard } from "../lib/types/EventTypes.ts";
 import { BONUMALUS_DAMAGE, getBuildingsPlayerByDomainAndByTier } from "../lib/helpers/CardHelper.ts";
@@ -53,6 +53,7 @@ export class GameActionsStore {
 
   static playCard(game: GameState, playerId: string, playedCard: TCard, randomPlayerIdTarget: string) {
     GameActionsStore.readBuildingsQueue(game, playerId);
+    GameActionsStore.readSpyQueue(game, playerId);
     GameActionsStore.applyEffects(game, playerId, playedCard, randomPlayerIdTarget);
     game.players[playerId].empire.food -= playedCard.template.cost.food;
     game.players[playerId].empire.wood -= playedCard.template.cost.wood;
@@ -61,6 +62,7 @@ export class GameActionsStore {
 
   static throwCard(game: GameState, playerId: string) {
     GameActionsStore.readBuildingsQueue(game, playerId);
+    GameActionsStore.readSpyQueue(game, playerId);
     let wood = gameConfig.income;
     let food = gameConfig.income;
     food +=
@@ -124,11 +126,28 @@ export class GameActionsStore {
     game.players[playerId].empire.buildings.push(building);
   }
 
+  static readSpyQueue(game: GameState, playerId: string) {
+    if (game.players[playerId].empire.spyingQueue.length) {
+      game.players[playerId].empire.spyingQueue = game.players[playerId].empire.spyingQueue
+        .filter((spy) => spy.turnsLeft > 0)
+        .map((spy) => ({ playerId: spy.playerId, turnsLeft: spy.turnsLeft - 1 }));
+    }
+  }
+
   static applyActionEffects(game: GameState, playerId: string, playedCard: TCard, targetPlayerId?: string) {
     (playedCard.effects as ActionEffect[]).map((actionEffect) => {
       switch (actionEffect.actionType) {
         case "singleTarget":
           if (!targetPlayerId) return;
+
+          // if card is spy
+          if (playedCard.template.id === "spy") {
+            game.players[playerId].empire.spyingQueue.push({
+              playerId: targetPlayerId,
+              turnsLeft: (playedCard.effects as ActionEffectProps[]).map((effect) => effect.turnsToSpy)[0]!,
+            });
+          }
+
           if (actionEffect.impactType === "negative") {
             game.players[targetPlayerId].empire.health -=
               gameConfig.baseDamage +
@@ -139,6 +158,18 @@ export class GameActionsStore {
           }
           break;
         case "everyTarget":
+          // if card is spyAll
+          if (playedCard.template.id === "spyAll") {
+            Object.keys(game.players).map((targetPlayerId) => {
+              if (targetPlayerId !== playerId) {
+                game.players[playerId].empire.spyingQueue.push({
+                  playerId: targetPlayerId,
+                  turnsLeft: (playedCard.effects as ActionEffectProps[]).map((effect) => effect.turnsToSpy)[0]!,
+                });
+              }
+            });
+          }
+
           Object.keys(game.players).map((targetPlayerId) => {
             if (playerId === targetPlayerId) return;
             game.players[targetPlayerId].empire.health -=

@@ -10,6 +10,7 @@ export class Empire {
     public health: number = gameConfig.health,
     public turn: number = 0,
     public buildings: TCardBuildingType[] = [],
+    public spyingQueue: { playerId: string; turnsLeft: number }[] = [],
     public buildingsQueue: { buildingType: TCardBuildingType; turnsLeft: number }[] = [],
   ) {
     makeAutoObservable(this);

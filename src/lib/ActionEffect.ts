@@ -5,6 +5,7 @@ export type ActionEffectProps = {
   domain?: TDOMAIN;
   impact?: number;
   impactType?: "positive" | "negative";
+  turnsToSpy?: number;
 };
 
 export class ActionEffect {
@@ -12,6 +13,7 @@ export class ActionEffect {
   domain;
   impact;
   impactType;
+  turnsToSpy;
 
   constructor(
     props: ActionEffectProps = {
@@ -22,5 +24,6 @@ export class ActionEffect {
     this.domain = props.domain;
     this.impact = props.impact;
     this.impactType = props.impactType;
+    this.turnsToSpy = props.turnsToSpy;
   }
 }

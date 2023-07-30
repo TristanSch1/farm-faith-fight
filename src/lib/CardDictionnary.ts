@@ -69,6 +69,7 @@ export const cardDictionnary: {
     effects: [
       {
         actionType: "singleTarget",
+        turnsToSpy: 2,
       },
     ],
   },
@@ -84,6 +85,7 @@ export const cardDictionnary: {
     effects: [
       {
         actionType: "everyTarget",
+        turnsToSpy: 2,
       },
     ],
   },

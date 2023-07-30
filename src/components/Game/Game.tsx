@@ -24,6 +24,10 @@ const Game = observer(() => {
       {gameStore.player?.empire.wood && <div>Wood: {gameStore.player?.empire.wood}</div>}
       {gameStore.player?.empire.turn && <div>Turn: {gameStore.player.empire.turn}</div>}
       {gameStore.player?.empire.health && <div>Health: {gameStore.player?.empire.health}</div>}
+      {gameStore.player?.empire.spyingQueue && gameStore.player?.empire.spyingQueue.map(spy => {
+       return <span>spy health : {gameStore.game?.players[spy.playerId].empire.health}</span>
+      })}
+
       <hr />
       {gameStore.isGameStarted && (
         <div style={{ display: "flex" }}>
