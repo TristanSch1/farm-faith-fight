@@ -75,10 +75,7 @@ const App = () => {
 
   const drawPileRef = useRef<DrawPileAPI>(null)
 
-  useEffect(() => {
-    console.log('DISTRIBUTE CARDS');
-    drawPileRef.current?.distribute()
-  });
+  useEffect(() => drawPileRef.current?.distribute());
 
   return (
     <SceneContainer>
