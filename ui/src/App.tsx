@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SceneContainer } from "./layouts";
 
 import "./assets/styles/normalize.css";
@@ -15,6 +15,7 @@ import {
   EmpireStatus,
   SpyReport,
 } from "./components";
+import { DrawPileAPI } from "./components/Card/CardDrawPile";
 
 const App = () => {
   const [waitingList, setWaitingList] = useState<{ progress: number; domain: string }[]>([]);
@@ -71,6 +72,10 @@ const App = () => {
   const stopSpy = () => {
     setSpyReport([]);
   };
+
+  const drawPileRef = useRef<DrawPileAPI>(null)
+
+  useEffect(() => drawPileRef.current?.distribute());
 
   return (
     <SceneContainer>
@@ -129,7 +134,7 @@ const App = () => {
         </BuildWaitingList>
       </EconomyHeader>
 
-      <CardDrawPile>
+      <CardDrawPile ref={drawPileRef}>
         <Card
           domain="religion"
           race="orc"
