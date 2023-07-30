@@ -24,13 +24,11 @@ Rune.initLogic({
   },
   actions: {
     startGame: (_, { game, playerId }) => {
-      console.log("startGame", playerId);
       if (game.gameStarted) throw Rune.invalidAction();
       game.gameStarted = true;
     },
     ready: (_, { game, playerId }) => {
       if (game.gameStarted || !game.players?.[playerId]) throw Rune.invalidAction();
-      console.log("ready", playerId);
       game.players[playerId].state = game.players[playerId].state === "waiting" ? "ready" : "waiting";
     },
     playCard({ card, randomPlayerIdTarget }, { game, playerId }) {

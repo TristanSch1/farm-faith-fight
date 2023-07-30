@@ -7,7 +7,7 @@ import { BuildingEffect, BuildingEffectProps } from "../lib/BuildingEffect.ts";
 import { ActionEffect } from "../lib/ActionEffect.ts";
 import eventsStore from "./EventsStore.ts";
 import { IEventPlayCard, IEventThrowCard } from "../lib/types/EventTypes.ts";
-import { BONUMALUS_DAMAGE, getBuildingByCategory } from "../lib/helpers/CardHelper.ts";
+import { BONUMALUS_DAMAGE, getBuildingsPlayerByDomainAndByTier } from "../lib/helpers/CardHelper.ts";
 import { first, intersection } from "remeda";
 import { TRACE } from "../lib/CardTemplate.ts";
 
@@ -52,9 +52,7 @@ export class GameActionsStore {
   }
 
   static playCard(game: GameState, playerId: string, playedCard: TCard, randomPlayerIdTarget: string) {
-    console.log(playedCard);
     GameActionsStore.readBuildingsQueue(game, playerId);
-    console.log(randomPlayerIdTarget);
     GameActionsStore.applyEffects(game, playerId, playedCard, randomPlayerIdTarget);
     game.players[playerId].empire.food -= playedCard.template.cost.food;
     game.players[playerId].empire.wood -= playedCard.template.cost.wood;
@@ -115,7 +113,6 @@ export class GameActionsStore {
             }
           }
 
-          // game.players[playerId].empire.buildings.splice()
           game.players[playerId].empire.buildingsQueue.splice(index, 1);
         }
         building.turnsLeft -= 1;
@@ -131,11 +128,15 @@ export class GameActionsStore {
     (playedCard.effects as ActionEffect[]).map((actionEffect) => {
       switch (actionEffect.actionType) {
         case "singleTarget":
-          console.log(targetPlayerId);
           if (!targetPlayerId) return;
-          game.players[targetPlayerId].empire.health -=
-            gameConfig.baseDamage +
-            GameActionsStore.getBonusOrMalusDamageByEffect(actionEffect, game, playerId, targetPlayerId);
+          if (actionEffect.impactType === "negative") {
+            game.players[targetPlayerId].empire.health -=
+              gameConfig.baseDamage +
+              GameActionsStore.getBonusOrMalusDamageByEffect(actionEffect, game, playerId, targetPlayerId);
+          }
+          if (actionEffect.impactType === "positive") {
+            game.players[targetPlayerId].empire.health += actionEffect.impact!;
+          }
           break;
         case "everyTarget":
           Object.keys(game.players).map((targetPlayerId) => {
@@ -155,33 +156,57 @@ export class GameActionsStore {
     playerId: string,
     targetPlayerId: string,
   ) {
-    if (!effect.category) return 0;
+    if (!effect.domain) return 0;
     let myRace: TRACE = "NONE";
     let enemyRace: TRACE = "NONE";
-    const buildingT2 = getBuildingByCategory(effect.category);
 
-    const playerBuildings = game.players[playerId].empire.buildings;
-    const targetPlayerBuildings = game.players[targetPlayerId].empire.buildings;
+    const playerBuildingsT1 = getBuildingsPlayerByDomainAndByTier(
+      game.players[playerId].empire.buildings,
+      effect.domain,
+      1,
+    );
+    const targetPlayerBuildingsT1 = getBuildingsPlayerByDomainAndByTier(
+      game.players[targetPlayerId].empire.buildings,
+      effect.domain,
+      1,
+    );
 
-    if (!playerBuildings.length && !targetPlayerBuildings.length) {
-      console.info(myRace, enemyRace, BONUMALUS_DAMAGE[myRace][enemyRace]);
-      return BONUMALUS_DAMAGE[myRace][enemyRace];
+    if (playerBuildingsT1.length) {
+      myRace = "NEUTRAL";
     }
 
-    if (playerBuildings.length) myRace = "NEUTRAL";
-    if (targetPlayerBuildings.length) enemyRace = "NEUTRAL";
-
-    const playerT2Buildings = intersection(playerBuildings, buildingT2);
-    const targetPlayerT2Buildings = intersection(targetPlayerBuildings, buildingT2);
-
-    if (playerT2Buildings.length) {
-      myRace = cardDictionnary[first(playerT2Buildings)!].template.race!;
+    if (targetPlayerBuildingsT1.length) {
+      myRace = "NEUTRAL";
     }
 
-    if (playerT2Buildings.length) {
-      enemyRace = cardDictionnary[first(targetPlayerT2Buildings)!].template.race!;
+    const playerBuildingsT2 = getBuildingsPlayerByDomainAndByTier(
+      game.players[playerId].empire.buildings,
+      effect.domain,
+      2,
+    );
+
+    const targetPlayerBuildingsT2 = getBuildingsPlayerByDomainAndByTier(
+      game.players[targetPlayerId].empire.buildings,
+      effect.domain,
+      2,
+    );
+
+    if (playerBuildingsT2.length) {
+      myRace = cardDictionnary[first(playerBuildingsT2)!].template.race!;
     }
-    console.info(myRace, enemyRace, BONUMALUS_DAMAGE[myRace][enemyRace]);
+
+    if (targetPlayerBuildingsT2.length) {
+      enemyRace = cardDictionnary[first(targetPlayerBuildingsT2)!].template.race!;
+    }
+
+    console.info(
+      effect.domain,
+      playerBuildingsT1,
+      playerBuildingsT2,
+      myRace,
+      enemyRace,
+      BONUMALUS_DAMAGE[myRace][enemyRace],
+    );
     return BONUMALUS_DAMAGE[myRace][enemyRace];
   }
 }

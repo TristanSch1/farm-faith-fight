@@ -38,7 +38,7 @@ export default {
     // buildings
     farm: 5,
     woodFactory: 5,
-    garrison: 1,
+    garrison: 50,
     spiritualPlace: 1,
     market: 1,
     temple: 1,
@@ -48,7 +48,7 @@ export default {
     spiceTrade: 1,
     silkTrade: 1,
     woolTrade: 1,
-    castle: 1,
+    castle: 50,
     crypt: 1,
     ancientOfWar: 1,
     barracks: 1,

@@ -1,15 +1,15 @@
-import { TCATEGORY } from "./CardTemplate";
+import { TDOMAIN } from "./CardTemplate";
 
 export type ActionEffectProps = {
   actionType: "singleTarget" | "everyTarget";
-  category?: TCATEGORY;
+  domain?: TDOMAIN;
   impact?: number;
   impactType?: "positive" | "negative";
 };
 
 export class ActionEffect {
   actionType;
-  category;
+  domain;
   impact;
   impactType;
 
@@ -19,7 +19,7 @@ export class ActionEffect {
     },
   ) {
     this.actionType = props.actionType;
-    this.category = props.category;
+    this.domain = props.domain;
     this.impact = props.impact;
     this.impactType = props.impactType;
   }

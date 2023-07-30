@@ -2,8 +2,8 @@ import gameConfig from "../../game.config.ts";
 import { cardDictionnary, TCardType } from "../CardDictionnary.ts";
 import { Card } from "../Card.ts";
 import { CardFactory } from "../CardFactory.ts";
-import { shuffle } from "remeda";
-import { TCATEGORY, TRACE } from "../CardTemplate.ts";
+import { intersection, shuffle } from "remeda";
+import { TDOMAIN, TRACE } from "../CardTemplate.ts";
 
 export function makeDeck() {
   const deck: Card[] = [];
@@ -13,10 +13,15 @@ export function makeDeck() {
   return shuffle(deck);
 }
 
-export function getBuildingByCategory(category: TCATEGORY) {
+export function getBuildingsByDomainAndByTier(domain: TDOMAIN, tier = 0) {
   return Object.values(cardDictionnary)
-    .filter((card) => card.template.category === category)
+    .filter((card) => (card.template.domain === domain && tier ? card.template.tier === tier : !card.template.tier))
     .map((card) => card.template.id);
+}
+
+export function getBuildingsPlayerByDomainAndByTier(buildings: TCardType[], domain: TDOMAIN, tier = 0) {
+  console.log(buildings, getBuildingsByDomainAndByTier(domain, tier));
+  return intersection(buildings, getBuildingsByDomainAndByTier(domain, tier));
 }
 
 export const BONUMALUS_DAMAGE: { [race in TRACE]: { [race in TRACE]: number } } = {

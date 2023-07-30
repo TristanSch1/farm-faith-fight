@@ -50,7 +50,7 @@ export const cardDictionnary: {
     },
     effects: [
       {
-        category: "ARMY",
+        domain: "ARMY",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
@@ -98,13 +98,13 @@ export const cardDictionnary: {
     },
     effects: [
       {
-        category: "TRADE",
+        domain: "TRADE",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
       },
       {
-        category: "TRADE",
+        domain: "TRADE",
         actionType: "singleTarget",
         impact: 5,
         impactType: "positive",
@@ -122,7 +122,7 @@ export const cardDictionnary: {
     },
     effects: [
       {
-        category: "ARMY",
+        domain: "ARMY",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
@@ -140,13 +140,13 @@ export const cardDictionnary: {
     },
     effects: [
       {
-        category: "ARMY",
+        domain: "ARMY",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
       },
       {
-        category: "RELIGION",
+        domain: "RELIGION",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
@@ -164,13 +164,13 @@ export const cardDictionnary: {
     },
     effects: [
       {
-        category: "RELIGION",
+        domain: "RELIGION",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
       },
       {
-        category: "RELIGION",
+        domain: "RELIGION",
         actionType: "singleTarget",
         impact: 5,
         impactType: "positive",
@@ -188,7 +188,7 @@ export const cardDictionnary: {
     },
     effects: [
       {
-        category: "RELIGION",
+        domain: "RELIGION",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
@@ -198,7 +198,7 @@ export const cardDictionnary: {
   farm: {
     template: {
       id: "farm",
-      tier: 1,
+      tier: 0,
       race: "NEUTRAL",
       cost: {
         wood: 50,
@@ -218,7 +218,7 @@ export const cardDictionnary: {
   woodFactory: {
     template: {
       id: "woodFactory",
-      tier: 1,
+      tier: 0,
       race: "NEUTRAL",
       cost: {
         wood: 50,
@@ -247,6 +247,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "garrison",
       name: "garrison",
+      domain: "ARMY",
     },
     effects: {
       income: {},
@@ -265,6 +266,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "spiritualPlace",
       name: "spiritualPlace",
+      domain: "RELIGION",
     },
     effects: {
       income: {},
@@ -283,6 +285,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "market",
       name: "market",
+      domain: "TRADE",
     },
     effects: {
       income: {},
@@ -301,6 +304,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "temple",
       name: "temple",
+      domain: "RELIGION",
     },
     effects: {
       income: {},
@@ -320,6 +324,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "moonwell",
       name: "moonwell",
+      domain: "RELIGION",
     },
     effects: {
       income: {},
@@ -339,6 +344,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "shamanAltar",
       name: "shamanAltar",
+      domain: "RELIGION",
     },
     effects: {
       income: {},
@@ -356,8 +362,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "shamanAltar",
-      name: "shamanAltar",
+      description: "damnedChasm",
+      name: "damnedChasm",
+      domain: "RELIGION",
     },
     effects: {
       income: {},
@@ -377,6 +384,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "spiceTrade",
       name: "spiceTrade",
+      domain: "TRADE",
     },
     effects: {
       income: {},
@@ -396,6 +404,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "silkTrade",
       name: "silkTrade",
+      domain: "TRADE",
     },
     effects: {
       income: {},
@@ -415,6 +424,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "woolTrade",
       name: "woolTrade",
+      domain: "TRADE",
     },
     effects: {
       income: {},
@@ -434,6 +444,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "woolTrade",
       name: "woolTrade",
+      domain: "TRADE",
     },
     effects: {
       income: {},
@@ -453,6 +464,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "castle",
       name: "castle",
+      domain: "ARMY",
     },
     effects: {
       income: {},
@@ -472,6 +484,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "crypt",
       name: "crypt",
+      domain: "ARMY",
     },
     effects: {
       income: {},
@@ -491,6 +504,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "ancientOfWar",
       name: "ancientOfWar",
+      domain: "ARMY",
     },
     effects: {
       income: {},
@@ -510,6 +524,7 @@ export const cardDictionnary: {
       category: "BUILDING",
       description: "barracks",
       name: "barracks",
+      domain: "ARMY",
     },
     effects: {
       income: {},
