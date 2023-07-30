@@ -1,11 +1,9 @@
-import React, { forwardRef, useImperativeHandle } from 'react'
-import { motion, useMotionValue, useTransform, animate, PanInfo } from 'framer-motion';
+import React, { forwardRef, useImperativeHandle, useState } from 'react'
+import { motion, useMotionValue, useTransform, animate, PanInfo, delay, useSpring } from 'framer-motion';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import styles from './style.module.css';
-
-type DrawDirection = 'left' | 'right';
 
 type Props = {
     children: React.ReactElement,
@@ -16,40 +14,67 @@ type Props = {
 }
 
 export type CardDrawableAPI = {
-    turn: () => void
+    turn: () => void,
+    throw: (delay: number) => void,
+    display: () => void,
 }
 
 const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPick, onPickLeft, onPickRight, }: Props, ref) => {
     const debugDurationFactor = 1;
+    const duration = (duration: number) => duration * debugDurationFactor;
     const drawTreshold = 150;
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const opacity = useMotionValue(1);
+    const [drag, setDrag] = useState<boolean | 'x' | 'y'>(false);
+    const x = useSpring(-400, {
+        mass: .6,
+        damping: 8,
+        stiffness: 65,
+    });
+    const y = useMotionValue(-150);
+    const opacity = useMotionValue(0);
     const rotateY = useMotionValue(180);
     const rotateOnDrag = useTransform(x, [-200, 200], [-10, 10]);
     const scaleOnRotateY = useTransform(rotateY, [180, 90, 0], [1, 1.5, 1]);
-    const cardDrawableAPI: CardDrawableAPI = {
-        turn: () => animate(rotateY, 0, { duration: .5 * debugDurationFactor })
-    }
+    const isCardPicked = (info: PanInfo) => Math.abs(info.offset.x) > drawTreshold;
 
-    const drawCard = (info: PanInfo) => {
-        animate(x, x.get() + (info.offset.x > 0 ? -125 : 125), { duration: 1 * debugDurationFactor });
-        animate(y, 1000, { duration: 1 * debugDurationFactor });
-        animate(opacity, 0, { duration: 0.5 * debugDurationFactor });
+    const turnCard = () => animate(rotateY, 0, { duration: duration(.5), onComplete: () => setDrag('x'), });
+    const throwCard = (delay: number) => animate([
+        [x, 0, { ease: 'backIn' }],
+        [y, 0, { ease: 'backIn' }],
+        [opacity, 1, { duration: duration(.1) }],
+    ], { duration: duration(.2), delay });
+    const displayCard = () => {
+        // Like throw but without animation
+        rotateOnDrag.set(0);
+        x.set(0);
+        y.set(0);
+        opacity.set(1);
+    };
+
+    const resetCardPosition = () => animate(x, 0, { duration: duration(.1), ease: 'anticipate' });
+    const throwCardAway = (info: PanInfo) => {
+        animate([
+            [x, x.get() + (info.offset.x > 0 ? -200 : 200), { duration: duration(1) }],
+            [y, 1000, { duration: duration(1) }],
+            [opacity, 0, { duration: duration(.5) }],
+        ]);
     }
-    const resetCard = () => {
-        animate(x, 0, { duration: 0.5 * debugDurationFactor });
-    }
-    const isCardDrawed = (info: PanInfo) => Math.abs(info.offset.x) > drawTreshold;
 
     const onDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-        isCardDrawed(info) ? drawCard(info) : resetCard();
+        if (isCardPicked(info)) {
+            throwCardAway(info)
+            info.offset.x > 0 ? onPickRight && onPickRight() : onPickLeft && onPickLeft();
+            onPick && onPick();
+            return;
+        }
 
-        info.offset.x > 0 ? onPickRight && onPickRight() : onPickLeft && onPickLeft();
-        onPick && onPick();
+        resetCardPosition();
     }
 
-    useImperativeHandle(ref, () => cardDrawableAPI);
+    useImperativeHandle(ref, (): CardDrawableAPI => ({
+        turn: turnCard,
+        throw: throwCard,
+        display: displayCard,
+    }));
 
     return (
         <motion.div
@@ -62,7 +87,7 @@ const CardDrawable = forwardRef<CardDrawableAPI, Props>(({ children, order, onPi
                 scale: scaleOnRotateY,
                 opacity,
             }}
-            drag="x"
+            drag={drag}
             whileDrag={{ scale: 1.1 }}
             dragConstraints={{ left: 0, right: 0 }}
             onDragEnd={onDragEnd}

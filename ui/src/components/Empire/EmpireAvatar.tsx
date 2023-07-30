@@ -5,12 +5,12 @@ import React from 'react'
 import styles from './style.module.css';
 
 type Props = {
-    imageUrl: string,
+    race_name: string,
 }
 
-const EmpireAvatar: React.FC<Props> = ({ imageUrl }) => (
+const EmpireAvatar: React.FC<Props> = ({ race_name }) => (
     <div className={styles.empire_avatar}>
-        <img src={imageUrl} />
+        <img src={`/src/assets/images/avatar/${race_name}.png`} />
     </div>
 )
 

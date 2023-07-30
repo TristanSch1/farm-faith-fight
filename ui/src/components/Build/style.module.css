@@ -1,0 +1,30 @@
+.build_waiting_list {
+  display: flex;
+  align-content: center;
+  flex-grow: 1;
+}
+
+.build_waiting_list > * {
+  height: 100%;
+  width: 6vh;
+  margin-right: 12px;
+}
+
+.build_waiting_list__item {
+  position: relative;
+}
+
+.build_waiting_list__item > * {
+  border: 2px solid transparent;
+  z-index: 2;
+  position: relative;
+}
+
+.build_waiting_list__progress {
+  position: absolute;
+  top: -2px;
+  z-index: 1;
+  background-color: #fff;
+  height: 100%;
+  transition: all 0.3s;
+}

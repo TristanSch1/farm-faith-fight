@@ -3,10 +3,13 @@
   background-color: rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
+  border: 3px solid #2d2313;
+  border-bottom: none;
 }
 
 .bar {
   width: 0%;
   height: 100%;
   border-radius: 0 2px 2px 0;
+  transition: all 0.3s;
 }
