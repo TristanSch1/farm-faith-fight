@@ -13,15 +13,19 @@ export type DrawPileAPI = {
 };
 type Props = {
   children: React.ReactElement | React.ReactElement[];
+  key_id?: string;
 };
 
-const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ children }, ref) => {
+let currentCardIndex = -1;
+
+const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ children, key_id }, ref) => {
   console.log('RENDER DRAW PILE');
   children = Array.isArray(children) ? children : [children];
   const drawableRef = useRef<CardDrawableAPI[]>([]);
-  let currentCardIndex = -1;
 
   const cardDistribution = () => {
+    if (currentCardIndex === drawableRef.current.length - 1) currentCardIndex = -1;
+
     let i = 0;
 
     for (i; i < Math.min(numberOfCardToDistribute, drawableRef.current.length); i++) {
@@ -40,6 +44,7 @@ const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ children }, ref) => {
   const turnNextCard = () => {
     const nextCard = drawableRef.current[currentCardIndex++];
     const delay = currentCardIndex === 1 ? 600 : 250;
+    console.log(key_id, currentCardIndex, drawableRef.current.length);
     if (nextCard) setTimeout(nextCard.turn, delay);
   };
 

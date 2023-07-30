@@ -6,18 +6,23 @@ import { Economy } from "./Economy.tsx";
 import CardDrawPile, { DrawPileAPI } from "../../../ui/src/components/Card/CardDrawPile.tsx";
 import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const GameUi = (() => {
   const ref = useRef<DrawPileAPI>(null);
+  const [isMounted, setIsMounded] = useState(false);
 
-  useEffect(() => ref.current?.distribute());
+  useEffect(() => {
+    ref.current?.distribute();
+    setIsMounded(true);
+  }, []);
+  // useEffect(() => setState(true), []);
 
   return (
     <SceneContainer>
       <Players />
       <Economy />
-      <CardDrawPile ref={ref}>
+      <CardDrawPile ref={ref} key_id={gameStore.playerId}>
         {gameStore.deck.map((card, index) => {
           const { template } = card;
           return <Card key={index} {...{ ...template, title: template.name, type: 'building/spiritualPlace', race: template.race?.toLowerCase() }} />;

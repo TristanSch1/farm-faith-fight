@@ -37,6 +37,8 @@ const App = observer(() => {
     return <div>Loading...</div>;
   }
 
+  console.log(gameStore.playerId, 'APP GAME RENDER');
+
   return <>{gameStore.game.gameStarted ? <GameUi /> : <StartGame />}</>;
 });
 export default App;
