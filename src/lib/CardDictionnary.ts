@@ -304,7 +304,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["spiritualPlace", "moonwell", "shamanAltar", "damnedChasm"],
     },
   },
@@ -323,7 +323,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["spiritualPlace", "temple", "shamanAltar", "damnedChasm"],
     },
   },
@@ -342,7 +342,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["spiritualPlace", "moonwell", "temple", "damnedChasm"],
     },
   },
@@ -361,7 +361,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["spiritualPlace", "moonwell", "shamanAltar", "temple"],
     },
   },
@@ -380,7 +380,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["market", "silkTrade", "woolTrade", "bonesTrade"],
     },
   },
@@ -399,7 +399,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["market", "spiceTrade", "woolTrade", "bonesTrade"],
     },
   },
@@ -418,7 +418,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["market", "silkTrade", "spiceTrade", "bonesTrade"],
     },
   },
@@ -437,7 +437,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["market", "silkTrade", "woolTrade", "spiceTrade"],
     },
   },
@@ -456,7 +456,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["garrison", "crypt", "ancientOfWar", "barracks"],
     },
   },
@@ -475,7 +475,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["garrison", "castle", "ancientOfWar", "barracks"],
     },
   },
@@ -494,7 +494,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["garrison", "crypt", "castle", "barracks"],
     },
   },
@@ -513,7 +513,7 @@ export const cardDictionnary: {
     },
     effects: {
       income: {},
-      turnsToBuild: 2,
+      turnsToBuild: 4,
       needed: ["garrison", "crypt", "ancientOfWar", "castle"],
     },
   },

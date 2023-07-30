@@ -3,7 +3,7 @@ import { Empire } from "../lib/Empire.ts";
 import { GameState } from "../lib/types/GameState.ts";
 import gameConfig from "../game.config.ts";
 import { cardDictionnary, TCardBuildingType } from "../lib/CardDictionnary.ts";
-import { BuildingEffect } from "../lib/BuildingEffect.ts";
+import { BuildingEffect, BuildingEffectProps } from "../lib/BuildingEffect.ts";
 import { ActionEffect } from "../lib/ActionEffect.ts";
 import eventsStore from "./EventsStore.ts";
 import { IEventPlayCard, IEventThrowCard } from "../lib/types/EventTypes.ts";
@@ -29,10 +29,26 @@ export class GameActionsStore {
   }
 
   static isPlayableCard(empire: Empire, card: TCard) {
-    if (GameActionsStore.isCurrentCardBuildingCard(card)) {
-      // card.effects;
+    if (empire.food < card.template.cost.food || empire.wood < card.template.cost.wood) {
+      return false;
     }
-    return empire.food >= card.template.cost.food && empire.wood >= card.template.cost.wood;
+
+    if (GameActionsStore.isCurrentCardBuildingCard(card)) {
+      const farms = empire.buildings.filter((building) => building.includes("farm"));
+      const woodFactories = empire.buildings.filter((building) => building.includes("woodFactory"));
+
+      // Limit farm/woodFactory
+      if (farms.length === gameConfig.maxFarmBuilding && card.template.id === "farm") return false;
+
+      if (woodFactories.length === gameConfig.maxWoodFactoryBuilding && card.template.id === "woodFactory")
+        return false;
+
+      // isNotBuildable
+      if ("needed" in card.effects) {
+        return !!intersection(empire.buildings, (card.effects as BuildingEffect).needed!).length;
+      }
+    }
+    return true;
   }
 
   static playCard(game: GameState, playerId: string, playedCard: TCard, randomPlayerIdTarget: string) {
@@ -77,7 +93,7 @@ export class GameActionsStore {
 
   static applyBuildingEffect(game: GameState, playerId: string, playedCard: TCard) {
     game.players[playerId].empire.buildingsQueue.push({
-      building: playedCard.template.id as TCardBuildingType,
+      buildingType: playedCard.template.id as TCardBuildingType,
       turnsLeft: (playedCard.effects as BuildingEffect).turnsToBuild,
     });
   }
@@ -86,7 +102,20 @@ export class GameActionsStore {
     if (game.players[playerId].empire.buildingsQueue.length) {
       game.players[playerId].empire.buildingsQueue.map((building, index) => {
         if (!building.turnsLeft) {
-          GameActionsStore.addBuildingsEffect(game, playerId, building.building);
+          GameActionsStore.addBuildingsEffect(game, playerId, building.buildingType);
+
+          if ("needed" in cardDictionnary[building.buildingType].effects) {
+            const neededBuildings = (cardDictionnary[building.buildingType].effects as BuildingEffectProps).needed;
+
+            const neededBuilding = first(intersection(neededBuildings!, game.players[playerId].empire.buildings));
+
+            if (neededBuilding) {
+              const buildingIndexToRemove = game.players[playerId].empire.buildings.indexOf(neededBuilding);
+              game.players[playerId].empire.buildings.splice(buildingIndexToRemove, 1);
+            }
+          }
+
+          // game.players[playerId].empire.buildings.splice()
           game.players[playerId].empire.buildingsQueue.splice(index, 1);
         }
         building.turnsLeft -= 1;

@@ -8,6 +8,8 @@ type TGameConfig = {
   maxWood: number;
   maxFood: number;
   baseDamage: number;
+  maxFarmBuilding: number;
+  maxWoodFactoryBuilding: number;
   deck: { [cardType in TCardType]: number };
 };
 
@@ -19,6 +21,9 @@ export default {
   maxWood: 200,
   maxFood: 200,
   baseDamage: 5,
+  maxFarmBuilding: 5,
+  maxWoodFactoryBuilding: 5,
+
   // 96 cartes
   deck: {
     // actions
