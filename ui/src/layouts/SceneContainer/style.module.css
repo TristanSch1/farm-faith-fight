@@ -1,9 +1,7 @@
 .scene_container {
-    background: var(--color-secondary);
-    height: 100%;
-    padding: 24px;
-    height: calc(100% - 48px);
-    box-shadow: 0px 0px 20px 23px rgba(17,17,26,0.63);
-    display: flex;
-    flex-flow: column;
+  padding: 24px;
+  height: calc(100% - 48px);
+  display: flex;
+  flex-flow: column;
+  position: relative;
 }

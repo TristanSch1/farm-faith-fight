@@ -76,6 +76,32 @@
   left: 0;
   right: 0;
   padding: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left_section, .right_section {
+  position: absolute;
+  top: 12vh;
+  display: flex;
+  flex-flow: column;
+}
+
+.left_section {
+  left: 16px;
+}
+
+.right_section {
+  right: 16px;
+}
+
+.card__badge {
+  background: var(--color-secondary);
+  padding: 4px 12px;
+  margin: 4px;
+  display: inline-block;
+  border-radius: 16px;
+  box-shadow: inset 0px 0px 3px 2px rgba(0, 0, 0, 0.3);
 }
 
 .card__content {

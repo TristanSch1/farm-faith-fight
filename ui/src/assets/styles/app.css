@@ -29,3 +29,10 @@ body {
     max-width: 58vh;
     height: 100vh;
 }
+
+.divider {
+    margin: 0 24px;
+    width: 3px;
+    height: 100%;
+    background: #2d2313;
+}
