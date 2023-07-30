@@ -7,6 +7,7 @@ export type TCARDCATEGORY = "SPY" | "BUILDING" | "ACTION";
 
 export type CardTemplateProps = {
   id: TCardType;
+  tier: number;
   description: string;
   name: string;
   cost: TCost;
@@ -15,6 +16,7 @@ export type CardTemplateProps = {
 
 export class CardTemplate {
   id: TCardType;
+  tier: number;
   description: string;
   name: string;
   cost: TCost;

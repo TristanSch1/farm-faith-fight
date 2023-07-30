@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import "./App.css";
-import { GameStore } from "./stores/GameStore.ts";
+import { gameStore } from "./stores/GameStore.ts";
 import StartGame from "./components/StartGame/StartGame.tsx";
 import { observer } from "mobx-react";
 import Game from "./components/Game/Game.tsx";
 import { fxStore } from "./stores/FxStore.ts";
+import { GameActionsStore } from "./stores/GameActionsStore.ts";
 
 fxStore.init();
-export const gameStore = new GameStore();
+GameActionsStore.initEvents();
 
 const App = observer(() => {
   useEffect(() => {

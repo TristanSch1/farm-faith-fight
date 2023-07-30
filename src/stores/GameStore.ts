@@ -3,28 +3,16 @@ import { Players } from "rune-games-sdk/multiplayer";
 import { GameState } from "../lib/types/GameState.ts";
 import { TCard } from "../lib/Card.ts";
 import { makeDeck } from "../lib/helpers/CardHelper.ts";
-import { BuildingEffect, BuildingEffectProps } from "../lib/BuildingEffect.ts";
-import { ActionEffectProps } from "../lib/ActionEffect.ts";
-import gameConfig from "../game.config.ts";
-import { cardDictionnary } from "../lib/CardDictionnary.ts";
 
 export class GameStore {
   game: GameState | null = null;
   players: Players | null = null;
   playerId = "";
   deck: TCard[] = observable.array(makeDeck());
+  randomPlayerIdTarget = "";
 
   constructor() {
     makeAutoObservable(this);
-
-    // Tirage de la premiere carte
-    // when(
-    //   () => this.isGameStarted && this.turn === -1,
-    //   () => {
-    //     console.log("1er tour", this.player?.empire.name);
-    //     this.setNextTurn();
-    //   },
-    // );
   }
 
   get player() {
@@ -46,6 +34,13 @@ export class GameStore {
     return this.deck[this.player!.empire.turn % this.deck.length];
   }
 
+  get isThisPlayableCard() {
+    return (
+      this.player!.empire.food >= this.currentTurnCard.template.cost.food &&
+      this.player!.empire.wood >= this.currentTurnCard.template.cost.wood
+    );
+  }
+
   isPlayerReady(id?: string) {
     return this.game?.players[id ?? this.playerId]?.state === "ready";
   }
@@ -56,40 +51,15 @@ export class GameStore {
     this.playerId = playerId;
   }
 
-  get isPlayableCard() {
-    return (
-      this.player!.empire.food >= this.currentTurnCard.template.cost.food &&
-      this.player!.empire.wood >= this.currentTurnCard.template.cost.wood
-    );
-  }
-
-  static playCard(game: GameState, playerId: string, playedCard: TCard) {
-    game.players[playerId].empire.food -= playedCard.template.cost.food;
-    game.players[playerId].empire.wood -= playedCard.template.cost.wood;
-    game.players[playerId].empire.turn += 1;
-    //   mettre le store a jour
-  }
-
-  static throwCard(game: GameState, playerId: string) {
-    let wood = gameConfig.income;
-    let food = gameConfig.income;
-    wood +=
-      game.players[playerId].empire.buildings.filter((building) => building === "farm").length *
-      cardDictionnary.farm.effects.income.food;
-    food +=
-      game.players[playerId].empire.buildings.filter((building) => building === "woodFactory").length *
-      cardDictionnary.woodFactory.effects.income.wood;
-
-    game.players[playerId].empire.turn += 1;
-    game.players[playerId].empire.food =
-      game.players[playerId].empire.food + food >= 200 ? 200 : game.players[playerId].empire.food + food;
-    game.players[playerId].empire.wood =
-      game.players[playerId].empire.wood + wood >= 200 ? 200 : game.players[playerId].empire.wood + wood;
-  }
-
-  applyEffects(effects: BuildingEffectProps | ActionEffectProps[]) {
-    if (effects instanceof BuildingEffect) {
-    } else {
+  randomizeSingleTarget() {
+    if (!this.game) return;
+    const players = Object.keys(this.game.players);
+    while (this.randomPlayerIdTarget !== this.playerId) {
+      const randomIndex = Math.floor(Math.random() * players.length);
+      this.randomPlayerIdTarget = players[randomIndex];
     }
+    return this.randomPlayerIdTarget;
   }
 }
+
+export const gameStore = new GameStore();

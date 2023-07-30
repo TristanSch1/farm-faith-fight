@@ -42,6 +42,7 @@ export const cardDictionnary: {
   attack: {
     template: {
       id: "attack",
+      tier: 1,
       description: "j'attaque",
       cost: { food: 40, wood: 75 },
       name: "Attaque",
@@ -59,6 +60,7 @@ export const cardDictionnary: {
   spy: {
     template: {
       id: "spy",
+      tier: 1,
       description: "spy",
       cost: { food: 40, wood: 40 },
       name: "spy",
@@ -73,6 +75,7 @@ export const cardDictionnary: {
   spyAll: {
     template: {
       id: "spyAll",
+      tier: 1,
       description: "spyAll",
       cost: { food: 100, wood: 100 },
       name: "spyAll",
@@ -87,6 +90,7 @@ export const cardDictionnary: {
   steal: {
     template: {
       id: "steal",
+      tier: 1,
       description: "steal",
       cost: { food: 90, wood: 20 },
       name: "steal",
@@ -110,6 +114,7 @@ export const cardDictionnary: {
   burningEarth: {
     template: {
       id: "burningEarth",
+      tier: 1,
       description: "burningEarth",
       cost: { food: 70, wood: 60 },
       name: "burningEarth",
@@ -127,6 +132,7 @@ export const cardDictionnary: {
   poisoning: {
     template: {
       id: "poisoning",
+      tier: 1,
       description: "poisoning",
       cost: { food: 90, wood: 100 },
       name: "poisoning",
@@ -150,6 +156,7 @@ export const cardDictionnary: {
   spiritualCelebration: {
     template: {
       id: "spiritualCelebration",
+      tier: 1,
       description: "spiritualCelebration",
       cost: { food: 120, wood: 40 },
       name: "spiritualCelebration",
@@ -173,6 +180,7 @@ export const cardDictionnary: {
   spiritualAttack: {
     template: {
       id: "spiritualAttack",
+      tier: 1,
       description: "spiritualAttack",
       cost: { food: 75, wood: 40 },
       name: "spiritualAttack",
@@ -190,6 +198,7 @@ export const cardDictionnary: {
   farm: {
     template: {
       id: "farm",
+      tier: 1,
       cost: {
         wood: 50,
         food: 50,
@@ -208,6 +217,7 @@ export const cardDictionnary: {
   woodFactory: {
     template: {
       id: "woodFactory",
+      tier: 1,
       cost: {
         wood: 50,
         food: 50,
@@ -226,6 +236,7 @@ export const cardDictionnary: {
   garrison: {
     template: {
       id: "garrison",
+      tier: 1,
       cost: {
         wood: 120,
         food: 50,
@@ -242,6 +253,7 @@ export const cardDictionnary: {
   spiritualPlace: {
     template: {
       id: "spiritualPlace",
+      tier: 1,
       cost: {
         wood: 85,
         food: 85,
@@ -258,6 +270,7 @@ export const cardDictionnary: {
   market: {
     template: {
       id: "market",
+      tier: 1,
       cost: {
         wood: 50,
         food: 120,
@@ -274,6 +287,7 @@ export const cardDictionnary: {
   temple: {
     template: {
       id: "temple",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -291,6 +305,7 @@ export const cardDictionnary: {
   moonwell: {
     template: {
       id: "moonwell",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -308,6 +323,7 @@ export const cardDictionnary: {
   shamanAltar: {
     template: {
       id: "shamanAltar",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -325,6 +341,7 @@ export const cardDictionnary: {
   damnedChasm: {
     template: {
       id: "damnedChasm",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -342,6 +359,7 @@ export const cardDictionnary: {
   spiceTrade: {
     template: {
       id: "spiceTrade",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -359,6 +377,7 @@ export const cardDictionnary: {
   silkTrade: {
     template: {
       id: "silkTrade",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -376,6 +395,7 @@ export const cardDictionnary: {
   woolTrade: {
     template: {
       id: "woolTrade",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -393,6 +413,7 @@ export const cardDictionnary: {
   bonesTrade: {
     template: {
       id: "bonesTrade",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -410,6 +431,7 @@ export const cardDictionnary: {
   castle: {
     template: {
       id: "castle",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -427,6 +449,7 @@ export const cardDictionnary: {
   crypt: {
     template: {
       id: "crypt",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -444,6 +467,7 @@ export const cardDictionnary: {
   ancientOfWar: {
     template: {
       id: "ancientOfWar",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,
@@ -461,6 +485,7 @@ export const cardDictionnary: {
   barracks: {
     template: {
       id: "barracks",
+      tier: 2,
       cost: {
         wood: 100,
         food: 100,

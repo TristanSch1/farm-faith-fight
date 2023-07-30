@@ -1,12 +1,12 @@
-export interface IEventMdl {
+export interface IEvent {
   type: string;
   payload?: any;
 }
 
 class EventsStore {
-  listeners: { [type: string]: ((event: IEventMdl) => void)[] } = {};
+  listeners: { [type: string]: ((event: IEvent) => void)[] } = {};
 
-  send(event: IEventMdl) {
+  send(event: IEvent) {
     if (this.listeners[event.type]) {
       for (let i = 0; i < this.listeners[event.type].length; i++) {
         try {
@@ -18,13 +18,13 @@ class EventsStore {
     }
   }
 
-  on(type: string, callback: (event: IEventMdl) => void) {
+  on(type: string, callback: (event: IEvent) => void) {
     if (!this.listeners[type]) this.listeners[type] = [];
     this.listeners[type].push(callback);
     return () => this.unregister(type, callback);
   }
 
-  unregister(type: string, callback: (event: IEventMdl) => void) {
+  unregister(type: string, callback: (event: IEvent) => void) {
     this.listeners[type].splice(this.listeners[type]?.indexOf(callback), 1);
   }
 }

@@ -1,8 +1,13 @@
 import { observer } from "mobx-react";
-import { gameStore } from "../../App.tsx";
 import eventsStore from "../../stores/EventsStore.ts";
+import { useEffect } from "react";
+import { gameStore } from "../../stores/GameStore.ts";
 
 const Game = observer(() => {
+  useEffect(() => {
+    gameStore.randomizeSingleTarget();
+  }, [gameStore.game?.players[gameStore.playerId].empire.turn]);
+
   return (
     <div>
       <div>
@@ -10,7 +15,7 @@ const Game = observer(() => {
         <div>{gameStore.currentTurnCard.template.name}</div>
         <div>Food: {gameStore.currentTurnCard.template.cost.food}</div>
         <div>Wood: {gameStore.currentTurnCard.template.cost.wood}</div>
-        <div>Is playable: {gameStore.isPlayableCard ? "Yes" : "No"}</div>
+        <div>Is playable: {gameStore.isThisPlayableCard ? "Yes" : "No"}</div>
       </div>
       <hr />
       {gameStore.player?.empire.name && <div>{gameStore.player?.empire.name}</div>}
@@ -21,23 +26,27 @@ const Game = observer(() => {
       <hr />
       {gameStore.isGameStarted && (
         <div style={{ display: "flex" }}>
-          <button
-            onClick={() => {
-              Rune.actions.throwCard();
-              eventsStore.send({ type: "throwCard" });
-            }}
-          >
-            THROW
-          </button>
+          <button onClick={() => eventsStore.send({ type: "throwCard" })}>THROW</button>
           &nbsp;&nbsp;
           <button
-            onClick={() => {
-              if (!gameStore.isPlayableCard) return;
-              Rune.actions.playCard(gameStore.currentTurnCard);
-              eventsStore.send({ type: "playCard" });
-            }}
+            onClick={() =>
+              eventsStore.send({
+                type: "playCard",
+                payload: {
+                  card: gameStore.currentTurnCard,
+                  empire: gameStore.player!.empire,
+                  randomPlayerIdTarget: gameStore.randomPlayerIdTarget,
+                },
+              })
+            }
           >
-            <span style={{ color: gameStore.isPlayableCard ? "" : "red" }}>PLAY</span>
+            <span
+              style={{
+                color: gameStore.isThisPlayableCard ? "" : "red",
+              }}
+            >
+              PLAY
+            </span>
           </button>
         </div>
       )}

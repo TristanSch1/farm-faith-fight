@@ -1,17 +1,9 @@
 import { Empire } from "./lib/Empire";
 import { GameState } from "./lib/types/GameState.ts";
-import { GameStore } from "./stores/GameStore.ts";
+import { GameActionsStore } from "./stores/GameActionsStore.ts";
 
 // TODO - Mettre les vrais empires
 const EMPIRE_NAMES = ["Orcs", "Elves", "Undead", "Humans"];
-const getRandomEmpireName = (players: GameState["players"]) => {
-  const empireNames = Object.values(players).map((player) => player.empire.name);
-
-  const availableEmpires = EMPIRE_NAMES.filter((empire) => !empireNames.includes(empire));
-
-  const randomIndex = Math.floor(Math.random() * availableEmpires.length);
-  return availableEmpires[randomIndex];
-};
 
 Rune.initLogic({
   minPlayers: 2,
@@ -41,11 +33,11 @@ Rune.initLogic({
       console.log("ready", playerId);
       game.players[playerId].state = game.players[playerId].state === "waiting" ? "ready" : "waiting";
     },
-    playCard(playedCard, { game, playerId }) {
-      GameStore.playCard(game, playerId, playedCard);
+    playCard({ card, randomPlayerIdTarget }, { game, playerId }) {
+      GameActionsStore.playCard(game, playerId, card, randomPlayerIdTarget);
     },
     throwCard(_, { game, playerId }) {
-      GameStore.throwCard(game, playerId);
+      GameActionsStore.throwCard(game, playerId);
     },
   },
   events: {
