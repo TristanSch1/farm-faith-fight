@@ -64,7 +64,7 @@ export const cardDictionnary: {
       description: "spy",
       cost: { food: 40, wood: 40 },
       name: "spy",
-      category: "SPY",
+      category: "ACTION",
     },
     effects: [
       {
@@ -79,7 +79,7 @@ export const cardDictionnary: {
       description: "spyAll",
       cost: { food: 100, wood: 100 },
       name: "spyAll",
-      category: "SPY",
+      category: "ACTION",
     },
     effects: [
       {
@@ -199,6 +199,7 @@ export const cardDictionnary: {
     template: {
       id: "farm",
       tier: 1,
+      race: "NEUTRAL",
       cost: {
         wood: 50,
         food: 50,
@@ -218,6 +219,7 @@ export const cardDictionnary: {
     template: {
       id: "woodFactory",
       tier: 1,
+      race: "NEUTRAL",
       cost: {
         wood: 50,
         food: 50,
@@ -237,6 +239,7 @@ export const cardDictionnary: {
     template: {
       id: "garrison",
       tier: 1,
+      race: "NEUTRAL",
       cost: {
         wood: 120,
         food: 50,
@@ -254,6 +257,7 @@ export const cardDictionnary: {
     template: {
       id: "spiritualPlace",
       tier: 1,
+      race: "NEUTRAL",
       cost: {
         wood: 85,
         food: 85,
@@ -271,6 +275,7 @@ export const cardDictionnary: {
     template: {
       id: "market",
       tier: 1,
+      race: "NEUTRAL",
       cost: {
         wood: 50,
         food: 120,
@@ -288,6 +293,7 @@ export const cardDictionnary: {
     template: {
       id: "temple",
       tier: 2,
+      race: "HUMAN",
       cost: {
         wood: 100,
         food: 100,
@@ -306,6 +312,7 @@ export const cardDictionnary: {
     template: {
       id: "moonwell",
       tier: 2,
+      race: "ELVE",
       cost: {
         wood: 100,
         food: 100,
@@ -324,6 +331,7 @@ export const cardDictionnary: {
     template: {
       id: "shamanAltar",
       tier: 2,
+      race: "ORC",
       cost: {
         wood: 100,
         food: 100,
@@ -342,6 +350,7 @@ export const cardDictionnary: {
     template: {
       id: "damnedChasm",
       tier: 2,
+      race: "UNDEAD",
       cost: {
         wood: 100,
         food: 100,
@@ -360,6 +369,7 @@ export const cardDictionnary: {
     template: {
       id: "spiceTrade",
       tier: 2,
+      race: "HUMAN",
       cost: {
         wood: 100,
         food: 100,
@@ -378,6 +388,7 @@ export const cardDictionnary: {
     template: {
       id: "silkTrade",
       tier: 2,
+      race: "ELVE",
       cost: {
         wood: 100,
         food: 100,
@@ -396,6 +407,7 @@ export const cardDictionnary: {
     template: {
       id: "woolTrade",
       tier: 2,
+      race: "ORC",
       cost: {
         wood: 100,
         food: 100,
@@ -414,6 +426,7 @@ export const cardDictionnary: {
     template: {
       id: "bonesTrade",
       tier: 2,
+      race: "UNDEAD",
       cost: {
         wood: 100,
         food: 100,
@@ -432,6 +445,7 @@ export const cardDictionnary: {
     template: {
       id: "castle",
       tier: 2,
+      race: "HUMAN",
       cost: {
         wood: 100,
         food: 100,
@@ -450,6 +464,7 @@ export const cardDictionnary: {
     template: {
       id: "crypt",
       tier: 2,
+      race: "UNDEAD",
       cost: {
         wood: 100,
         food: 100,
@@ -468,6 +483,7 @@ export const cardDictionnary: {
     template: {
       id: "ancientOfWar",
       tier: 2,
+      race: "ELVE",
       cost: {
         wood: 100,
         food: 100,
@@ -486,6 +502,7 @@ export const cardDictionnary: {
     template: {
       id: "barracks",
       tier: 2,
+      race: "ORC",
       cost: {
         wood: 100,
         food: 100,

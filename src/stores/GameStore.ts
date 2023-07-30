@@ -54,7 +54,7 @@ export class GameStore {
   randomizeSingleTarget() {
     if (!this.game) return;
     const players = Object.keys(this.game.players);
-    while (this.randomPlayerIdTarget !== this.playerId) {
+    while (!this.randomPlayerIdTarget || this.randomPlayerIdTarget === this.playerId) {
       const randomIndex = Math.floor(Math.random() * players.length);
       this.randomPlayerIdTarget = players[randomIndex];
     }

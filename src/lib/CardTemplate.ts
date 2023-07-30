@@ -1,13 +1,15 @@
 import { TCost } from "./types/genericTypes";
 import { TCardType } from "./CardDictionnary.ts";
 
+export type TRACE = "HUMAN" | "ELVE" | "ORC" | "UNDEAD" | "NEUTRAL" | "NONE";
 export type TDOMAIN = "ARMY" | "RELIGION" | "TRADE";
-export type TCATEGORY = TDOMAIN | "SPY" | "BUILDING";
-export type TCARDCATEGORY = "SPY" | "BUILDING" | "ACTION";
+export type TCATEGORY = TDOMAIN | "BUILDING";
+export type TCARDCATEGORY = "BUILDING" | "ACTION";
 
 export type CardTemplateProps = {
   id: TCardType;
   tier: number;
+  race?: TRACE;
   description: string;
   name: string;
   cost: TCost;
@@ -17,6 +19,7 @@ export type CardTemplateProps = {
 export class CardTemplate {
   id: TCardType;
   tier: number;
+  race?: TRACE;
   description: string;
   name: string;
   cost: TCost;

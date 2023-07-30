@@ -6,7 +6,7 @@ import { GameActionsStore } from "./stores/GameActionsStore.ts";
 const EMPIRE_NAMES = ["Orcs", "Elves", "Undead", "Humans"];
 
 Rune.initLogic({
-  minPlayers: 2,
+  minPlayers: 3,
   maxPlayers: 4,
   setup: (allPlayerIds): GameState => {
     return {

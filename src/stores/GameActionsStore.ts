@@ -7,6 +7,9 @@ import { BuildingEffect } from "../lib/BuildingEffect.ts";
 import { ActionEffect } from "../lib/ActionEffect.ts";
 import eventsStore from "./EventsStore.ts";
 import { IEventPlayCard, IEventThrowCard } from "../lib/types/EventTypes.ts";
+import { BONUMALUS_DAMAGE, getBuildingByCategory } from "../lib/helpers/CardHelper.ts";
+import { first, intersection } from "remeda";
+import { TRACE } from "../lib/CardTemplate.ts";
 
 export class GameActionsStore {
   static initEvents() {
@@ -35,6 +38,7 @@ export class GameActionsStore {
   static playCard(game: GameState, playerId: string, playedCard: TCard, randomPlayerIdTarget: string) {
     console.log(playedCard);
     GameActionsStore.readBuildingsQueue(game, playerId);
+    console.log(randomPlayerIdTarget);
     GameActionsStore.applyEffects(game, playerId, playedCard, randomPlayerIdTarget);
     game.players[playerId].empire.food -= playedCard.template.cost.food;
     game.players[playerId].empire.wood -= playedCard.template.cost.wood;
@@ -64,9 +68,7 @@ export class GameActionsStore {
   }
 
   static applyEffects(game: GameState, playerId: string, playedCard: TCard, targetPlayerId?: string) {
-    console.log(playedCard.effects);
-
-    if ((playedCard.effects as BuildingEffect).turnsToBuild) {
+    if ("turnsToBuild" in playedCard.effects) {
       GameActionsStore.applyBuildingEffect(game, playerId, playedCard);
     } else {
       GameActionsStore.applyActionEffects(game, playerId, playedCard, targetPlayerId);
@@ -100,10 +102,57 @@ export class GameActionsStore {
     (playedCard.effects as ActionEffect[]).map((actionEffect) => {
       switch (actionEffect.actionType) {
         case "singleTarget":
+          console.log(targetPlayerId);
+          if (!targetPlayerId) return;
+          game.players[targetPlayerId].empire.health -=
+            gameConfig.baseDamage +
+            GameActionsStore.getBonusOrMalusDamageByEffect(actionEffect, game, playerId, targetPlayerId);
           break;
         case "everyTarget":
+          Object.keys(game.players).map((targetPlayerId) => {
+            if (playerId === targetPlayerId) return;
+            game.players[targetPlayerId].empire.health -=
+              gameConfig.baseDamage +
+              GameActionsStore.getBonusOrMalusDamageByEffect(actionEffect, game, playerId, targetPlayerId);
+          });
           break;
       }
     });
+  }
+
+  static getBonusOrMalusDamageByEffect(
+    effect: ActionEffect,
+    game: GameState,
+    playerId: string,
+    targetPlayerId: string,
+  ) {
+    if (!effect.category) return 0;
+    let myRace: TRACE = "NONE";
+    let enemyRace: TRACE = "NONE";
+    const buildingT2 = getBuildingByCategory(effect.category);
+
+    const playerBuildings = game.players[playerId].empire.buildings;
+    const targetPlayerBuildings = game.players[targetPlayerId].empire.buildings;
+
+    if (!playerBuildings.length && !targetPlayerBuildings.length) {
+      console.info(myRace, enemyRace, BONUMALUS_DAMAGE[myRace][enemyRace]);
+      return BONUMALUS_DAMAGE[myRace][enemyRace];
+    }
+
+    if (playerBuildings.length) myRace = "NEUTRAL";
+    if (targetPlayerBuildings.length) enemyRace = "NEUTRAL";
+
+    const playerT2Buildings = intersection(playerBuildings, buildingT2);
+    const targetPlayerT2Buildings = intersection(targetPlayerBuildings, buildingT2);
+
+    if (playerT2Buildings.length) {
+      myRace = cardDictionnary[first(playerT2Buildings)!].template.race!;
+    }
+
+    if (playerT2Buildings.length) {
+      enemyRace = cardDictionnary[first(targetPlayerT2Buildings)!].template.race!;
+    }
+    console.info(myRace, enemyRace, BONUMALUS_DAMAGE[myRace][enemyRace]);
+    return BONUMALUS_DAMAGE[myRace][enemyRace];
   }
 }

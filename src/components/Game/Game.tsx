@@ -15,14 +15,10 @@ const Game = observer(() => {
         <div>{gameStore.currentTurnCard.template.name}</div>
         <div>Food: {gameStore.currentTurnCard.template.cost.food}</div>
         <div>Wood: {gameStore.currentTurnCard.template.cost.wood}</div>
-        <div>Is playable: {gameStore.isThisPlayableCard ? "Yes" : "No"}</div>
       </div>
       <hr />
-      {
-        gameStore.player?.empire.buildings.map(building => 
-          <div>building :{building}</div>
-        )
-      }
+      {gameStore.player?.empire.buildings.map((building) => <div>building :{building}</div>)}
+      {gameStore.playerId && <div>{gameStore.playerId}</div>}
       {gameStore.player?.empire.name && <div>{gameStore.player?.empire.name}</div>}
       {gameStore.player?.empire.food && <div>Food: {gameStore.player?.empire.food}</div>}
       {gameStore.player?.empire.wood && <div>Wood: {gameStore.player?.empire.wood}</div>}
@@ -34,7 +30,8 @@ const Game = observer(() => {
           <button onClick={() => eventsStore.send({ type: "throwCard" })}>THROW</button>
           &nbsp;&nbsp;
           <button
-            onClick={() =>
+            onClick={() => {
+              console.log("play card on ", gameStore.randomPlayerIdTarget);
               eventsStore.send({
                 type: "playCard",
                 payload: {
@@ -42,8 +39,8 @@ const Game = observer(() => {
                   empire: gameStore.player!.empire,
                   randomPlayerIdTarget: gameStore.randomPlayerIdTarget,
                 },
-              })
-            }
+              });
+            }}
           >
             <span
               style={{
