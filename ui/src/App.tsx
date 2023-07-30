@@ -53,16 +53,16 @@ const App = () => {
   const showSpy = () => {
     setSpyReport([
       {
-        domain: "army",
+        domain: "ARMY",
         tier: 1,
         race: "elf",
       },
       {
-        domain: "religion",
+        domain: "RELIGION",
         tier: 2,
       },
       {
-        domain: "trade",
+        domain: "TRADE",
         tier: 1,
         race: "orc",
       },
@@ -136,7 +136,7 @@ const App = () => {
 
       <CardDrawPile ref={drawPileRef}>
         <Card
-          domain="religion"
+          domain="RELIGION"
           race="orc"
           type="building/spiritualPlace"
           tier={0}

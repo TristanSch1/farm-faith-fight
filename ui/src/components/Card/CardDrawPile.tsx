@@ -47,8 +47,6 @@ const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ debug_key, children, onDr
     const nextCard = drawableRef.current[currentCardIndex];
     const delay = currentCardIndex === 0 ? 600 : 250;
 
-    console.log(debug_key, currentCardIndex, drawableRef.current, drawableRef.current[currentCardIndex]);
-
     if (nextCard) setTimeout(nextCard.turn, delay);
     else onDrawPileEmpty && onDrawPileEmpty();
   };
