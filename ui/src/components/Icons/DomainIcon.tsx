@@ -10,7 +10,7 @@ type Props = {
 
 const DomainIcon: React.FC<Props> = ({ domain }) => (
     <div className={styles.icon}>
-        <img src={`/src/assets/images/icons/domain/${domain}.png`} />
+        <img src={`images/icons/domain/${domain}.png`} />
     </div>
 )
 

@@ -46,7 +46,7 @@
   top: 0;
   bottom: 0;
   z-index: -1;
-  background: url("/src/assets/images/card/backcard_bg.png");
+  background: url("images/card/backcard_bg.png");
   backface-visibility: hidden;
   transform-style: preserve-3d;
   transform: rotateY(180deg);

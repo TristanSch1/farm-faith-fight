@@ -69,7 +69,7 @@ const Card: React.FC<Props> = ({ type, target, title, description, tier, domain,
                     {renderTimeToBuild()}
                 </div>
 
-                <img draggable={false} src={`/src/assets/images/card/${type}.png`} />
+                <img draggable={false} src={`images/card/${type}.png`} />
 
                 <div className={styles.card__content}>
                     <div className={styles.card__content__title}>
