@@ -139,9 +139,9 @@ const App = () => {
           domain="religion"
           race="orc"
           type="building/spiritualPlace"
-          tier={1}
-          title="Lieu spirituel"
-          description="Découvrez le Cercle Spirituel, un humble lieu de sanctuaire en pleine plaine, entouré de la sérénité de la forêt environnante. Les piliers de terre et de pierre dressés ici accueillent les païens démunis mais ardents, qui viennent y accomplir leurs rituels avec ferveur. Ce lieu sacré transcende les races, accueillant tous ceux qui cherchent la paix intérieure."
+          tier={0}
+          title="Ferme"
+          description="Voici la Ferme, un havre de simplicité où le blé danse au gré du vent. Lieu de labeur et de moisson, il n'appartient à aucune race mais nourrit toutes bouches affamées. </br></br> Augmente votre production de blé."
           target="Kevin"
           turnsToBuild={3}
           buildLinks={[

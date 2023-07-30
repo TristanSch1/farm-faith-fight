@@ -9,6 +9,7 @@ export { default as DomainIcon } from "./Icons/DomainIcon";
 export { default as RaceIcon } from "./Icons/RaceIcon";
 export { default as ConstructionIcon } from "./Icons/ConstructionIcon";
 
+export { default as EmpireAvatar } from "./Empire/EmpireAvatar";
 export { default as EmpiresHeader } from "./Empire/EmpiresHeader";
 export { default as EmpireStatus } from "./Empire/EmpireStatus";
 export { default as EmpirePlayer } from "./Empire/EmpireAvatar";

@@ -73,7 +73,7 @@ const Card: React.FC<Props> = ({ type, target, title, description, tier, domain,
 
                 <div className={styles.card__content}>
                     <div className={styles.card__content__title}>
-                        {title} (Tier {tier})
+                        {title} {tier > 0 && `(Tier ${tier})`}
                     </div>
                     <p dangerouslySetInnerHTML={{ __html: transformDescription(description) }} />
                 </div>
