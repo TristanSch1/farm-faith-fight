@@ -30,7 +30,7 @@ const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ debug_key, children, onDr
     let i = 0;
 
     for (i; i < Math.min(numberOfCardToDistribute, drawableRef.current.length); i++) {
-      drawableRef.current[i].throw((i + 1) * 0.2);
+      drawableRef.current[i].distribute((i + 1) * 0.2);
     }
 
     setTimeout(() => {
