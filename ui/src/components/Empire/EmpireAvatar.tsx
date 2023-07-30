@@ -6,12 +6,16 @@ import styles from "./style.module.css";
 
 type Props = {
   race_name: string;
+  pseudo: string;
 };
 
-const EmpireAvatar: React.FC<Props> = ({ race_name }) => (
-  <div className={styles.empire_avatar}>
-    <img src={`/ui/src/assets/images/avatar/${race_name}.png`} />
-  </div>
+const EmpirePlayer: React.FC<Props> = ({ race_name, pseudo }) => (
+  <>
+    <div className={styles.empire_avatar}>
+      <img src={`/src/assets/images/avatar/${race_name}.png`} />
+    </div>
+    <div className={styles.empire_player_pseudo}>{pseudo}</div>
+  </>
 );
 
-export default EmpireAvatar;
+export default EmpirePlayer;
