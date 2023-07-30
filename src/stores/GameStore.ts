@@ -3,6 +3,10 @@ import { Players } from "rune-games-sdk/multiplayer";
 import { GameState } from "../lib/types/GameState.ts";
 import { TCard } from "../lib/Card.ts";
 import { makeDeck } from "../lib/helpers/CardHelper.ts";
+import gameConfig from "../game.config.ts";
+import { intersection } from "remeda";
+import { BuildingEffect } from "../lib/BuildingEffect.ts";
+import { GameActionsStore } from "./GameActionsStore.ts";
 
 export class GameStore {
   game: GameState | null = null;
@@ -35,10 +39,33 @@ export class GameStore {
   }
 
   get isThisPlayableCard() {
-    return (
-      this.player!.empire.food >= this.currentTurnCard.template.cost.food &&
-      this.player!.empire.wood >= this.currentTurnCard.template.cost.wood
-    );
+    if (
+      this.player!.empire.food < this.currentTurnCard.template.cost.food ||
+      this.player!.empire.wood < this.currentTurnCard.template.cost.wood
+    ) {
+      return false;
+    }
+
+    if (GameActionsStore.isCurrentCardBuildingCard(this.currentTurnCard)) {
+      const farms = this.player!.empire.buildings.filter((building) => building.includes("farm"));
+      const woodFactories = this.player!.empire.buildings.filter((building) => building.includes("woodFactory"));
+
+      // Limit farm/woodFactory
+      if (farms.length === gameConfig.maxFarmBuilding && this.currentTurnCard.template.id === "farm") return false;
+
+      if (
+        woodFactories.length === gameConfig.maxWoodFactoryBuilding &&
+        this.currentTurnCard.template.id === "woodFactory"
+      )
+        return false;
+
+      // isNotBuildable
+      if ("needed" in this.currentTurnCard.effects) {
+        return !!intersection(this.player!.empire.buildings, (this.currentTurnCard.effects as BuildingEffect).needed!)
+          .length;
+      }
+    }
+    return true;
   }
 
   isPlayerReady(id?: string) {
