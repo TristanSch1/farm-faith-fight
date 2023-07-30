@@ -1,7 +1,7 @@
 .spy_report {
   display: flex;
   position: absolute;
-  top: 0;
+  top: 3.4vh;
 }
 
 .spy_report__tier {
