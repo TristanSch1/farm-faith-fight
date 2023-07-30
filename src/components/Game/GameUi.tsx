@@ -22,7 +22,7 @@ const GameUi = (() => {
     <SceneContainer>
       <Players />
       <Economy />
-      <CardDrawPile ref={ref} key_id={gameStore.playerId}>
+      <CardDrawPile ref={ref} debug_key={gameStore.playerId}>
         {gameStore.deck.map((card, index) => {
           const { template } = card;
           return <Card key={index} {...{ ...template, title: template.name, type: 'building/spiritualPlace', race: template.race?.toLowerCase() }} />;
