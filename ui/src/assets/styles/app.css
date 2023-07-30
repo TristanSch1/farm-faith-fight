@@ -1,38 +1,45 @@
-@import url('https://fonts.googleapis.com/css?family=MedievalSharp|Oswald&display=swap');
+@import url("https://fonts.googleapis.com/css?family=MedievalSharp|Oswald&display=swap");
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 :root {
-  --font-primary: 'Oswald';
-  --font-accent: 'MedievalSharp';
-  --color-primary: #FAFFFD;
-  --color-secondary: #4C382C;
-  --color-accent: #1C111C;
+  --font-primary: "Oswald";
+  --font-accent: "MedievalSharp";
+  --color-primary: #fafffd;
+  --color-secondary: #4c382c;
+  --color-accent: #1c111c;
 }
 
-
 body {
-    background: var(--color-accent);
-    background-image: url("../images/background.png");
-    background-size: cover;
-    background-position: center center;
-    overflow: hidden;
+  background: var(--color-accent);
+  background-image: url("../images/background.png");
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden;
 }
 
 #root {
-    font-size: 1.8rem;
-    color: var(--color-primary);
-    font-family: var(--font-primary);
-    margin: 0 auto;
-    max-width: 58vh;
-    height: 100vh;
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  margin: 0 auto;
+  max-width: 58vh;
+  height: 100vh;
+  padding: 0;
+  text-align: unset;
+}
+
+@media (max-width: 57vh) {
+  #root {
+    width: 100vw;
+  }
 }
 
 .divider {
-    margin: 0 24px;
-    width: 3px;
-    height: 100%;
-    background: #2d2313;
+  margin: 0 24px;
+  width: 3px;
+  height: 100%;
+  background: #2d2313;
 }

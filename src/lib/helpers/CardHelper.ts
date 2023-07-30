@@ -30,7 +30,7 @@ export const BONUMALUS_DAMAGE: { [race in TRACE]: { [race in TRACE]: number } } 
     NEUTRAL: -3,
     HUMAN: -4,
     ORC: -4,
-    ELVE: -4,
+    ELF: -4,
     UNDEAD: -4,
   },
   NEUTRAL: {
@@ -38,7 +38,7 @@ export const BONUMALUS_DAMAGE: { [race in TRACE]: { [race in TRACE]: number } } 
     NEUTRAL: 0,
     HUMAN: -2,
     ORC: -2,
-    ELVE: -2,
+    ELF: -2,
     UNDEAD: -2,
   },
   HUMAN: {
@@ -46,7 +46,7 @@ export const BONUMALUS_DAMAGE: { [race in TRACE]: { [race in TRACE]: number } } 
     NEUTRAL: 2,
     HUMAN: -1,
     ORC: -3,
-    ELVE: 0,
+    ELF: 0,
     UNDEAD: 3,
   },
   ORC: {
@@ -54,15 +54,15 @@ export const BONUMALUS_DAMAGE: { [race in TRACE]: { [race in TRACE]: number } } 
     NEUTRAL: 2,
     HUMAN: 3,
     ORC: -1,
-    ELVE: -3,
+    ELF: -3,
     UNDEAD: 0,
   },
-  ELVE: {
+  ELF: {
     NONE: 5,
     NEUTRAL: 2,
     HUMAN: 0,
     ORC: 3,
-    ELVE: -1,
+    ELF: -1,
     UNDEAD: -3,
   },
   UNDEAD: {
@@ -70,7 +70,7 @@ export const BONUMALUS_DAMAGE: { [race in TRACE]: { [race in TRACE]: number } } 
     NEUTRAL: 2,
     HUMAN: -3,
     ORC: 0,
-    ELVE: 3,
+    ELF: 3,
     UNDEAD: -1,
   },
 };
