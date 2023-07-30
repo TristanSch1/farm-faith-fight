@@ -45,7 +45,7 @@ export const cardDictionnary: {
       tier: 1,
       description: "j'attaque",
       cost: { food: 40, wood: 75 },
-      name: "Attaque",
+      name: "Chaaaaaaaaargez !",
       category: "ACTION",
     },
     effects: [
@@ -63,7 +63,7 @@ export const cardDictionnary: {
       tier: 1,
       description: "spy",
       cost: { food: 40, wood: 40 },
-      name: "spy",
+      name: "Regard du Corbeau",
       category: "ACTION",
     },
     effects: [
@@ -79,7 +79,7 @@ export const cardDictionnary: {
       tier: 1,
       description: "spyAll",
       cost: { food: 0, wood: 0 },
-      name: "spyAll",
+      name: "Surveillance Omnisciente",
       category: "ACTION",
     },
     effects: [
@@ -95,7 +95,7 @@ export const cardDictionnary: {
       tier: 1,
       description: "steal",
       cost: { food: 90, wood: 20 },
-      name: "steal",
+      name: "Vol à la tire",
       category: "ACTION",
     },
     effects: [
@@ -119,7 +119,7 @@ export const cardDictionnary: {
       tier: 1,
       description: "burningEarth",
       cost: { food: 70, wood: 60 },
-      name: "burningEarth",
+      name: "Désolation de Feu",
       category: "ACTION",
     },
     effects: [
@@ -161,7 +161,7 @@ export const cardDictionnary: {
       tier: 1,
       description: "spiritualCelebration",
       cost: { food: 120, wood: 40 },
-      name: "spiritualCelebration",
+      name: "Toucher du Basilic",
       category: "ACTION",
     },
     effects: [
@@ -185,7 +185,7 @@ export const cardDictionnary: {
       tier: 1,
       description: "spiritualAttack",
       cost: { food: 75, wood: 40 },
-      name: "spiritualAttack",
+      name: "Frappe Spirituelle",
       category: "ACTION",
     },
     effects: [
@@ -208,7 +208,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "farm",
-      name: "farm",
+      name: "Ferme",
     },
     effects: {
       income: {
@@ -228,7 +228,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "wood factory",
-      name: "wood factory",
+      name: "Scierie",
     },
     effects: {
       income: {
@@ -248,7 +248,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "garrison",
-      name: "garrison",
+      name: "Garnison",
       domain: "ARMY",
     },
     effects: {
@@ -267,7 +267,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "spiritualPlace",
-      name: "spiritualPlace",
+      name: "Lieu spirituel",
       domain: "RELIGION",
     },
     effects: {
@@ -286,7 +286,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "market",
-      name: "market",
+      name: "Marché",
       domain: "TRADE",
     },
     effects: {
@@ -305,7 +305,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "temple",
-      name: "temple",
+      name: "Temple",
       domain: "RELIGION",
     },
     effects: {
@@ -325,7 +325,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "moonwell",
-      name: "moonwell",
+      name: "Puit de Lune",
       domain: "RELIGION",
     },
     effects: {
@@ -345,7 +345,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "shamanAltar",
-      name: "shamanAltar",
+      name: "Autel Shaman",
       domain: "RELIGION",
     },
     effects: {
@@ -364,8 +364,8 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "damnedChasm",
-      name: "damnedChasm",
+      description: "Gouffre Damné",
+      name: "Mort-Vivan",
       domain: "RELIGION",
     },
     effects: {
@@ -385,7 +385,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "spiceTrade",
-      name: "spiceTrade",
+      name: "Commerce d'épice",
       domain: "TRADE",
     },
     effects: {
@@ -405,7 +405,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "silkTrade",
-      name: "silkTrade",
+      name: "Commerce de soie",
       domain: "TRADE",
     },
     effects: {
@@ -425,7 +425,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "woolTrade",
-      name: "woolTrade",
+      name: "Commerce de peau",
       domain: "TRADE",
     },
     effects: {
@@ -445,7 +445,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "woolTrade",
-      name: "woolTrade",
+      name: "Commerce d'os",
       domain: "TRADE",
     },
     effects: {
@@ -465,7 +465,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "castle",
-      name: "castle",
+      name: "Château",
       domain: "ARMY",
     },
     effects: {
@@ -485,7 +485,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "crypt",
-      name: "crypt",
+      name: "Crypte",
       domain: "ARMY",
     },
     effects: {
@@ -505,7 +505,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "ancientOfWar",
-      name: "ancientOfWar",
+      name: "Ancien de Guerre",
       domain: "ARMY",
     },
     effects: {
@@ -525,7 +525,7 @@ export const cardDictionnary: {
       },
       category: "BUILDING",
       description: "barracks",
-      name: "barracks",
+      name: "Barraque",
       domain: "ARMY",
     },
     effects: {
