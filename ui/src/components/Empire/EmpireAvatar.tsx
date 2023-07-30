@@ -12,7 +12,7 @@ type Props = {
 const EmpirePlayer: React.FC<Props> = ({ race_name, pseudo }) => (
     <>
         <div className={styles.empire_avatar}>
-            <img src={`/src/assets/images/avatar/${race_name}.png`} />
+            <img src={`images/avatar/${race_name}.png`} />
         </div>
         <div className={styles.empire_player_pseudo}>
             {pseudo}

@@ -10,7 +10,7 @@ type Props = {
 
 const RaceIcon: React.FC<Props> = ({ race }) => (
     <div className={styles.icon}>
-        <img src={`/src/assets/images/avatar/${race}.png`} />
+        <img src={`images/avatar/${race}.png`} />
     </div>
 )
 
