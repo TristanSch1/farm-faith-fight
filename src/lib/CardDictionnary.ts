@@ -15,6 +15,7 @@ export type TCardBuildingType =
   | "spiceTrade"
   | "silkTrade"
   | "woolTrade"
+  | "bonesTrade"
   | "castle"
   | "crypt"
   | "ancientOfWar"
@@ -352,6 +353,7 @@ export const cardDictionnary: {
     effects: {
       income: {},
       turnsToBuild: 2,
+      needed: ["market", "silkTrade", "woolTrade", "bonesTrade"],
     },
   },
   silkTrade: {
@@ -368,6 +370,7 @@ export const cardDictionnary: {
     effects: {
       income: {},
       turnsToBuild: 2,
+      needed: ["market", "spiceTrade", "woolTrade", "bonesTrade"],
     },
   },
   woolTrade: {
@@ -384,6 +387,24 @@ export const cardDictionnary: {
     effects: {
       income: {},
       turnsToBuild: 2,
+      needed: ["market", "silkTrade", "spiceTrade", "bonesTrade"],
+    },
+  },
+  bonesTrade: {
+    template: {
+      id: "bonesTrade",
+      cost: {
+        wood: 100,
+        food: 100,
+      },
+      category: "BUILDING",
+      description: "woolTrade",
+      name: "woolTrade",
+    },
+    effects: {
+      income: {},
+      turnsToBuild: 2,
+      needed: ["market", "silkTrade", "woolTrade", "spiceTrade"],
     },
   },
   castle: {
@@ -400,6 +421,7 @@ export const cardDictionnary: {
     effects: {
       income: {},
       turnsToBuild: 2,
+      needed: ["garrison", "crypt", "ancientOfWar", "barracks"],
     },
   },
   crypt: {
@@ -416,6 +438,7 @@ export const cardDictionnary: {
     effects: {
       income: {},
       turnsToBuild: 2,
+      needed: ["garrison", "castle", "ancientOfWar", "barracks"],
     },
   },
   ancientOfWar: {
@@ -432,6 +455,7 @@ export const cardDictionnary: {
     effects: {
       income: {},
       turnsToBuild: 2,
+      needed: ["garrison", "crypt", "castle", "barracks"],
     },
   },
   barracks: {
@@ -448,6 +472,7 @@ export const cardDictionnary: {
     effects: {
       income: {},
       turnsToBuild: 2,
+      needed: ["garrison", "crypt", "ancientOfWar", "castle"],
     },
   },
 };
