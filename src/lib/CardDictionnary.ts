@@ -78,7 +78,7 @@ export const cardDictionnary: {
       id: "spyAll",
       tier: 1,
       description: "spyAll",
-      cost: { food: 100, wood: 100 },
+      cost: { food: 0, wood: 0 },
       name: "spyAll",
       category: "ACTION",
     },
