@@ -4,12 +4,12 @@ import { BuildingEffectProps } from "./BuildingEffect.ts";
 
 export type TCard = {
   template: CardTemplate;
-  effects: ActionEffectProps[] | BuildingEffectProps[];
+  effects: ActionEffectProps[] | BuildingEffectProps;
 };
 
 export class Card {
   template: CardTemplate;
-  effects: ActionEffectProps[] | BuildingEffectProps[];
+  effects: ActionEffectProps[] | BuildingEffectProps;
   constructor(props: TCard) {
     this.template = props.template;
     this.effects = props.effects;

@@ -1,6 +1,18 @@
 import { TCardType } from "./lib/CardDictionnary";
 
+type TGameConfig = {
+  health: number;
+  income: number;
+  wood: number;
+  food: number;
+  deck: { [cardType in TCardType]: number };
+};
+
 export default {
+  health: 100,
+  wood: 50,
+  food: 50,
+  income: 10,
   // 96 cartes
   deck: {
     // actions
@@ -30,4 +42,4 @@ export default {
     ancientOfWar: 1,
     barracks: 1,
   },
-} as { deck: { [cardType in TCardType]: number } };
+} as TGameConfig;

@@ -7,7 +7,6 @@ export interface GameState {
     [playerId: string]: {
       empire: Empire;
       state: PlayerState;
-      turns: number;
     };
   };
   gameStarted: boolean;

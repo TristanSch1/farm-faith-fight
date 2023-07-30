@@ -23,6 +23,7 @@ class FxStore {
       playerJoin.play();
     });
     eventsStore.on("playCard", () => {
+      console.log("event playCard");
       playCard.play();
     });
     eventsStore.on("throwCard", () => {

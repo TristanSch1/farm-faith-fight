@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { gameStore } from "../../stores/GameStore.ts";
+import { gameStore } from "../../App.tsx";
 
 const StartGame = observer(() => {
   return (

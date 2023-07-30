@@ -1,8 +1,6 @@
 import { Empire } from "./lib/Empire";
 import { GameState } from "./lib/types/GameState.ts";
-import { gameStore } from "./stores/GameStore.ts";
-import { toJS } from "mobx";
-import eventsStore from "./stores/EventsStore.ts";
+import { GameStore } from "./stores/GameStore.ts";
 
 // TODO - Mettre les vrais empires
 const EMPIRE_NAMES = ["Orcs", "Elves", "Undead", "Humans"];
@@ -26,7 +24,6 @@ Rune.initLogic({
           [playerId]: {
             empire: new Empire(EMPIRE_NAMES[index]),
             state: "waiting",
-            turns: 0,
           },
         };
       }, {}),
@@ -34,33 +31,34 @@ Rune.initLogic({
     };
   },
   actions: {
-    startGame: (_, { game }) => {
+    startGame: (_, { game, playerId }) => {
+      console.log("startGame", playerId);
       if (game.gameStarted) throw Rune.invalidAction();
       game.gameStarted = true;
     },
     ready: (_, { game, playerId }) => {
       if (game.gameStarted || !game.players?.[playerId]) throw Rune.invalidAction();
+      console.log("ready", playerId);
       game.players[playerId].state = game.players[playerId].state === "waiting" ? "ready" : "waiting";
     },
-    playCard(_, { game }) {
-      gameStore.playCard();
-      //   mettre le store a jour ?
-      game.players = toJS(gameStore.game!.players);
+    playCard(playedCard, { game, playerId }) {
+      GameStore.playCard(game, playerId, playedCard);
     },
-    throwCard(_, { game }) {
-      gameStore.throwCard();
-      game.players = toJS(gameStore.game!.players);
+    throwCard(_, { game, playerId }) {
+      GameStore.throwCard(game, playerId);
     },
   },
   events: {
-    playerJoined: (playerId, { game }) => {
-      game.players[playerId] = {
-        empire: new Empire(getRandomEmpireName(game.players)),
-        state: "waiting",
-        turns: 0,
-      };
-      eventsStore.send({ type: "playerJoin" });
-    },
+    // FB: on ne doit pas laisser des joueurs rejoindre (default behavior)
+    // https://developers.rune.ai/docs/advanced/joining-leaving#supporting-players-joining-midgame
+    // playerJoined: (playerId, { game }) => {
+    //   if (gameStore.game?.gameStarted) return;
+    //   game.players[playerId] = {
+    //     empire: new Empire(getRandomEmpireName(game.players)),
+    //     state: "waiting",
+    //   };
+    //   eventsStore.send({ type: "playerJoin" });
+    // },
     playerLeft(playerId, { game }) {
       delete game.players[playerId];
     },
