@@ -10,12 +10,19 @@ import CardDrawPile, { DrawPileAPI } from "../../../ui/src/components/Card/CardD
 import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
 import eventsStore from "../../stores/EventsStore.ts";
-import { TCardBuildingType, cardDictionnary } from "../../lib/CardDictionnary.ts";
+import { cardDictionnary, TCardBuildingType } from "../../lib/CardDictionnary.ts";
 import { BuildingEffectProps } from "../../lib/BuildingEffect.ts";
 
 const GameUi = () => {
   const ref = useRef<DrawPileAPI>(null);
   useEffect(() => ref.current?.distribute(), []);
+  useEffect(() => {
+    gameStore.randomizeSingleTarget();
+  }, [gameStore.game]);
+
+  if (gameStore.player?.state === "dead") {
+    return <SceneContainer>Lost</SceneContainer>;
+  }
 
   return (
     <SceneContainer>
@@ -55,8 +62,8 @@ const GameUi = () => {
                 ...template,
                 title: template.name,
                 buildLinks: (cardDictionnary[template.id].effects as BuildingEffectProps).needed?.map<{
-                  name: string,
-                  built: boolean
+                  name: string;
+                  built: boolean;
                 }>((needed_name) => ({
                   name: neededTranslations[needed_name],
                   built: gameStore.player!.empire.buildings.includes(needed_name),
@@ -77,7 +84,7 @@ export default GameUi;
 
 type NeededTranslation = {
   [cardName in TCardBuildingType]: string;
-}
+};
 const neededTranslations: NeededTranslation = {
   farm: "Ferme",
   woodFactory: "Scierie",
@@ -96,4 +103,4 @@ const neededTranslations: NeededTranslation = {
   crypt: "Crype",
   ancientOfWar: "Ancien de Guerre",
   barracks: "Barraque",
-}
+};

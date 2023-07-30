@@ -153,9 +153,11 @@ export class GameActionsStore {
             break;
           }
           if (actionEffect.impactType === "negative") {
+            console.log("here");
             game.players[targetPlayerId].empire.health -=
               gameConfig.baseDamage +
               GameActionsStore.getBonusOrMalusDamageByEffect(actionEffect, game, playerId, targetPlayerId);
+            GameActionsStore.gameOver(game);
             break;
           }
           if (actionEffect.impactType === "positive") {
@@ -177,6 +179,7 @@ export class GameActionsStore {
                 });
               }
             });
+            GameActionsStore.gameOver(game);
             break;
           }
 
@@ -251,5 +254,23 @@ export class GameActionsStore {
     return BONUMALUS_DAMAGE[myRace][enemyRace];
   }
 
-  static gameOver() {}
+  static gameOver(game: GameState) {
+    const alivePlayers = Object.entries(game.players).filter(([_playerId, player]) => player.empire.health > 0);
+    const deadPlayers = Object.entries(game.players).filter(([_playerId, player]) => player.empire.health <= 0);
+    deadPlayers.forEach(([playerId, _player]) => {
+      game.players[playerId].state = "dead";
+    });
+    if (alivePlayers.length === 1) {
+      let players = {};
+      deadPlayers.forEach(([playerId, _player]) => {
+        players = { ...players, [playerId]: "LOST" };
+      });
+      alivePlayers.forEach(([playerId, _player]) => {
+        players = { ...players, [playerId]: "WON" };
+      });
+      Rune.gameOver({
+        players,
+      });
+    }
+  }
 }

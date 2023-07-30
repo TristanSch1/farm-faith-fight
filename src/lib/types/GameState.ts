@@ -1,6 +1,6 @@
 import { Empire } from "../Empire.ts";
 
-export type PlayerState = "waiting" | "ready";
+export type PlayerState = "waiting" | "ready" | "dead";
 
 export interface GameState {
   players: {

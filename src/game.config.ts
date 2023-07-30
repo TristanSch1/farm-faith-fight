@@ -15,8 +15,8 @@ type TGameConfig = {
 
 export default {
   health: 100,
-  wood: 50,
-  food: 50,
+  wood: 200,
+  food: 200,
   income: 10,
   maxWood: 200,
   maxFood: 200,

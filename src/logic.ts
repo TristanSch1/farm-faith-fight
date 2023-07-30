@@ -6,7 +6,7 @@ import { GameActionsStore } from "./stores/GameActionsStore.ts";
 const EMPIRE_NAMES = ["elf", "orc", "human", "undead"];
 
 Rune.initLogic({
-  minPlayers: 2,
+  minPlayers: 3,
   maxPlayers: 4,
   setup: (allPlayerIds): GameState => {
     return {
@@ -37,9 +37,7 @@ Rune.initLogic({
     throwCard(_, { game, playerId }) {
       GameActionsStore.throwCard(game, playerId);
     },
-    gameOver(_, { game, playerId }) {
-      GameActionsStore.gameOver(game, playerId);
-    },
+    gameOver(_, { game, playerId }) {},
   },
   events: {
     // FB: on ne doit pas laisser des joueurs rejoindre (default behavior)
