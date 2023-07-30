@@ -37,6 +37,9 @@ Rune.initLogic({
     throwCard(_, { game, playerId }) {
       GameActionsStore.throwCard(game, playerId);
     },
+    gameOver(_, { game, playerId }) {
+      GameActionsStore.gameOver(game, playerId);
+    },
   },
   events: {
     // FB: on ne doit pas laisser des joueurs rejoindre (default behavior)

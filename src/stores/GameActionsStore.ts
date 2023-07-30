@@ -22,6 +22,10 @@ export class GameActionsStore {
     eventsStore.on("throwCard", (_event: IEventThrowCard) => {
       Rune.actions.throwCard();
     });
+
+    eventsStore.on("gameOver", (_event: IEventThrowCard) => {
+      Rune.actions.gameOver();
+    });
   }
 
   static isCurrentCardBuildingCard(card: TCard) {
@@ -246,4 +250,6 @@ export class GameActionsStore {
     );
     return BONUMALUS_DAMAGE[myRace][enemyRace];
   }
+
+  static gameOver() {}
 }

@@ -5,4 +5,5 @@ export type GameActions = {
   ready: () => void;
   playCard: ({ card, randomPlayerIdTarget }: { card: TCard; randomPlayerIdTarget: string }) => void;
   throwCard: () => void;
+  gameOver: () => void;
 };

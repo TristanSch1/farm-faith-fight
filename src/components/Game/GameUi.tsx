@@ -7,11 +7,14 @@ import CardDrawPile, { DrawPileAPI } from "../../../ui/src/components/Card/CardD
 import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
 import { useEffect, useRef } from "react";
+import eventsStore from "../../stores/EventsStore.ts";
 
-const GameUi = (() => {
+const GameUi = () => {
   const ref = useRef<DrawPileAPI>(null);
-
-  useEffect(() => ref.current?.distribute());
+  useEffect(() => ref.current?.distribute(), []);
+  useEffect(() => {
+    eventsStore.send({ type: "gameOver" });
+  });
 
   return (
     <SceneContainer>
@@ -20,11 +23,21 @@ const GameUi = (() => {
       <CardDrawPile ref={ref}>
         {gameStore.deck.map((card, index) => {
           const { template } = card;
-          return <Card key={index} {...{ ...template, title: template.name, type: 'building/spiritualPlace', race: template.race?.toLowerCase() }} />;
+          return (
+            <Card
+              key={index}
+              {...{
+                ...template,
+                title: template.name,
+                type: "building/spiritualPlace",
+                race: template.race?.toLowerCase(),
+              }}
+            />
+          );
         })}
       </CardDrawPile>
     </SceneContainer>
   );
-});
+};
 
 export default GameUi;
