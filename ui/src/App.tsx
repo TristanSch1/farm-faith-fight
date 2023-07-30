@@ -32,7 +32,7 @@ const App = () => {
       ...waitingList,
       {
         progress: 0,
-        domain: ["army", "religion", "trade"][Math.floor(Math.random() * 3)],
+        domain: ["ARMY", "RELIGION", "TRADE"][Math.floor(Math.random() * 3)],
       },
     ]);
   };
@@ -53,16 +53,16 @@ const App = () => {
   const showSpy = () => {
     setSpyReport([
       {
-        domain: "army",
+        domain: "ARMY",
         tier: 1,
         race: "elf",
       },
       {
-        domain: "religion",
+        domain: "RELIGION",
         tier: 2,
       },
       {
-        domain: "trade",
+        domain: "TRADE",
         tier: 1,
         race: "orc",
       },
@@ -75,7 +75,10 @@ const App = () => {
 
   const drawPileRef = useRef<DrawPileAPI>(null)
 
-  useEffect(() => drawPileRef.current?.distribute());
+  useEffect(() => {
+    console.log('DISTRIBUTE CARDS');
+    drawPileRef.current?.distribute()
+  });
 
   return (
     <SceneContainer>
@@ -136,7 +139,67 @@ const App = () => {
 
       <CardDrawPile ref={drawPileRef}>
         <Card
-          domain="religion"
+          domain="RELIGION"
+          race="orc"
+          type="building/spiritualPlace"
+          tier={0}
+          title="Ferme"
+          description="Voici la Ferme, un havre de simplicité où le blé danse au gré du vent. Lieu de labeur et de moisson, il n'appartient à aucune race mais nourrit toutes bouches affamées. </br></br> Augmente votre production de blé."
+          target="Kevin"
+          turnsToBuild={3}
+          buildLinks={[
+            {
+              name: "Caserne",
+              built: false,
+            },
+            {
+              name: "Puit de Lune",
+              built: true,
+            },
+          ]}
+        />
+        <Card
+          domain="RELIGION"
+          race="orc"
+          type="building/spiritualPlace"
+          tier={0}
+          title="Ferme"
+          description="Voici la Ferme, un havre de simplicité où le blé danse au gré du vent. Lieu de labeur et de moisson, il n'appartient à aucune race mais nourrit toutes bouches affamées. </br></br> Augmente votre production de blé."
+          target="Kevin"
+          turnsToBuild={3}
+          buildLinks={[
+            {
+              name: "Caserne",
+              built: false,
+            },
+            {
+              name: "Puit de Lune",
+              built: true,
+            },
+          ]}
+        />
+        <Card
+          domain="RELIGION"
+          race="orc"
+          type="building/spiritualPlace"
+          tier={0}
+          title="Ferme"
+          description="Voici la Ferme, un havre de simplicité où le blé danse au gré du vent. Lieu de labeur et de moisson, il n'appartient à aucune race mais nourrit toutes bouches affamées. </br></br> Augmente votre production de blé."
+          target="Kevin"
+          turnsToBuild={3}
+          buildLinks={[
+            {
+              name: "Caserne",
+              built: false,
+            },
+            {
+              name: "Puit de Lune",
+              built: true,
+            },
+          ]}
+        />
+        <Card
+          domain="RELIGION"
           race="orc"
           type="building/spiritualPlace"
           tier={0}

@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
 
 import CardDrawable, { CardDrawableAPI } from "./CardDrawable";
 
@@ -13,19 +13,24 @@ export type DrawPileAPI = {
 };
 type Props = {
   children: React.ReactElement | React.ReactElement[];
+  debug_key?: string;
+  onDrawPileEmpty?: () => void;
 };
 
-const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ children }, ref) => {
-  console.log('RENDER DRAW PILE');
+let currentCardIndex = -1;
+let wasDistributed = false;
+
+const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ debug_key, children, onDrawPileEmpty }, ref) => {
   children = Array.isArray(children) ? children : [children];
   const drawableRef = useRef<CardDrawableAPI[]>([]);
-  let currentCardIndex = -1;
 
   const cardDistribution = () => {
+    if (wasDistributed) return;
+
     let i = 0;
 
     for (i; i < Math.min(numberOfCardToDistribute, drawableRef.current.length); i++) {
-      drawableRef.current[i].throw((i + 1) * 0.2);
+      drawableRef.current[i].distribute((i + 1) * 0.2);
     }
 
     setTimeout(() => {
@@ -35,12 +40,26 @@ const CardDrawPile = forwardRef<DrawPileAPI, Props>(({ children }, ref) => {
     }, 3000);
 
     turnNextCard();
+
+    if (!wasDistributed) wasDistributed = true;
   };
 
   const turnNextCard = () => {
-    const nextCard = drawableRef.current[currentCardIndex++];
-    const delay = currentCardIndex === 1 ? 600 : 250;
+    currentCardIndex++
+
+    console.log(currentCardIndex);
+    const nextCard = drawableRef.current[currentCardIndex];
+    const delay = currentCardIndex === 0 ? 600 : 250;
+
     if (nextCard) setTimeout(nextCard.turn, delay);
+    else {
+      onDrawPileEmpty && onDrawPileEmpty();
+
+      // setTimeout(nextCard.turn, delay)
+      wasDistributed = false;
+      currentCardIndex = -1;
+      cardDistribution();
+    }
   };
 
   const setDrawableRef = (element: CardDrawableAPI | null, index: number) => {
