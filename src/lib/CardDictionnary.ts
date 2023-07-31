@@ -63,7 +63,7 @@ export const cardDictionnary: {
       tier: 0,
       description:
         "With eyes as sharp as a hawk and ears as fine as a hare's, know what your enemy is up to. {target} can't hide their secrets from our sneaky squirrel!",
-      cost: { food: 40, wood: 40 },
+      cost: { food: 30, wood: 15 },
       name: "Squirrel's Cunning Gaze",
       category: "ACTION",
     },
@@ -80,7 +80,7 @@ export const cardDictionnary: {
       tier: 0,
       description:
         "The all-seeing owl swoops! No corner of your enemy's realm can hide from its wide, wise gaze. Two turns of omniscient oversight, free of charge!",
-      cost: { food: 0, wood: 0 },
+      cost: { food: 100, wood: 20 },
       name: "Owl's All-seeing Aerie",
       category: "ACTION",
     },
@@ -129,6 +129,12 @@ export const cardDictionnary: {
     effects: [
       {
         domain: "ARMY",
+        actionType: "singleTarget",
+        impact: 5,
+        impactType: "negative",
+      },
+      {
+        domain: "TRADE",
         actionType: "singleTarget",
         impact: 5,
         impactType: "negative",
