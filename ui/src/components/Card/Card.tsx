@@ -58,6 +58,7 @@ const Card: React.FC<Props> = ({ type, target, title, description, tier, domain,
                 </div>
 
                 <div className={styles.left_section}>
+                    {buildLinks.length > 0 && <span style={{ fontFamily: 'var(--font-accent)', textShadow: '0px 0px 8px rgba(0, 0, 0, 0.74), 0px 0px 8px rgba(0, 0, 0, 0.74), 0px 0px 8px rgba(0, 0, 0, 0.74)' }}>You need one of:</span>}
                     {buildLinks.map(buildLink =>
                         <span style={badgeStyle(buildLink.built)} key={buildLink.name} className={styles.card__badge}>
                             {buildLink.name}
