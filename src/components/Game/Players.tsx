@@ -11,20 +11,22 @@ export const Players = observer(() => {
         const isSpied = queue.some((spy) => spy.playerId === playerId);
         const buildings = gameStore.game?.players[playerId].empire.buildings || [];
 
-        const spyData = buildings.filter((building) => {
-          const { domain } = cardDictionnary[building].template;
-          return !['FOOD', 'WOOD'].includes(domain!);
-        }).map((building) => {
-          const { domain, tier, race } = cardDictionnary[building].template;
-          return {
-            domain,
-            tier,
-            race: ["NEUTRAL", "NONE"].includes(race || "") ? undefined : race,
-          };
-        });
+        const spyData = buildings
+          .filter((building) => {
+            const { domain } = cardDictionnary[building].template;
+            return !["FOOD", "WOOD"].includes(domain!);
+          })
+          .map((building) => {
+            const { domain, tier, race } = cardDictionnary[building].template;
+            return {
+              domain,
+              tier,
+              race: ["NEUTRAL", "NONE"].includes(race || "") ? undefined : race,
+            };
+          });
 
         return (
-          <EmpireStatus fill={gameStore.player!.empire.health} key={playerId}>
+          <EmpireStatus fill={gameStore.game!.players![playerId]!.empire.health} key={playerId}>
             <>
               <EmpireAvatar race_name={player.empire.name} pseudo={gameStore.players![playerId].displayName} />
               {isSpied && (
