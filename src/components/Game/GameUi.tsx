@@ -71,7 +71,7 @@ const GameUi = () => {
                   built: gameStore.player!.empire.buildings.includes(needed_name),
                 })),
                 target: gameStore.currentTargetPlayer(),
-                type: "spiritualPlace",
+                type: template.id,
                 race: (["NEUTRAL", "NONE"].includes(template.race || "") ? undefined : template.race)?.toLowerCase(),
                 turnsToBuild: (effects as BuildingEffectProps).turnsToBuild,
               }}
