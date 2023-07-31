@@ -13,7 +13,7 @@ GameActionsStore.initEvents();
 const App = observer(() => {
   useEffect(() => {
     Rune.initClient({
-      onChange: ({ newGame, players, yourPlayerId, rollbacks, action, event }) => {
+      onChange: ({ newGame, players, yourPlayerId }) => {
         gameStore.update(newGame, players, yourPlayerId);
       },
     });

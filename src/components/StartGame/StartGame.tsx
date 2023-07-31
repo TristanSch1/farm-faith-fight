@@ -13,6 +13,7 @@ const StartGame = observer(() => {
           return (
             <div key={playerId}>
               <EmpireAvatar
+                isPlayer={false}
                 key={playerId}
                 race_name={player.empire.name}
                 pseudo={gameStore.players![playerId].displayName}

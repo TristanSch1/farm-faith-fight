@@ -23,7 +23,7 @@ let currentCardIndex = -1;
 let wasDistributed = false;
 
 const CardDrawPile = forwardRef<DrawPileAPI, Props>(
-  ({ debug_key, children, onDrawPileEmpty, onPlayCard, onThrowCard }, ref) => {
+  ({ children, onDrawPileEmpty, onPlayCard, onThrowCard }, ref) => {
     children = Array.isArray(children) ? children : [children];
     const drawableRef = useRef<CardDrawableAPI[]>([]);
 

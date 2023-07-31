@@ -24,7 +24,7 @@ Rune.initLogic({
     };
   },
   actions: {
-    startGame: (_, { game, playerId }) => {
+    startGame: (_, { game }) => {
       if (game.gameStarted) throw Rune.invalidAction();
       eventsStore.send({ type: "start" });
       game.gameStarted = true;
@@ -39,7 +39,8 @@ Rune.initLogic({
     throwCard(_, { game, playerId }) {
       GameActionsStore.throwCard(game, playerId);
     },
-    gameOver(_, { game, playerId }) {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, no-empty-pattern, @typescript-eslint/no-unused-vars
+    gameOver(_, {}) {},
   },
   events: {
     // FB: on ne doit pas laisser des joueurs rejoindre (default behavior)
