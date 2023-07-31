@@ -18,7 +18,7 @@ type Props = {
 const SpyReport: React.FC<Props> = ({ data }) => (
     <div className={styles.spy_report}>
         <AnimatePresence>
-            {data.map(({ domain, race }) => (
+            {data.map(({ domain, race, tier }) => (
                 <motion.div
                     className={styles.spy_report__construction}
                     key={domain + race}
@@ -28,7 +28,7 @@ const SpyReport: React.FC<Props> = ({ data }) => (
                 >
                     <ConstructionIcon domain={domain} />
                     {race && <RaceIcon race={race} />}
-                    <span className={styles.spy_report__tier}>T1</span>
+                    <span className={styles.spy_report__tier}>T{tier}</span>
                 </motion.div>
             ))}
         </AnimatePresence>
