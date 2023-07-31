@@ -1,0 +1,15 @@
+.lost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 7rem;
+    font-family: var(--font-accent);
+    text-align: center;
+    font-weight: bold;
+    text-shadow:
+            0px 0px 8px rgba(0, 0, 0, 0.5),
+            0px 0px 8px rgba(0, 0, 0, 0.5),
+            0px 0px 8px rgba(0, 0, 0, 0.5);
+}

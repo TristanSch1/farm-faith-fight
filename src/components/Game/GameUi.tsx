@@ -13,6 +13,7 @@ import eventsStore from "../../stores/EventsStore.ts";
 import { cardDictionnary } from "../../lib/CardDictionnary.ts";
 
 import { BuildingEffectProps } from "../../lib/BuildingEffect.ts";
+import styles from "./_css/gameUi.module.css";
 
 const GameUi = () => {
   const ref = useRef<DrawPileAPI>(null);
@@ -22,7 +23,11 @@ const GameUi = () => {
   }, [gameStore.player?.empire.turn]);
 
   if (gameStore.player?.state === "dead") {
-    return <SceneContainer>Lost</SceneContainer>;
+    return (
+      <SceneContainer>
+        <div className={styles.lost}>You lost</div>
+      </SceneContainer>
+    );
   }
 
   return (
