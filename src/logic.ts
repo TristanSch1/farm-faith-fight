@@ -1,6 +1,7 @@
 import { Empire } from "./lib/Empire";
 import { GameState } from "./lib/types/GameState.ts";
 import { GameActionsStore } from "./stores/GameActionsStore.ts";
+import eventsStore from "./stores/EventsStore.ts";
 
 // TODO - Mettre les vrais empires
 const EMPIRE_NAMES = ["ELF", "ORC", "HUMAN", "UNDEAD"];
@@ -25,6 +26,7 @@ Rune.initLogic({
   actions: {
     startGame: (_, { game, playerId }) => {
       if (game.gameStarted) throw Rune.invalidAction();
+      eventsStore.send({ type: "start" });
       game.gameStarted = true;
     },
     ready: (_, { game, playerId }) => {
