@@ -242,14 +242,15 @@ export class GameActionsStore {
       enemyRace = cardDictionnary[first(targetPlayerBuildingsT2)!].template.race!;
     }
 
-    console.info(
-      effect.domain,
-      playerBuildingsT1,
-      playerBuildingsT2,
-      myRace,
-      enemyRace,
-      BONUMALUS_DAMAGE[myRace][enemyRace],
-    );
+    // console.info(
+    //   effect.domain,
+    //   playerBuildingsT1,
+    //   playerBuildingsT2,
+    //   myRace,
+    //   enemyRace,
+    //   BONUMALUS_DAMAGE[myRace][enemyRace],
+    // );
+
     return BONUMALUS_DAMAGE[myRace][enemyRace];
   }
 
