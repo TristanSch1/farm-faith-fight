@@ -6,14 +6,9 @@ export const Players = observer(() => {
   return (
     <EmpiresHeader>
       {Object.entries(gameStore.game!.players).map(([playerId, player]) => {
-        console.log(
-          "vie : ",
-          gameStore.game!.players[playerId].empire.name,
-          gameStore.game!.players[playerId].empire.health,
-        );
         return (
           <EmpireStatus fill={gameStore.game!.players[playerId].empire.health} key={playerId}>
-            <EmpireAvatar race_name={player.empire.name} pseudo={player.empire.name} />
+            <EmpireAvatar race_name={player.empire.name} pseudo={gameStore.players![playerId].displayName} />
           </EmpireStatus>
         );
       })}

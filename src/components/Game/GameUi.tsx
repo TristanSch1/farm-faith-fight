@@ -19,7 +19,7 @@ const GameUi = () => {
   useEffect(() => ref.current?.distribute(), []);
   useEffect(() => {
     gameStore.randomizeSingleTarget();
-  }, [gameStore.game]);
+  }, [gameStore.player?.empire.turn]);
 
   if (gameStore.player?.state === "dead") {
     return <SceneContainer>Lost</SceneContainer>;

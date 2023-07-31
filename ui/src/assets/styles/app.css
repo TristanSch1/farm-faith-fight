@@ -10,6 +10,8 @@ html {
   --color-primary: #fafffd;
   --color-secondary: #4c382c;
   --color-accent: #1c111c;
+  --color-error: red;
+  --color-success: green;
 }
 
 body {

@@ -32,3 +32,11 @@
     0px 0px 8px rgba(0, 0, 0, 0.5),
     0px 0px 8px rgba(0, 0, 0, 0.5);
 }
+
+.ready {
+  color: var(--color-success);
+}
+
+.not_ready {
+  color: var(--color-error);
+}
