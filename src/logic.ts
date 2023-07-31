@@ -3,7 +3,7 @@ import { GameState } from "./lib/types/GameState.ts";
 import { GameActionsStore } from "./stores/GameActionsStore.ts";
 
 // TODO - Mettre les vrais empires
-const EMPIRE_NAMES = ["elf", "orc", "human", "undead"];
+const EMPIRE_NAMES = ["ELF", "ORC", "HUMAN", "UNDEAD"];
 
 Rune.initLogic({
   minPlayers: 3,
