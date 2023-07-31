@@ -11,11 +11,19 @@ import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
 import eventsStore from "../../stores/EventsStore.ts";
 import { cardDictionnary } from "../../lib/CardDictionnary.ts";
+
 import { BuildingEffectProps } from "../../lib/BuildingEffect.ts";
 
 const GameUi = () => {
   const ref = useRef<DrawPileAPI>(null);
   useEffect(() => ref.current?.distribute(), []);
+  useEffect(() => {
+    gameStore.randomizeSingleTarget();
+  }, [gameStore.player?.empire.turn]);
+
+  if (gameStore.player?.state === "dead") {
+    return <SceneContainer>Lost</SceneContainer>;
+  }
 
   return (
     <SceneContainer>
@@ -54,15 +62,16 @@ const GameUi = () => {
               {...{
                 ...template,
                 title: template.name,
+
                 buildLinks: (effects as BuildingEffectProps).needed?.map<{
-                  name: string,
-                  built: boolean
+                  name: string;
+                  built: boolean;
                 }>((needed_name) => ({
                   name: cardDictionnary[needed_name].template.name,
                   built: gameStore.player!.empire.buildings.includes(needed_name),
                 })),
                 type: "building/spiritualPlace",
-                race: (['NEUTRAL', 'NONE'].includes(template.race || '') ? undefined : template.race)?.toLowerCase(),
+                race: (["NEUTRAL", "NONE"].includes(template.race || "") ? undefined : template.race)?.toLowerCase(),
                 turnsToBuild: (effects as BuildingEffectProps).turnsToBuild,
               }}
             />
