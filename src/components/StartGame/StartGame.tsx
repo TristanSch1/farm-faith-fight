@@ -22,9 +22,15 @@ const StartGame = observer(() => {
         })}
       </div>
       <div className={styles.flex1} />
-      <button className={styles.button} onClick={() => Rune.actions.ready()}>
-        {gameStore.isPlayerReady() ? "NOT READY" : "READY"}
-      </button>
+
+      <div className={styles.ready} onClick={() => (!gameStore.isPlayerReady() ? Rune.actions.ready() : undefined)}>
+        {gameStore.isPlayerReady() ? "I'm ready to beat them all!" : "Ready to fight for the glory?"}
+      </div>
+      {gameStore.isPlayerReady() && (
+        <div className={styles.coward} onClick={() => (gameStore.isPlayerReady() ? Rune.actions.ready() : undefined)}>
+          Click here to cancel... chicken!
+        </div>
+      )}
     </SceneContainer>
   );
 });

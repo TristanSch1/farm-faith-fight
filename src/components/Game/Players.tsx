@@ -16,19 +16,25 @@ export const Players = observer(() => {
           return {
             domain,
             tier,
-            race: ['NEUTRAL', 'NONE'].includes(race || '') ? undefined : race,
-          }
+            race: ["NEUTRAL", "NONE"].includes(race || "") ? undefined : race,
+          };
         });
 
         return (
           <EmpireStatus fill={gameStore.player!.empire.health} key={playerId}>
             <>
-              <EmpireAvatar race_name={player.empire.name} pseudo={player.empire.name} />
-              {isSpied && <SpyReport data={spyData as Array<{
-                domain: string,
-                tier: number,
-                race?: string,
-              }>} />}
+              <EmpireAvatar race_name={player.empire.name} pseudo={gameStore.players![playerId].displayName} />
+              {isSpied && (
+                <SpyReport
+                  data={
+                    spyData as Array<{
+                      domain: string;
+                      tier: number;
+                      race?: string;
+                    }>
+                  }
+                />
+              )}
             </>
           </EmpireStatus>
         );
