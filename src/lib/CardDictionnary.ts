@@ -43,9 +43,9 @@ export const cardDictionnary: {
     template: {
       id: "attack",
       tier: 1,
-      description: "j'attaque",
+      description: "Charge {target} with the ferocity of a chicken chased by a fox! Victory or the cooking pot!",
       cost: { food: 40, wood: 75 },
-      name: "Chaaaaaaaaargez !",
+      name: "Feathered Fury!",
       category: "ACTION",
     },
     effects: [
@@ -61,9 +61,10 @@ export const cardDictionnary: {
     template: {
       id: "spy",
       tier: 1,
-      description: "spy",
+      description:
+        "With eyes as sharp as a hawk and ears as fine as a hare's, know what your enemy is up to. {target} can't hide their secrets from our sneaky squirrel!",
       cost: { food: 40, wood: 40 },
-      name: "Regard du Corbeau",
+      name: "Squirrel's Cunning Gaze",
       category: "ACTION",
     },
     effects: [
@@ -77,9 +78,10 @@ export const cardDictionnary: {
     template: {
       id: "spyAll",
       tier: 1,
-      description: "spyAll",
+      description:
+        "The all-seeing owl swoops! No corner of your enemy's realm can hide from its wide, wise gaze. Two turns of omniscient oversight, free of charge!",
       cost: { food: 0, wood: 0 },
-      name: "Surveillance Omnisciente",
+      name: "Owl's All-seeing Aerie",
       category: "ACTION",
     },
     effects: [
@@ -93,9 +95,10 @@ export const cardDictionnary: {
     template: {
       id: "steal",
       tier: 1,
-      description: "steal",
+      description:
+        "Your nimble fingers find their way into {target} pockets, nabbing a handful of goodies. Costs a hearty meal and a bit of lumber, but the thrill is worth every bit!",
       cost: { food: 90, wood: 20 },
-      name: "Vol à la tire",
+      name: "Pilferer's Prance",
       category: "ACTION",
     },
     effects: [
@@ -117,9 +120,10 @@ export const cardDictionnary: {
     template: {
       id: "burningEarth",
       tier: 1,
-      description: "burningEarth",
+      description:
+        "Set {target}'s turf ablaze! You'll need a feast's worth of food and a small grove's worth of wood, but the spectacle? Priceless.",
       cost: { food: 70, wood: 60 },
-      name: "Désolation de Feu",
+      name: "Scorched Shenanigans",
       category: "ACTION",
     },
     effects: [
@@ -135,9 +139,10 @@ export const cardDictionnary: {
     template: {
       id: "poisoning",
       tier: 1,
-      description: "poisoning",
+      description:
+        "Slip a dash of the nasty into {target}'s mead! Costs a king's feast of food and a sizeable stash of wood, but the results... Oh, what belly laughs you'll have!",
       cost: { food: 90, wood: 100 },
-      name: "poisoning",
+      name: "Pernicious Potions",
       category: "ACTION",
     },
     effects: [
@@ -159,9 +164,10 @@ export const cardDictionnary: {
     template: {
       id: "spiritualCelebration",
       tier: 1,
-      description: "spiritualCelebration",
+      description:
+        "A ceremony of spiritual magnitude! Bolster your faith while giving {target} a crisis of conscience.",
       cost: { food: 120, wood: 40 },
-      name: "Toucher du Basilic",
+      name: "Basilisk's Touch",
       category: "ACTION",
     },
     effects: [
@@ -183,9 +189,9 @@ export const cardDictionnary: {
     template: {
       id: "spiritualAttack",
       tier: 1,
-      description: "spiritualAttack",
+      description: "A divinely inspired onslaught against {target}, shaking your foe's faith to its core.",
       cost: { food: 75, wood: 40 },
-      name: "Frappe Spirituelle",
+      name: "Spiritual Smite",
       category: "ACTION",
     },
     effects: [
@@ -207,8 +213,8 @@ export const cardDictionnary: {
         food: 50,
       },
       category: "BUILDING",
-      description: "farm",
-      name: "Ferme",
+      description: "A humble yet hearty provider of sustenance. Takes a while to set up, but well worth the wait!",
+      name: "Yonder Yeomanry",
       domain: "FOOD",
     },
     effects: {
@@ -228,8 +234,9 @@ export const cardDictionnary: {
         food: 50,
       },
       category: "BUILDING",
-      description: "wood factory",
-      name: "Scierie",
+      description:
+        "A quaint lumber mill, tirelessly turning tree trunks into timber. Takes a bit to build, but a real asset once up and running!",
+      name: "Timber Totter",
       domain: "WOOD",
     },
     effects: {
@@ -249,8 +256,9 @@ export const cardDictionnary: {
         food: 50,
       },
       category: "BUILDING",
-      description: "garrison",
-      name: "Garnison",
+      description:
+        "A mighty stronghold filled with fierce soldiers. Takes a couple of turns to set up, but hey, Rome wasn't built in a day, right?",
+      name: "Barracks of Bravery",
       domain: "ARMY",
     },
     effects: {
@@ -268,8 +276,9 @@ export const cardDictionnary: {
         food: 85,
       },
       category: "BUILDING",
-      description: "spiritualPlace",
-      name: "Lieu spirituel",
+      description:
+        "A divine sanctuary of silence and prayer. Takes some time to build, but divine intervention doesn't happen overnight, does it?",
+      name: "Sanctuary of Serenity",
       domain: "RELIGION",
     },
     effects: {
@@ -287,8 +296,9 @@ export const cardDictionnary: {
         food: 120,
       },
       category: "BUILDING",
-      description: "market",
-      name: "Marché",
+      description:
+        "A bustling hub of trade, where food might be scant but deals are abundant. Requires a little time to set up.",
+      name: "Bazaar of Bargains",
       domain: "TRADE",
     },
     effects: {
@@ -306,8 +316,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "temple",
-      name: "Temple",
+      description:
+        "A holy place that takes time and other spiritual sites to construct. Divine patience is a virtue, they say.",
+      name: "Cathedral of Conviction",
       domain: "RELIGION",
     },
     effects: {
@@ -326,8 +337,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "moonwell",
-      name: "Puit de Lune",
+      description:
+        "A divine well under the moonlight that requires time and the blessing of other religious sites to construct.",
+      name: "Lunar Fountain",
       domain: "RELIGION",
     },
     effects: {
@@ -346,8 +358,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "shamanAltar",
-      name: "Autel Shaman",
+      description:
+        "An eerie place of worship, requires time and blessings of other spiritual sites to construct. For the spirits!",
+      name: "Shaman's Stand",
       domain: "RELIGION",
     },
     effects: {
@@ -366,8 +379,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "Gouffre Damné",
-      name: "Mort-Vivan",
+      description:
+        "A chilling rift where the undead draw their powers. Requires patience and blessings of other spiritual sites to construct.",
+      name: "Abyss of the Damned",
       domain: "RELIGION",
     },
     effects: {
@@ -386,8 +400,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "spiceTrade",
-      name: "Commerce d'épice",
+      description:
+        "A bustling hub of spice trade, the aroma alone could lead you here. Needs other trades and time to establish.",
+      name: "Spice Souk",
       domain: "TRADE",
     },
     effects: {
@@ -406,8 +421,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "silkTrade",
-      name: "Commerce de soie",
+      description:
+        "A hub of elegant silk trade. Its establishment requires time and the presence of other trading centers.",
+      name: "Silk Spinner's Stall",
       domain: "TRADE",
     },
     effects: {
@@ -426,8 +442,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "woolTrade",
-      name: "Commerce de peau",
+      description:
+        "A bustling hub for the wool trade, ready to be weaved into existence with time and other trade partners.",
+      name: "Wool Weaver's Workshop",
       domain: "TRADE",
     },
     effects: {
@@ -446,8 +463,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "woolTrade",
-      name: "Commerce d'os",
+      description:
+        "A chilling hub of bones trade that can be summoned into existence with time and the presence of other trading centers.",
+      name: "Boneyard Bazaar",
       domain: "TRADE",
     },
     effects: {
@@ -466,8 +484,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "castle",
-      name: "Château",
+      description:
+        "A towering structure of defense and dominance. Requires time and military foundations to construct.",
+      name: "Fortress of Sovereignty",
       domain: "ARMY",
     },
     effects: {
@@ -486,8 +505,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "crypt",
-      name: "Crypte",
+      description:
+        "An eerie structure that strengthens the undead army. Its rise requires time and other military foundations.",
+      name: "Necropolis of Nightmares",
       domain: "ARMY",
     },
     effects: {
@@ -506,8 +526,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "ancientOfWar",
-      name: "Ancien de Guerre",
+      description:
+        "A mystical structure that strengthens the elven army. Its growth requires time and the presence of other military foundations.",
+      name: "Sentinel of the Sylvan",
       domain: "ARMY",
     },
     effects: {
@@ -526,8 +547,9 @@ export const cardDictionnary: {
         food: 100,
       },
       category: "BUILDING",
-      description: "barracks",
-      name: "Barraque",
+      description:
+        "A robust structure that strengthens the orcish army. Requires time and the presence of other military bases to construct.",
+      name: "Warrior's Warcamp",
       domain: "ARMY",
     },
     effects: {

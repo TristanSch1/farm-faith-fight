@@ -14,9 +14,17 @@ export class GameStore {
   players: Players | null = null;
   playerId = "";
   deck: TCard[] = observable.array(makeDeck());
+  currentTargetPlayerId: string | undefined = "";
+
+  currentTargetPlayer() {
+    if (!gameStore.players) return;
+    if (!this.currentTargetPlayerId) this.randomPlayerIdTarget();
+    return gameStore.players[this.currentTargetPlayerId!].displayName;
+  }
 
   randomPlayerIdTarget() {
-    return this.randomizeSingleTarget();
+    this.currentTargetPlayerId = this.randomizeSingleTarget();
+    return this.currentTargetPlayerId;
   }
 
   constructor() {

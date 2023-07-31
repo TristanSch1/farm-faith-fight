@@ -70,7 +70,8 @@ const GameUi = () => {
                   name: cardDictionnary[needed_name].template.name,
                   built: gameStore.player!.empire.buildings.includes(needed_name),
                 })),
-                type: "building/spiritualPlace",
+                target: gameStore.currentTargetPlayer(),
+                type: "spiritualPlace",
                 race: (["NEUTRAL", "NONE"].includes(template.race || "") ? undefined : template.race)?.toLowerCase(),
                 turnsToBuild: (effects as BuildingEffectProps).turnsToBuild,
               }}
