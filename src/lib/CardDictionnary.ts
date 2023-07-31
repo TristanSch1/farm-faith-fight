@@ -42,7 +42,7 @@ export const cardDictionnary: {
   attack: {
     template: {
       id: "attack",
-      tier: 1,
+      tier: 0,
       description: "Charge {target} with the ferocity of a chicken chased by a fox! Victory or the cooking pot!",
       cost: { food: 40, wood: 75 },
       name: "Feathered Fury!",
@@ -60,7 +60,7 @@ export const cardDictionnary: {
   spy: {
     template: {
       id: "spy",
-      tier: 1,
+      tier: 0,
       description:
         "With eyes as sharp as a hawk and ears as fine as a hare's, know what your enemy is up to. {target} can't hide their secrets from our sneaky squirrel!",
       cost: { food: 40, wood: 40 },
@@ -77,7 +77,7 @@ export const cardDictionnary: {
   spyAll: {
     template: {
       id: "spyAll",
-      tier: 1,
+      tier: 0,
       description:
         "The all-seeing owl swoops! No corner of your enemy's realm can hide from its wide, wise gaze. Two turns of omniscient oversight, free of charge!",
       cost: { food: 0, wood: 0 },
@@ -94,7 +94,7 @@ export const cardDictionnary: {
   steal: {
     template: {
       id: "steal",
-      tier: 1,
+      tier: 0,
       description:
         "Your nimble fingers find their way into {target} pockets, nabbing a handful of goodies. Costs a hearty meal and a bit of lumber, but the thrill is worth every bit!",
       cost: { food: 90, wood: 20 },
@@ -119,7 +119,7 @@ export const cardDictionnary: {
   burningEarth: {
     template: {
       id: "burningEarth",
-      tier: 1,
+      tier: 0,
       description:
         "Set {target}'s turf ablaze! You'll need a feast's worth of food and a small grove's worth of wood, but the spectacle? Priceless.",
       cost: { food: 70, wood: 60 },
@@ -138,7 +138,7 @@ export const cardDictionnary: {
   poisoning: {
     template: {
       id: "poisoning",
-      tier: 1,
+      tier: 0,
       description:
         "Slip a dash of the nasty into {target}'s mead! Costs a king's feast of food and a sizeable stash of wood, but the results... Oh, what belly laughs you'll have!",
       cost: { food: 90, wood: 100 },
@@ -163,7 +163,7 @@ export const cardDictionnary: {
   spiritualCelebration: {
     template: {
       id: "spiritualCelebration",
-      tier: 1,
+      tier: 0,
       description:
         "A ceremony of spiritual magnitude! Bolster your faith while giving {target} a crisis of conscience.",
       cost: { food: 120, wood: 40 },
@@ -188,7 +188,7 @@ export const cardDictionnary: {
   spiritualAttack: {
     template: {
       id: "spiritualAttack",
-      tier: 1,
+      tier: 0,
       description: "A divinely inspired onslaught against {target}, shaking your foe's faith to its core.",
       cost: { food: 75, wood: 40 },
       name: "Spiritual Smite",

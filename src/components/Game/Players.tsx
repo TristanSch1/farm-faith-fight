@@ -8,10 +8,13 @@ export const Players = observer(() => {
     <EmpiresHeader>
       {Object.entries(gameStore.game!.players).map(([playerId, player]) => {
         const queue = gameStore.game?.players[gameStore.playerId].empire.spyingQueue || [];
-
         const isSpied = queue.some((spy) => spy.playerId === playerId);
+        const buildings = gameStore.game?.players[playerId].empire.buildings || [];
 
-        const spyData = (gameStore.game?.players[playerId].empire.buildings || []).map((building) => {
+        const spyData = buildings.filter((building, index) => {
+          const { domain } = cardDictionnary[building].template;
+          return !['FOOD', 'WOOD'].includes(domain || '') && buildings.findIndex((b) => b === building) === index;
+        }).map((building) => {
           const { domain, tier, race } = cardDictionnary[building].template;
           return {
             domain,
