@@ -153,7 +153,6 @@ export class GameActionsStore {
             break;
           }
           if (actionEffect.impactType === "negative") {
-            console.log("here");
             game.players[targetPlayerId].empire.health -=
               gameConfig.baseDamage +
               GameActionsStore.getBonusOrMalusDamageByEffect(actionEffect, game, playerId, targetPlayerId);
