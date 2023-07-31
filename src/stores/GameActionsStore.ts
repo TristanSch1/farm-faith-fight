@@ -71,10 +71,10 @@ export class GameActionsStore {
     let food = gameConfig.income;
     food +=
       game.players[playerId].empire.buildings.filter((building) => building === "farm").length *
-      cardDictionnary.farm.effects.income.food;
+      (cardDictionnary.farm.effects as BuildingEffect).income.food!;
     wood +=
       game.players[playerId].empire.buildings.filter((building) => building === "woodFactory").length *
-      cardDictionnary.woodFactory.effects.income.wood;
+      (cardDictionnary.woodFactory.effects as BuildingEffect).income.wood!;
 
     game.players[playerId].empire.food =
       game.players[playerId].empire.food + food >= gameConfig.maxFood
