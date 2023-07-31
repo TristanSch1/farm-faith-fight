@@ -103,21 +103,21 @@ const App = () => {
       <EmpiresHeader>
         <EmpireStatus fill={80}>
           <>
-            <EmpirePlayer race_name="elf" pseudo="Aradehel" />
+            <EmpirePlayer isPlayer={true} race_name="elf" pseudo="Aradehel" />
             <SpyReport data={spyReport} />
           </>
         </EmpireStatus>
 
         <EmpireStatus fill={20}>
-          <EmpirePlayer race_name="orc" pseudo="Ulgborz" />
+          <EmpirePlayer isPlayer={false} race_name="orc" pseudo="Ulgborz" />
         </EmpireStatus>
 
         <EmpireStatus fill={60}>
-          <EmpirePlayer race_name="human" pseudo="Leoric" />
+          <EmpirePlayer isPlayer={false} race_name="human" pseudo="Leoric" />
         </EmpireStatus>
 
         <EmpireStatus fill={66}>
-          <EmpirePlayer race_name="undead" pseudo="Phelishma" />
+          <EmpirePlayer isPlayer={false} race_name="undead" pseudo="Phelishma" />
         </EmpireStatus>
       </EmpiresHeader>
 

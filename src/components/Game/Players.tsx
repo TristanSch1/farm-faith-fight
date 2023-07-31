@@ -28,7 +28,7 @@ export const Players = observer(() => {
         return (
           <EmpireStatus fill={gameStore.game!.players![playerId]!.empire.health} key={playerId}>
             <>
-              <EmpireAvatar race_name={player.empire.name} pseudo={gameStore.players![playerId].displayName} />
+              <EmpireAvatar isPlayer={gameStore.playerId === playerId} race_name={player.empire.name} pseudo={gameStore.players![playerId].displayName} />
               {isSpied && (
                 <SpyReport
                   data={

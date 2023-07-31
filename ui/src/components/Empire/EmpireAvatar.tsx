@@ -9,9 +9,10 @@ type Props = {
   race_name: string;
   pseudo: string;
   status?: boolean;
+  isPlayer: boolean;
 };
 
-const EmpirePlayer: React.FC<Props> = ({ race_name, pseudo, status }) => (
+const EmpirePlayer: React.FC<Props> = ({ race_name, pseudo, status, isPlayer }) => (
   <>
     <div className={styles.empire_avatar}>
       <img src={`images/avatar/${race_name}.png`} />
@@ -22,6 +23,7 @@ const EmpirePlayer: React.FC<Props> = ({ race_name, pseudo, status }) => (
       })}
     >
       {pseudo}
+      {isPlayer && <span style={{ fontSize: '1.3rem' }}><br />(You)</span>}
     </div>
   </>
 );
