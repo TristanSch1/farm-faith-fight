@@ -48,10 +48,8 @@ const CardDrawPile = forwardRef<DrawPileAPI, Props>(
     };
 
     const turnNextCard = () => {
-      console.log('turnnextcard');
       currentCardIndex++;
 
-      console.log(currentCardIndex);
       const nextCard = drawableRef.current[currentCardIndex];
       const delay = currentCardIndex === 0 ? 600 : 250;
 

@@ -37,7 +37,6 @@ const Game = observer(() => {
           &nbsp;&nbsp;
           <button
             onClick={() => {
-              console.log("play card on ", gameStore.randomPlayerIdTarget);
               eventsStore.send({
                 type: "playCard",
                 payload: {

@@ -10,7 +10,8 @@ import CardDrawPile, { DrawPileAPI } from "../../../ui/src/components/Card/CardD
 import { gameStore } from "../../stores/GameStore.ts";
 import { Card } from "../../../ui/src/components";
 import eventsStore from "../../stores/EventsStore.ts";
-import { cardDictionnary, TCardBuildingType } from "../../lib/CardDictionnary.ts";
+import { cardDictionnary } from "../../lib/CardDictionnary.ts";
+
 import { BuildingEffectProps } from "../../lib/BuildingEffect.ts";
 
 const GameUi = () => {
@@ -54,23 +55,24 @@ const GameUi = () => {
         debug_key={gameStore.playerId}
       >
         {gameStore.deck.map((card, index) => {
-          const { template } = card;
+          const { template, effects } = card;
           return (
             <Card
               key={index}
               {...{
                 ...template,
                 title: template.name,
-                buildLinks: (cardDictionnary[template.id].effects as BuildingEffectProps).needed?.map<{
+
+                buildLinks: (effects as BuildingEffectProps).needed?.map<{
                   name: string;
                   built: boolean;
                 }>((needed_name) => ({
-                  name: neededTranslations[needed_name],
+                  name: cardDictionnary[needed_name].template.name,
                   built: gameStore.player!.empire.buildings.includes(needed_name),
                 })),
                 type: "building/spiritualPlace",
-                race: template.race?.toLowerCase(),
-                turnsToBuild: (cardDictionnary[template.id].effects as BuildingEffectProps).turnsToBuild,
+                race: (["NEUTRAL", "NONE"].includes(template.race || "") ? undefined : template.race)?.toLowerCase(),
+                turnsToBuild: (effects as BuildingEffectProps).turnsToBuild,
               }}
             />
           );
@@ -81,26 +83,3 @@ const GameUi = () => {
 };
 
 export default GameUi;
-
-type NeededTranslation = {
-  [cardName in TCardBuildingType]: string;
-};
-const neededTranslations: NeededTranslation = {
-  farm: "Ferme",
-  woodFactory: "Scierie",
-  garrison: "Garnison",
-  spiritualPlace: "Lieu spirituel",
-  market: "Marché",
-  temple: "Temple",
-  moonwell: "Puit de Lune",
-  shamanAltar: "Autel Shaman",
-  damnedChasm: "Gouffre Damné",
-  spiceTrade: "Commerce d'épice",
-  silkTrade: "Commerce de soie",
-  woolTrade: "Commerce de peau",
-  bonesTrade: "Commerce d'os",
-  castle: "Château",
-  crypt: "Crype",
-  ancientOfWar: "Ancien de Guerre",
-  barracks: "Barraque",
-};

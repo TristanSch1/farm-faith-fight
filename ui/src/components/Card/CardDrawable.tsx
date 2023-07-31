@@ -61,7 +61,6 @@ const CardDrawable = forwardRef<CardDrawableAPI, Props>(
 
         const resetCardPosition = () => animate(x, 0, { duration: duration(0.1), ease: "anticipate" });
         const throwCardAway = () => {
-            console.log(onThrown);
             onThrown && onThrown();
 
             animate([

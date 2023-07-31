@@ -20,7 +20,6 @@ export function getBuildingsByDomainAndByTier(domain: TDOMAIN, tier = 0) {
 }
 
 export function getBuildingsPlayerByDomainAndByTier(buildings: TCardType[], domain: TDOMAIN, tier = 0) {
-  console.log(buildings, getBuildingsByDomainAndByTier(domain, tier));
   return intersection(buildings, getBuildingsByDomainAndByTier(domain, tier));
 }
 

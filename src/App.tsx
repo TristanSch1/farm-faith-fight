@@ -15,15 +15,6 @@ const App = observer(() => {
     Rune.initClient({
       onChange: ({ newGame, players, yourPlayerId, rollbacks, action, event }) => {
         gameStore.update(newGame, players, yourPlayerId);
-        // core : states
-        // console.log("onChange", {
-        //   newGame,
-        //   players,
-        //   yourPlayerId,
-        //   rollbacks,
-        //   action,
-        //   event,
-        // });
       },
     });
   }, []);
@@ -36,8 +27,6 @@ const App = observer(() => {
   if (!gameStore.game) {
     return <div>Loading...</div>;
   }
-
-  console.log(gameStore.playerId, 'APP GAME RENDER');
 
   return <>{gameStore.game.gameStarted ? <GameUi /> : <StartGame />}</>;
 });
