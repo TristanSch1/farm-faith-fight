@@ -37,6 +37,12 @@ const GameUi = () => {
       <CardDrawPile
         onPlayCard={(cardDrawable) => {
           if (!gameStore.isThisPlayableCard) {
+            eventsStore.send({
+              type: "cannotPlayCard",
+              payload: {
+                card: gameStore.currentTurnCard,
+              },
+            });
             cardDrawable.reset();
             return;
           }
