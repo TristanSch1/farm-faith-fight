@@ -14,7 +14,10 @@ export class GameStore {
   players: Players | null = null;
   playerId = "";
   deck: TCard[] = observable.array(makeDeck());
-  randomPlayerIdTarget = "";
+
+  randomPlayerIdTarget() {
+    return this.randomizeSingleTarget();
+  }
 
   constructor() {
     makeAutoObservable(this);
@@ -92,11 +95,12 @@ export class GameStore {
   randomizeSingleTarget() {
     if (!this.game) return;
     const players = Object.keys(this.game.players);
-    while (!this.randomPlayerIdTarget || this.randomPlayerIdTarget === this.playerId) {
+    let randomPlayerId;
+    while (!randomPlayerId || randomPlayerId === this.playerId) {
       const randomIndex = Math.floor(Math.random() * players.length);
-      this.randomPlayerIdTarget = players[randomIndex];
+      randomPlayerId = players[randomIndex];
     }
-    return this.randomPlayerIdTarget;
+    return randomPlayerId;
   }
 }
 

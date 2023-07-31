@@ -35,7 +35,7 @@ const GameUi = () => {
             payload: {
               card: gameStore.currentTurnCard,
               empire: gameStore.player!.empire,
-              randomPlayerIdTarget: gameStore.randomPlayerIdTarget,
+              randomPlayerIdTarget: gameStore.randomPlayerIdTarget(),
             },
           });
         }}
