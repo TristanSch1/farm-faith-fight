@@ -1,43 +1,63 @@
 import eventsStore from "./EventsStore.ts";
-import playedCardSound from "../fx/playedCard.mp3";
-import playerJoinSound from "../fx/playerJoin.wav";
-import throwCardSound from "../fx/throwCard.mp3";
+import play from "../fx/play.mp3";
+import coinSound from "../fx/coin.mp3";
+import errorSound from "../fx/error.mp3";
+import attackSound from "../fx/attack.mp3";
+import constructSound from "../fx/construct.mp3";
 import UIfx from "uifx";
 import { IEventPlayCard } from "../lib/types/EventTypes.ts";
 import { GameActionsStore } from "./GameActionsStore.ts";
 
-const playCard = new UIfx(playedCardSound, {
+const playCard = new UIfx(play, {
   volume: 0.4, // number between 0.0 ~ 1.0
   throttleMs: 100,
 });
 
-const playCardNotPossible = new UIfx(playedCardSound, {
+const coin = new UIfx(coinSound, {
   volume: 0.4, // number between 0.0 ~ 1.0
   throttleMs: 100,
 });
 
-const throwCard = new UIfx(throwCardSound, {
+const error = new UIfx(errorSound, {
   volume: 0.4, // number between 0.0 ~ 1.0
   throttleMs: 100,
 });
 
-const playerJoin = new UIfx(playerJoinSound, {
+const attack = new UIfx(attackSound, {
+  volume: 0.4, // number between 0.0 ~ 1.0
+  throttleMs: 100,
+});
+
+const construct = new UIfx(constructSound, {
   volume: 0.4, // number between 0.0 ~ 1.0
   throttleMs: 100,
 });
 
 class FxStore {
   init() {
-    eventsStore.on("playerJoin", () => {
-      playerJoin.play();
-    });
     eventsStore.on("playCard", ({ payload }: IEventPlayCard) => {
       if (!payload?.empire || !payload.card) return;
-      if (!GameActionsStore.isPlayableCard(payload.empire, payload.card)) playCardNotPossible.play();
+      if (!GameActionsStore.isPlayableCard(payload.empire, payload.card)) error.play();
       playCard.play();
+      if (payload.card.template.category === "BUILDING") {
+        setTimeout(() => {
+          construct.play();
+        }, 250);
+      }
+      if (payload.card.template.category === "ACTION") {
+        setTimeout(() => {
+          attack.play();
+        }, 250);
+      }
     });
     eventsStore.on("throwCard", () => {
-      throwCard.play();
+      playCard.play();
+      setTimeout(() => {
+        coin.play();
+      }, 250);
+    });
+    eventsStore.on("cannotPlayCard", () => {
+      error.play();
     });
   }
 }
